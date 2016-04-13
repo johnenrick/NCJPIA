@@ -92,4 +92,7 @@ body {
     .reg-display-table td[width="85%"]{
         width: 65%;
     }
+    .reg-display-table td[width="65%"]{
+        width: 55%;
+    }
 }
