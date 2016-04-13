@@ -55,7 +55,7 @@ body {
     float: left;
 }
 
-.reg-radio label:hover {
+.reg-checkbox label:hover {
     background-color: #eee;
 }
 .reg-display-table {
@@ -64,4 +64,7 @@ body {
 
 .reg-display-table td {
     padding: 3px;
+}
+.table>tbody>tr>th, .table>tbody>tr>td {
+    vertical-align: middle;
 }
