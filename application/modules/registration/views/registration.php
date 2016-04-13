@@ -126,82 +126,82 @@
                         <div class="form-group">
                             <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
                             <label class="control-label">Non-Academic Events</label>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> Battle of the Bands
+                                    <input type="checkbox"> Battle of the Bands
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> Debate
+                                    <input type="checkbox"> Debate
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> Siniratura
+                                    <input type="checkbox"> Siniratura
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> That's My Bae
+                                    <input type="checkbox"> That's My Bae
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> REO Showoff
+                                    <input type="checkbox"> REO Showoff
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> JPIAN Idol
+                                    <input type="checkbox"> JPIAN Idol
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> Kalokalike
+                                    <input type="checkbox"> Kalokalike
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioNAE" value=""> CineJPIA
+                                    <input type="checkbox"> CineJPIA
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Academic Events</label>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 1 - Basic Accounting
+                                    <input type="checkbox"> Cup 1 - Basic Accounting
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 2 - Financial Accounting and Reporting
+                                    <input type="checkbox"> Cup 2 - Financial Accounting and Reporting
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 3 - Advanced Financial Accounting and Reporting
+                                    <input type="checkbox"> Cup 3 - Advanced Financial Accounting and Reporting
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 4 - Management Accounting and Control
+                                    <input type="checkbox"> Cup 4 - Management Accounting and Control
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 5 - Auditing
+                                    <input type="checkbox"> Cup 5 - Auditing
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 6 - Regulatory Framework for Business Transactions
+                                    <input type="checkbox"> Cup 6 - Regulatory Framework for Business Transactions
                                 </label>
                             </div>
-                            <div class="radio reg-radio">
+                            <div class="checkbox reg-checkbox">
                                 <label>
-                                    <input type="radio" name="radioAE" value=""> Cup 7 - Taxation Case Study
+                                    <input type="checkbox"> Cup 7 - Taxation Case Study
                                 </label>
                             </div>
                         </div>
@@ -217,13 +217,14 @@
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-condensed">
+                            <table class="table table-striped reg-table-member">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Position</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -232,21 +233,24 @@
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>Local Chapter Adviser</td>
+                                        <td><a class="btn btn-info btn-xs">edit</a></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>Local Chapter Faculty</td>
+                                        <td><a class="btn btn-info btn-xs">edit</a></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>Larry</td>
                                         <td>Bird</td>
                                         <td>Local Chapter Representative</td>
+                                        <td><a class="btn btn-info btn-xs">edit</a></td>
                                     </tr>
                                     <tr>
-                                        <th colspan="4" style="text-align:center">No members added yet</th>
+                                        <th colspan="5" style="text-align:center">No members added yet</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -305,82 +309,82 @@
                                 <div class="form-group">
                                     <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
                                     <label class="control-label">Non-Academic Events</label>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> Battle of the Bands
+                                            <input type="checkbox"> Battle of the Bands
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> Debate
+                                            <input type="checkbox"> Debate
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> Siniratura
+                                            <input type="checkbox"> Siniratura
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> That's My Bae
+                                            <input type="checkbox"> That's My Bae
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> REO Showoff
+                                            <input type="checkbox"> REO Showoff
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> JPIAN Idol
+                                            <input type="checkbox"> JPIAN Idol
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> Kalokalike
+                                            <input type="checkbox"> Kalokalike
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioNAE" value=""> CineJPIA
+                                            <input type="checkbox"> CineJPIA
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Academic Events</label>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 1 - Basic Accounting
+                                            <input type="checkbox"> Cup 1 - Basic Accounting
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 2 - Financial Accounting and Reporting
+                                            <input type="checkbox"> Cup 2 - Financial Accounting and Reporting
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 3 - Advanced Financial Accounting and Reporting
+                                            <input type="checkbox"> Cup 3 - Advanced Financial Accounting and Reporting
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 4 - Management Accounting and Control
+                                            <input type="checkbox"> Cup 4 - Management Accounting and Control
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 5 - Auditing
+                                            <input type="checkbox"> Cup 5 - Auditing
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 6 - Regulatory Framework for Business Transactions
+                                            <input type="checkbox"> Cup 6 - Regulatory Framework for Business Transactions
                                         </label>
                                     </div>
-                                    <div class="radio reg-radio">
+                                    <div class="checkbox reg-checkbox">
                                         <label>
-                                            <input type="radio" name="radioAE" value=""> Cup 7 - Taxation Case Study
+                                            <input type="checkbox"> Cup 7 - Taxation Case Study
                                         </label>
                                     </div>
                                 </div>
