@@ -18,8 +18,8 @@ class C_account extends API_Controller {
     public function createAccount(){
         $this->accessNumber = 1;
         //registration
-        if(($this->input->post("account_type_ID") != 2) && (($this->input->post("account_type_ID") == 1 && user_type() == 1) || ($this->input->post("account_type_ID") == 3 && user_type() == 1) || ($this->input->post("account_type_ID") == 4 ))){
-            if(!$this->validReCaptcha() && $this->input->post("account_type_ID") == 4){
+        if($this->input->post("account_type_ID") == 9 || (($this->input->post("account_type_ID") != 9) && (user_type() == 2))){
+            if(!$this->validReCaptcha() && $this->input->post("account_type_ID") == 9){
                 $this->responseError(5, "Invalid Captcha");
                 $this->outputResponse();
             }
@@ -33,9 +33,13 @@ class C_account extends API_Controller {
             ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
             $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
             $this->form_validation->set_rules('email_detail', 'Email Detail', 'required|valid_email|callback_is_unique_email');
-            
-//            $this->form_validation->set_message('alpha_dash_space', 'Only accept alpha and spaces');
-            
+            if($this->input->post("account_type_ID") == 9){
+                $this->form_validation->set_rules('local_chapter_ID', 'Local Chapter ID', 'required');
+                $this->form_validation->set_rules('local_chapter_position_ID', 'Local Chapter Position', 'required');
+                $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
+                $this->form_validation->set_rules('email_address', 'Email Address', 'required');
+                $this->form_validation->set_rules('tshirt_size', 'T-shirt Size', 'required');
+            }
             if($this->form_validation->run()){
                 $result = $this->m_account->createAccount(
                         $this->input->post("username"),
@@ -47,36 +51,18 @@ class C_account extends API_Controller {
                     $this->load->model("m_account_basic_information");
                     $this->m_account_basic_information->createAccountBasicInformation(
                             $result,
+                            $this->input->post("account_ID"),
                             $this->input->post("first_name"),
                             $this->input->post("middle_name"),
-                            $this->input->post("last_name") 
+                            $this->input->post("last_name"),
+                            $this->input->post("local_chapter_group_ID"),
+                            $this->input->post("local_chapter_position_ID"),
+                            $this->input->post("contact_number"),
+                            $this->input->post("email_address"),
+                            $this->input->post("identification_file_uploaded_ID"),
+                            $this->input->post("tshirt_size")                            
                             );
-                    /*Create Email*/
-                    $this->load->model("M_account_contact_information");
-                    $this->M_account_contact_information->createAccountContactInformation(
-                            $result,
-                            1,
-                            $this->input->post("email_detail")
-                            );
-                    //Send Email Confirmation
-                    if($this->input->post("account_type_ID") == 4){
-                        $datetime = time();
-                        $this->sendEmail("Wasteline Registration Verification", $this->input->post("email_detail"), "Good day ".$this->input->post('username') ."! Thank you for registering in Wasteline.\nTo verify your account, please click the following link: ".  base_url("portal/accountVerification/".(sprintf("%d%d", $result, $datetime))));
-                        $this->responseDebug(base_url("portal/accountVerification/".(sprintf("%d%d", $result, $datetime))));
-                    }
-                    /*Create Contact Number*/
-                    if($this->input->post("contact_number_detail")){
-                        $this->M_account_contact_information->createAccountContactInformation(
-                            $result,
-                            3,
-                            $this->input->post("contact_number_detail")
-                            );
-                    }
-                    /*Default Account Address*/
-                    $this->load->model("M_account_address");
-                    $this->load->model("M_map_marker");
-                    $accountAddressID = $this->M_account_address->createAccountAddress($result, 1, $this->input->post("last_name")."'s Residence" );
-                    $this->M_map_marker->createMapMarker($accountAddressID, 1, 123.922587, 10.339634);
+                                        
                     $this->actionLog($result);
                     $this->responseData($result);
                 }else{
