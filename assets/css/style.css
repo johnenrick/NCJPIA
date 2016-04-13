@@ -58,6 +58,7 @@ body {
 .reg-checkbox label:hover {
     background-color: #eee;
 }
+
 .reg-display-table {
     font-size: 14px;
 }
@@ -65,6 +66,30 @@ body {
 .reg-display-table td {
     padding: 3px;
 }
-.table>tbody>tr>th, .table>tbody>tr>td {
+
+.table>tbody>tr>th,
+.table>tbody>tr>td {
     vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+    }
+    .reg-con-1 {
+        height: 200px;
+    }
+    .reg-con-2 {
+        height: auto;
+        padding: 0 15px;
+    }
+    .form-inline .form-control.reg-input-inline {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .reg-display-table td[width="85%"]{
+        width: 65%;
+    }
 }
