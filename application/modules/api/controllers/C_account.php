@@ -34,7 +34,6 @@ class C_account extends API_Controller {
             $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
             $this->form_validation->set_rules('email_detail', 'Email Detail', 'required|valid_email|callback_is_unique_email');
             if($this->input->post("account_type_ID") == 9){
-                $this->form_validation->set_rules('local_chapter_ID', 'Local Chapter ID', 'required');
                 $this->form_validation->set_rules('local_chapter_position_ID', 'Local Chapter Position', 'required');
                 $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
                 $this->form_validation->set_rules('email_address', 'Email Address', 'required');
@@ -55,7 +54,6 @@ class C_account extends API_Controller {
                             $this->input->post("first_name"),
                             $this->input->post("middle_name"),
                             $this->input->post("last_name"),
-                            $this->input->post("local_chapter_group_ID"),
                             $this->input->post("local_chapter_position_ID"),
                             $this->input->post("contact_number"),
                             $this->input->post("email_address"),

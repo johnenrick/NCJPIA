@@ -16,9 +16,8 @@ class M_local_chapter_group extends API_Model{
         parent::__construct();
         $this->TABLE = "local_chapter_group";
     }
-    public function createLocalChapterGroup($leaderAccountID, $localChapterID){
+    public function createLocalChapterGroup($localChapterID){
         $newData = array(
-            "leader_account_ID" => $leaderAccountID,
             "local_chapter_ID" => $localChapterID,
             "registration_datetime" => time()
         );
