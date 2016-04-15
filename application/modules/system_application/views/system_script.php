@@ -14,8 +14,8 @@
             asset_url : "<?=asset_url()?>"
         },
         data : {
-            default_page : "<?=$defaultPage?>",
-            extra_data : ('<?=$extra_data? $extra_data : "false"?>' !== "false") ? JSON.parse('<?=$extra_data?>') : false
+            default_page : "<?=isset($defaultPage) ? $defaultPage:""?>",
+            extra_data : ('<?=(isset($extra_data) == true && $extra_data)? $extra_data : "false"?>' !== 'false') ? JSON.parse('<?=isset($extra_data) ?  $extra_data : "{}" ?>') : false
         },
         access_control_list :{},
         refresh_call : {
@@ -108,8 +108,8 @@
 
                 moduleHolder.attr("module_link", moduleLink);
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
-                moduleHolder.append(data);
-                $("#moduleContainer").append(moduleHolder);
+                moduleHolder.append(moduleHolder);
+                $("#moduleContainer").append(data);
                 /*show page*/
                 $('.wl-page-content:not(.moduleHolder[module_link="'+moduleLink+'"])').hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
@@ -247,65 +247,12 @@
 
     }
 </script>
-<!--Other Functions-->
-<script>
-/*Account Verification*/
-var requestVerificationCode = function(){
-    $("#systemMessageContainer").find(".systemMessage[message_status='"+51+"']").find(".alert-link").attr("data-loading-text", "Sending Verification Code...");
-    $("#systemMessageContainer").find(".systemMessage[message_status='"+51+"']").find(".alert-link").button("loading");
-    $.post(base_url("portal/requestVerificationCode"), {}, function(data){
-        var response = JSON.parse(data);
-        remove_system_message(51);
-        if(!response["error"].length){
-            show_system_message(52, 4,
-                "Your verification link has been sent to your email: "+response["data"]+".",
-                {text: "Please refresh this page after you verify your account", callback : function(){
-                        location.reload(true);
-                }});
-        }else{
-            if(response["error"][0]["status"]*1 === 1){
-                show_system_message(53, 1, "Your account has already been verified.", {text: "Refresh this page", callback : function(){
-                        location.reload(true);
-                }});
-            }
-        }
-    });
-}
-</script>
 <!--Document Ready-->
 <script>
     $(document).ready(function(){
         //redirect www
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
-
         }
-        
-        
-        retrieve_access_control();
-        if(user_type() === 4){
-            setTimeout(function(){
-                show_system_message(51, 1, "Please verify your account by clicking the link sent to your account.", {text : "Send Verification Code", callback: requestVerificationCode});
-            }, 1300);
-
-        }
-        /*show messages*/
-        if(typeof( system_data.data.extra_data["message"]) !== "undefined"){
-           for(var x= 0; x < system_data.data.extra_data["message"].length; x++){
-               show_system_message(system_data.data.extra_data["message"][x]["status"], system_data.data.extra_data["message"][x]["type"], system_data.data.extra_data["message"][x]["message"]);
-           }
-        }
-        $.post(api_url("C_account/retrieveAccount"), {ID:user_id()}, function(data){
-            var response = JSON.parse(data);
-            if(!response["error"].length){
-                if(response["data"]["account_address_map_marker_ID"] === null && (response["data"]["account_type_ID"]*1 === 2 || response["data"]["account_type_ID"]*1 === 4)
-                        && (response["data"]["account_address_longitude"]*1 === 123.922587 && response["data"]["account_address_latitude"]*1 === 10.339634)
-                    ){
-                    $("[module_link='profile_management']").trigger("click");
-                    show_system_message(121, 4, "Please complete all the information required especially your location and complete address.");
-                }
-            }
-        });
-        load_module(base_url("Portal"), "Portal");
     });
 </script>
