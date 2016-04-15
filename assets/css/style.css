@@ -20,19 +20,49 @@ body {
 
 /* registration */
 
+.reg-con-1 {
+    background-color: #1672b4;
+    text-align: right;
+    background-image: url(../img/bg.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+#reg-logo-1 {
+    height: 120px;
+    width: 120px;
+    margin: 20px 0 20px;
+}
+
+#reg-logo-2 {
+    height: 120px;
+    width: 120px;
+    margin: 10px 0 10px;
+}
+
+#reg-logo-3 {
+    height: 80px;
+    width: auto;
+}
+
 .reg-con-2 {
     padding: 20px 40px 0 40px;
     overflow: auto;
+    background-color: #fff;
 }
 
-.reg-h-1 {}
+.reg-h-1 {
+    color: #1672b4;
+}
 
 .reg-p-1 {
     font-size: 13px;
+    color: #4E4E4E;
 }
 
 .reg-form {
     padding-bottom: 40px;
+    color: #4E4E4E;
 }
 
 .reg-form label {
@@ -72,14 +102,49 @@ body {
     vertical-align: middle;
 }
 
-@media (max-width: 768px) {
+.footer-text {
+    bottom: 0;
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    padding: 0 40px 10px 0;
+}
+.footer-text a {
+    color: #E6F1F9 !important;
+    cursor: pointer;
+}
+.footer-text .copyright,
+.footer-text .separator {
+    color: #BBDFF9;
+}
+
+@media (max-width: 600px) {
+    .reg-con-1 {
+        height: 150px;
+    }
+}
+@media (min-width: 600px) and (max-width: 992px) {
+    .reg-con-1 {
+        height: 220px;
+    }
+}
+@media (max-width: 992px) {
     html,
     body {
         height: auto;
         overflow: auto;
     }
-    .reg-con-1 {
-        height: 200px;
+    #reg-logo-1 {
+        height: auto;
+        width: 22%;
+    }
+    #reg-logo-2 {
+        height: auto;
+        width: 22%;
+    }
+    #reg-logo-3 {
+        height: auto;
+        width: 50%;
     }
     .reg-con-2 {
         height: auto;
@@ -89,10 +154,10 @@ body {
         width: 100%;
         margin-bottom: 5px;
     }
-    .reg-display-table td[width="85%"]{
+    .reg-display-table td[width="85%"] {
         width: 65%;
     }
-    .reg-display-table td[width="65%"]{
+    .reg-display-table td[width="65%"] {
         width: 55%;
     }
 }

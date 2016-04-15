@@ -14,11 +14,21 @@
 <body>
     <div class="container-fluid full-height">
         <div class="row full-height">
-            <div class="col-md-4 full-height reg-con-1" style="background-color:black;">
+            <div class="col-md-4 full-height reg-con-1">
+                <img src="<?=base_url('assets/img/NF Logo.png')?>" id="reg-logo-1">
+                <img src="<?=base_url('assets/img/text-logo.png')?>" id="reg-logo-2">
+
+                <img src="<?=base_url('assets/img/Siklab.png')?>" id="reg-logo-3">
+
+                <p class="footer-text">
+                    <a>Privacy and Terms</a> <span class="separator">|</span> <a>Help</a>
+                    <br>
+                    <span class="copyright">Copyright © 2015, All rights reserved. <span class="separator">|</span> Powered by IITS</span>
+                </p>
 
             </div>
-            <div class="col-md-8 full-height reg-con-2" style="background-color:white;">
-                <div class="col-md-8 full-height" style="background-color:white;">
+            <div class="col-md-8 full-height reg-con-2">
+                <div class="col-md-8 full-height">
                     <h3 class="reg-h-1 bold-1">Registration</h3>
                     <p class="reg-p-1">Welcome to registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
                     <br>
