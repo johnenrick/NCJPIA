@@ -10,7 +10,6 @@ body {
 
 .full-height {
     height: 100%;
-    min-height: 100%;
 }
 
 .bold-1 {
@@ -109,13 +108,19 @@ body {
     width: 100%;
     padding: 0 40px 10px 0;
 }
+
 .footer-text a {
     color: #E6F1F9 !important;
     cursor: pointer;
 }
+
 .footer-text .copyright,
 .footer-text .separator {
     color: #BBDFF9;
+}
+
+.footer-text .separator {
+    margin: 0 6px;
 }
 
 @media (max-width: 600px) {
@@ -123,16 +128,20 @@ body {
         height: 150px;
     }
 }
+
 @media (min-width: 600px) and (max-width: 992px) {
     .reg-con-1 {
         height: 220px;
     }
 }
+
 @media (max-width: 992px) {
     html,
     body {
-        height: auto;
-        overflow: auto;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        min-height: 100%;
     }
     #reg-logo-1 {
         height: auto;
@@ -159,5 +168,87 @@ body {
     }
     .reg-display-table td[width="65%"] {
         width: 55%;
+    }
+    .footer-text {
+        text-align: center;
+    }
+    .copyright {
+        display: none;
+    }
+}
+
+
+/* portal */
+
+#portal-con {
+    background-color: #1672b4;
+    background-image: url(../img/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#portal-con .modal {
+    text-align: center;
+    padding: 0!important;
+    display: block;
+}
+
+#portal-con .modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+#portal-con .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+
+#portal-con .modal-dialog.modal-lg {
+    width: 800px;
+}
+
+#portal-con .modal-body {
+    padding: 0 !important;
+}
+
+#portal-con .portal-con-left {
+    padding: 20px;
+}
+#portal-con .portal-con-right {
+    padding: 0;
+    overflow: hidden;
+}
+
+#portal-con .row {
+    margin: 0;
+}
+#portal-con .btn-right {
+    float: right;
+}
+#portal-con .btn-left {
+    float: left;
+}
+
+
+@media (max-width: 991px) {
+    #portal-con .portal-con-right {
+        padding-top: 30px;
+        overflow: inherit;
+    }
+    #portal-con .portal-con-right img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 799px) {
+    #portal-con .modal-dialog.modal-lg {
+        width: 80%;
     }
 }

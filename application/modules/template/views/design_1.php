@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ANC Registration</title>
-    <link href="assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="assets/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="<?=base_url()?>assets/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,9 +22,22 @@
                 <img src="<?=base_url('assets/img/Siklab.png')?>" id="reg-logo-3">
 
                 <p class="footer-text">
-                    <a>Privacy and Terms</a> <span class="separator">|</span> <a>Help</a>
+                    <a href="https://twitter.com/nfjpiaofficial" target="_blank">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        @nfjpiaofficial
+                    </a>
+                    <span class="separator">|</span>
+                    <a href="https://www.facebook.com/nfjpia" target="_blank">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                        /nfjpia
+                    </a>
+                    <span class="separator">|</span>
+                    <a href="https://www.instagram.com/nfjpiaofficial" target="_blank">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        @nfjpiaofficial
+                    </a>
                     <br>
-                    <span class="copyright">Copyright © 2015, All rights reserved. <span class="separator">|</span> Powered by IITS</span>
+                    <span class="copyright">Copyright © 2015, All rights reserved. | Powered by IITS</span>
                 </p>
 
             </div>
@@ -502,9 +516,9 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/custom.js"></script>
 
 </body>
 
