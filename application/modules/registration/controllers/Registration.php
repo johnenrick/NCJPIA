@@ -14,9 +14,11 @@
 class Registration extends FE_Controller{
     //put your code here
     function index(){
-        
         $this->loadPage("registration", array("registration_script"), array("message" => false));
         $this->load->view("system_application/system");
         $this->load->view("system_application/system_script");
+    }
+    function test(){
+        $this->loadPage("test_form", array(), array("message" => false));
     }
 }

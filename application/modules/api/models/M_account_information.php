@@ -16,13 +16,12 @@ class M_account_information extends API_Model{
         parent::__construct();
         $this->TABLE = "account_information";
     }
-    public function createAccountInformation($accountID, $firstName, $middleName, $lastName, $localChapterID, $localChapterPositionID, $contactNumber, $emailAddress, $identificationFileUploadedID, $tshirtSize){
+    public function createAccountInformation($accountID, $firstName, $middleName, $lastName, $localChapterPositionID, $contactNumber, $emailAddress, $identificationFileUploadedID, $tshirtSize){
         $newData = array(
             "account_ID" => $accountID,
             "first_name" => $firstName,
             "middle_name" => $middleName,
             "last_name" => $lastName,
-            "local_chapter_group_ID" => $localChapterID,
             "local_chapter_position_ID" => $localChapterPositionID,
             "contact_number" => $contactNumber,
             "email_address" => $emailAddress,

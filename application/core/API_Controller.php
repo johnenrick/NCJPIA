@@ -85,7 +85,7 @@ class API_Controller extends MX_Controller{
      */
     public function checkACL($subAccessNumber = NULL){
         //check module with parent
-        return $this->m_access_control_list->checkGoupACL(user_id(), $this->APICONTROLLERID, ($subAccessNumber === NULL ) ? $this->accessNumber : $subAccessNumber);
+        return true;//$this->m_access_control_list->checkGoupACL(user_id(), $this->APICONTROLLERID, ($subAccessNumber === NULL ) ? $this->accessNumber : $subAccessNumber);
     }
     public function actionLog($detail){
         //check module with parent
@@ -142,11 +142,23 @@ class API_Controller extends MX_Controller{
         }
         return (count($errorList) > 0) ? $errorList : true;
     }
-    public function stripHTMLtags($str)
-    {
+    public function stripHTMLtags($str){
         $t = preg_replace('/<[^<|>]+?>/', '', htmlspecialchars_decode($str));
-        $t = htmlentities($t, ENT_QUOTES, "UTF-8");
-        return $t;
+        return htmlentities($t, ENT_QUOTES, "UTF-8");;
     }
+    public $formValidationError = array();
+    public function formValidationRun(){
+        return (count($this->formValidationError) > 0) ? false : $this->form_validation->run();
+    }
+    public function formValidationError(){
+        return array_merge($this->formValidationError, $this->form_validation->error_array());
+    }
+    public function formValidationSetRule($fieldName, $fieldTitle, $rule){
+        $this->form_validation->set_rules($fieldName, $fieldTitle, $rule);
+        if(substr_count($rule, "required") && !$this->input->post($fieldName)){
+            $this->formValidationError[$fieldName] = "$fieldTitle is required";
+        }
+    }
+    
 }
 

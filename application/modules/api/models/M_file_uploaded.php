@@ -7,36 +7,39 @@
  */
 
 /**
- * Description of m_local_chapter_group
+ * Description of m_file_uploaded
  *
  * @author johnenrick
  */
-class M_local_chapter_group extends API_Model{
+class M_file_uploaded extends API_Model{
     public function __construct() {
         parent::__construct();
-        $this->TABLE = "local_chapter_group";
+        $this->TABLE = "file_uploaded";
     }
-    public function createLocalChapterGroup($localChapterID){
+    public function createFileUploaded($type, $name, $path, $size){
         $newData = array(
-            "local_chapter_ID" => $localChapterID,
-            "registration_datetime" => time()
+            "type" => $type,
+            "name" => $name,
+            "path" => $path,
+            "size" => $size,
+            "datetime" => time()
         );
         return $this->createTableEntry($newData);
     }
-    public function retrieveLocalChapterGroup($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
+    public function retrieveFileUploaded($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
             
         );
         $selectedColumn = array(
-            "local_chapter_group.*"
+            "file_uploaded.*"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
     }
-    public function updateLocalChapterGroup($ID = NULL, $condition = array(), $newData = array()) {
+    public function updateFileUploaded($ID = NULL, $condition = array(), $newData = array()) {
         return $this->updateTableEntry($ID, $condition, $newData);
     }
-    public function deleteLocalChapterGroup($ID = NULL, $condition = array()){
+    public function deleteFileUploaded($ID = NULL, $condition = array()){
         return $this->deleteTableEntry($ID, $condition);
     }
 }
