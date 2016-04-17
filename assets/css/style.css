@@ -16,6 +16,36 @@ body {
     font-weight: 400;
 }
 
+#reg-option {
+    text-align: center;
+    padding-top: 25%;
+}
+#reg-option button {
+
+}
+
+.hide-module {
+    display: none;
+}
+
+#success-module {
+    text-align: center;
+    padding-top: 25%;
+}
+
+#success-module i.fa-check-circle-o {
+    font-size: 80px;
+    color: yellowgreen;
+}
+
+#success-module i {
+    font-size: 30px;
+    color: #1672b4
+}
+#success-module a {
+    margin: 0 10px;
+}
+
 
 /* registration */
 

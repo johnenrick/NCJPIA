@@ -35,4 +35,20 @@ $(document).ready(function () {
             con.find('form')[0].reset();
         }
     });
+
+    $("#reg-option button[name=op-reg]").click(function(){
+        var btn = $(this);
+        btn.parent().hide();
+        $("#reg-module").fadeIn();
+    });
+    $("#reg-option button[name=op-con]").click(function(){
+        var btn = $(this);
+        btn.parent().hide();
+        $("#con-module").fadeIn();
+    });
+
+    $(".reg-btn-submit").click(function(){
+        $(".hide-module:not(#success-module)").hide();
+        $("#success-module").fadeIn();
+    })
 });

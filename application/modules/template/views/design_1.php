@@ -23,18 +23,15 @@
 
                 <p class="footer-text">
                     <a href="https://twitter.com/nfjpiaofficial" target="_blank">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                        @nfjpiaofficial
+                        <i class="fa fa-twitter" aria-hidden="true"></i> @nfjpiaofficial
                     </a>
                     <span class="separator">|</span>
                     <a href="https://www.facebook.com/nfjpia" target="_blank">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                        /nfjpia
+                        <i class="fa fa-facebook" aria-hidden="true"></i> /nfjpia
                     </a>
                     <span class="separator">|</span>
                     <a href="https://www.instagram.com/nfjpiaofficial" target="_blank">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                        @nfjpiaofficial
+                        <i class="fa fa-instagram" aria-hidden="true"></i> @nfjpiaofficial
                     </a>
                     <br>
                     <span class="copyright">Copyright © 2015, All rights reserved. | Powered by IITS</span>
@@ -42,7 +39,13 @@
 
             </div>
             <div class="col-md-8 full-height reg-con-2">
-                <div class="col-md-8 full-height">
+                <div id="reg-option" class="full-height">
+                    <button type="button" name="op-reg" class="btn btn-success btn-lg">Registration</button>
+                    <h3>OR</h3>
+                    <br>
+                    <button type="button" name="op-con" class="btn btn-warning btn-lg">Confirm Payment</button>
+                </div>
+                <div id="reg-module" class="col-md-8 full-height hide-module">
                     <h3 class="reg-h-1 bold-1">Registration</h3>
                     <p class="reg-p-1">Welcome to registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
                     <br>
@@ -102,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-2" style="display:none">
+                    <div class="reg-form reg-form-2 hide-module">
                         <h4 class="bold-1">Local Chapter Information</h4>
                         <hr>
                         <div class="form-group">
@@ -144,7 +147,7 @@
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-3" style="display:none">
+                    <div class="reg-form reg-form-3 hide-module">
                         <h4 class="bold-1">Choose an event to participate</h4>
                         <hr>
                         <div class="form-group">
@@ -237,7 +240,7 @@
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-4" style="display:none">
+                    <div class="reg-form reg-form-4 hide-module">
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
                         <div class="table-responsive">
@@ -282,7 +285,7 @@
                         <div class="form-group">
                             <a id="reg-add-member" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Group Member</a>
                         </div>
-                        <div class="reg-form-member btn-form-con" style="display:none">
+                        <div class="reg-form-member btn-form-con hide-module">
                             <form>
                                 <div class="form-group">
                                     <label class="control-label">Name</label>
@@ -426,7 +429,7 @@
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-5" style="display:none">
+                    <div class="reg-form reg-form-5 hide-module">
                         <h4 class="bold-1">Event Links</h4>
                         <hr>
                         <div class="form-group">
@@ -486,10 +489,10 @@
                             </table>
                         </div>
                         <br>
-                        <p>* <i>Send your deposit slips to: <b>anc.nfjpia1516@gmail.com</b></i></p>
+                        <p>* <i>Send and upload a copy of your deposit slips with your Registration No. at <b>Payment Confirmation</b> in home page.</i></p>
                         <br>
 
-                        <h4 class="bold-1">Verification</h4>
+                        <h4 class="bold-1">Agreements</h4>
                         <hr>
                         <div class="form-group">
                             <div class="checkbox">
@@ -507,9 +510,47 @@
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
-                            <button type="submit" class="btn btn-success reg-btn-right reg-btn-submit">Sumbit</button>
+                            <button type="submit" class="btn btn-success reg-btn-right reg-btn-submit">Submit</button>
                         </div>
                     </div>
+
+                </div>
+                <div id="con-module" class="col-md-8 full-height hide-module">
+                    <h3 class="reg-h-1 bold-1">Payment Confirmation</h3>
+                    <p class="reg-p-1">Verifying your registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
+                    <br>
+                    <div class="reg-form reg-form-1">
+                        <div class="form-group">
+                            <label class="control-label">Registration Number</label>
+                            <input class="form-control" type="text" placeholder="XXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Valid ID</label>
+                            <input type="file" id="exampleInputFile">
+                            <p class="help-block">Upload a scanned copy of your deposit slips.</p>
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success reg-btn-right reg-btn-submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="success-module" class="fulll-height hide-module">
+                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                    <br>
+                    <h3><b>Successfully Done!</b></h3>
+                    <h4>Get the latest updates! Follow us on our social networking sites!</h4>
+
+                    <a href="https://twitter.com/nfjpiaofficial" target="_blank">
+                        <i class="fa fa-twitter" aria-hidden="true"></i> @nfjpiaofficial
+                    </a>
+                    <a href="https://www.facebook.com/nfjpia" target="_blank">
+                        <i class="fa fa-facebook" aria-hidden="true"></i> /nfjpia
+                    </a>
+                    <a href="https://www.instagram.com/nfjpiaofficial" target="_blank">
+                        <i class="fa fa-instagram" aria-hidden="true"></i> @nfjpiaofficial
+                    </a>
 
                 </div>
             </div>
