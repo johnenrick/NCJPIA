@@ -63,25 +63,30 @@ class C_registration extends API_Controller {
                     }
                 }
             }
-            if($this->formValidationRun()){
+            $imageError = $this->hasFileUploadError();
+            if($this->formValidationRun() && !$imageError){
                 $this->load->model("M_local_chapter_group");
                 $this->load->model("M_account_information");
                 $this->load->model("M_account");
                 $this->load->model("M_account_event_participation");
                 $this->load->model("M_account_local_chapter_group");
+                $this->load->model("M_file_uploaded");
                 /*Create Local Group*/
                 $localChapterGroupResult = $this->M_local_chapter_group->createLocalChapterGroup(
                         $this->input->post("local_chapter_ID")
                         );
                 /*Create account for member*/
-                foreach($groupMemberList as $value){
+                foreach($groupMemberList as $key => $value){
                     $accountResult = $this->M_account->createAccount(
                             $value["first_name"].$value["last_name"].$this->input->post("local_chapter_ID"), 
                             $value["first_name"].$value["last_name"].$this->input->post("local_chapter_ID"), 
                             9,//account type
                             1//status
                             );
-                    if($accountResult){
+                    $fileUploaded = $this->do_upload_images($key);
+                        
+                    if($accountResult && $fileUploaded){
+                        $fileUploadedResult = $this->M_file_uploaded->createFileUploaded($fileUploaded["image_type"], $fileUploaded["file_name"], $fileUploaded["file_path"], $fileUploaded["file_size"]);
                         $this->M_account_information->createAccountInformation(
                                 $accountResult,
                                 $value["first_name"], 
@@ -90,7 +95,7 @@ class C_registration extends API_Controller {
                                 $value["local_chapter_position_ID"],
                                 $value["contact_number"],
                                 $value["email_address"],
-                                0,//file upload ID
+                                $fileUploadedResult,
                                 $value["tshirt_size"]
                                 );
                         /*Add local chapter group member*/
@@ -107,6 +112,7 @@ class C_registration extends API_Controller {
                                 $this->M_account_event_participation->createAccountEventParticipation($accountResult, $nonAcademicValue);
                             }
                         }
+                        
                     }
                 }
                 if($localChapterGroupResult){
@@ -118,8 +124,13 @@ class C_registration extends API_Controller {
             }else{
                 if(count($this->formValidationError())){
                     $this->responseError(102, $this->formValidationError());
-                }else{
-                    $this->responseError(100, "Required Fields are empty");
+                }
+                if($imageError){
+                    if(is_array($imageError)){
+                        $this->responseError(5, $imageError);
+                    }else{
+                        $this->responseError(6, "Number of images does not match with the number of group member");
+                    }
                 }
             }
         }else{
@@ -197,27 +208,62 @@ class C_registration extends API_Controller {
         }
         $this->outputResponse();
     }
-    
-    function do_upload_images() {
+    /**
+     * 
+     * @return bolean/array true if exceeds limit, array if multiple errors, false if no errors
+     */
+    function hasFileUploadError(){
+        if(!isset($_FILES['images'] ['name'])){
+            return true;
+        }
         $files = $_FILES;
-
-        $cpt = count ( $_FILES ['images'] ['name'] );
+        $cpt = count($_FILES['images'] ['name']);
+        if($cpt != count($this->input->post("group_member_list"))){
+            return true;
+        }
+        $errorList = array();
         for($i = 0; $i < $cpt; $i ++) {
-
-            $_FILES ['images'] ['name'] = $files ['images'] ['name'] [$i];
-            $_FILES ['images'] ['type'] = $files ['images'] ['type'] [$i];
-            $_FILES ['images'] ['tmp_name'] = $files ['images'] ['tmp_name'] [$i];
-            $_FILES ['images'] ['error'] = $files ['images'] ['error'] [$i];
-            $_FILES ['images'] ['size'] = $files ['images'] ['size'] [$i];
-
-            $this->upload->initialize ( $this->set_upload_options () );
-            $this->upload->do_upload ('images');
+            if(!($files ['images'] ['type'] [$i] == "image/jpeg" || $files ['images'] ['type'] [$i] == "image/png" || $files ['images'] ['type'] [$i] == "image/jpg")){
+                if(!isset($errorList[$i])){
+                    $errorList[$i] = array();
+                }
+                $errorList[$i]["type"] = "Invalid image type";
+            }
+            if($files ['images'] ['size'] [$i] > 2000000){//maximum 2MB
+                if(!isset($errorList[$i])){
+                    $errorList[$i] = array();
+                }
+                $errorList[$i]["size"] = "Maximum file size exceeded";
+            }
+        }
+        return (count($errorList) > 0) ? errorList : false;
+    }
+    function do_upload_images($i) {
+        $files = $_FILES;
+        $this->load->library('upload');
+        $cpt = count ( $_FILES ['images'] ['name'] );
+        if($i > $cpt-1){
+            return false;
+        }
+        $_FILES ['userfile'] ['name'] = $files ['images'] ['name'] [$i];
+        $_FILES ['userfile'] ['type'] = $files ['images'] ['type'] [$i];
+        $_FILES ['userfile'] ['tmp_name'] = $files ['images'] ['tmp_name'] [$i];
+        $_FILES ['userfile'] ['error'] = $files ['images'] ['error'] [$i];
+        $_FILES ['userfile'] ['size'] = $files ['images'] ['size'] [$i];
+        $this->upload->initialize ( $this->set_upload_options () );
+        $this->upload->do_upload();
+        
+        $photoinfo = $this->upload->data();
+        if($photoinfo["file_name"] != ""){
+            return $photoinfo;
+        }else{
+            return false;
         }
     }
     private function set_upload_options() {
         // upload an image options
         $config = array ();
-        $config ['upload_path'] = './uploads/estate_images';
+        $config ['upload_path'] = 'assets/images/identification_card';
         $config ['allowed_types'] = 'gif|jpg|png';
         $config ['encrypt_name'] = TRUE;
 
