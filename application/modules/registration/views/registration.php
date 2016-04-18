@@ -56,13 +56,13 @@
                         <div class="form-group">
                             <label class="control-label">Name</label>
                             <div class="form-inline">
-                                <input class="form-control reg-input-inline" type="text" placeholder="First Name">
-                                <input class="form-control reg-input-inline" type="text" placeholder="Last Name">
+                                <input name="group_member_list[0][first_name]" class="form-control reg-input-inline" type="text" placeholder="First Name">
+                                <input name="group_member_list[0][last_name]" class="form-control reg-input-inline" type="text" placeholder="Last Name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Position</label>
-                            <select class="form-control" id="select">
+                            <select name="group_member_list[0][local_chapter_position_ID]" class="form-control localChapterPosition">
                                 <option selected disabled>None</option>
                                 <option>Local Chapter Adviser</option>
                                 <option>Local Chapter Faculty (Dean, Chairman)</option>
@@ -72,31 +72,31 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Contact Number</label>
-                            <input class="form-control" type="text" placeholder="Cell No. or Tel. No.">
+                            <input name="group_member_list[0][contact_number]" class="form-control" type="text" placeholder="Cell No. or Tel. No.">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Complete Address</label>
-                            <input type="text" class="form-control" placeholder="Address">
+                            <input name="group_member_list[0][complete_address]" type="text" class="form-control" placeholder="Address">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Email Address</label>
-                            <input type="text" class="form-control" placeholder="name@email.com">
+                            <input name="group_member_list[0][email_address]" type="text" class="form-control" placeholder="name@email.com">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Valid ID</label>
-                            <input type="file" id="exampleInputFile">
+                            <input name="images[]" type="file">
                             <p class="help-block">Upload a scanned copy of valid ID.</p>
                         </div>
                         <div class="form-group">
                             <label class="control-label">T-shirt Size</label>
-                            <select class="form-control" id="select">
+                            <select name="group_member_list[0][tshirt_size]" class="form-control">
                                 <option selected disabled>None</option>
-                                <option>XS</option>
-                                <option>S</option>
-                                <option>M</option>
-                                <option>L</option>
-                                <option>XL</option>
-                                <option>XXL</option>
+                                <option value="XS">XS</option>
+                                <option value="S" >S</option>
+                                <option value="M" >M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </div>
 
@@ -111,33 +111,22 @@
                         <hr>
                         <div class="form-group">
                             <label class="control-label">Local Chapter (School/University)</label>
-                            <input type="text" class="form-control" placeholder="School/University">
+                            <input name="local_chapter_description" type="text" class="form-control" placeholder="School/University">
+                            <input name="local_chapter_chapter_type" type="hidden" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label class="control-label">Local Chapter Address</label>
-                            <input type="text" class="form-control" placeholder="Address">
+                            <input name="local_chapter_address" type="text" class="form-control" placeholder="Address">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Region</label>
-                            <select class="form-control" id="select">
+                            <select name="local_chapter_region"  class="form-control" id="select2">
                                 <option selected disabled>None</option>
-                                <option>Region 1</option>
-                                <option>Region 2</option>
-                                <option>Region 3</option>
-                                <option>Region 4-A</option>
-                                <option>Region 4-B</option>
-                                <option>Region 5</option>
-                                <option>Region 6</option>
-                                <option>Region 7</option>
-                                <option>Region 8</option>
-                                <option>Region 9</option>
-                                <option>Region 10</option>
-                                <option>Region 11</option>
-                                <option>Region 12</option>
-                                <option>NCR</option>
-                                <option>CAR</option>
-                                <option>ARMM</option>
-                                <option>NIR</option>
+                                <option>Region 1 & CAR</option>
+                                <option>Region 4</option>
+                                <option>Region 10 & CARAGA</option>
+                                <option>Region 12 & SOCCSKSARGEN</option>
+                                
                             </select>
                         </div>
 
@@ -151,96 +140,20 @@
                     <div class="reg-form reg-form-3 hide-module">
                         <h4 class="bold-1">Choose an event to participate</h4>
                         <hr>
-                        <div class="form-group">
+                        <div  class="form-group nonAcademicEvent">
                             <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
                             <label class="control-label">Non-Academic Events</label>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Battle of the Bands
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Debate
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Siniratura
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> That's My Bae
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> REO Showoff
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> JPIAN Idol
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Kalokalike
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> CineJPIA
-                                </label>
-                            </div>
                         </div>
-                        <div class="form-group">
+                        <div  class="form-group academicEvent">
                             <label class="control-label">Academic Events</label>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 1 - Basic Accounting
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 2 - Financial Accounting and Reporting
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 3 - Advanced Financial Accounting and Reporting
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 4 - Management Accounting and Control
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 5 - Auditing
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 6 - Regulatory Framework for Business Transactions
-                                </label>
-                            </div>
-                            <div class="checkbox reg-checkbox">
-                                <label>
-                                    <input type="checkbox"> Cup 7 - Taxation Case Study
-                                </label>
-                            </div>
                         </div>
-
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
                             <a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
                         </div>
                     </div>
-
+                    
                     <div class="reg-form reg-form-4 hide-module">
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
@@ -256,29 +169,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr 
+                                        contact_number="" 
+                                        complete_address="" 
+                                        email_address="" 
+                                        tshirt_size="" 
+                                        member_type="" 
+                                        local_chapter_ID=""
+                                        local_chapter_position_ID=""
+                                        event_participation=""
+                                        academic_event_participation=""
+                                        non_academic_event_participation=""
+                                        >
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>Local Chapter Adviser</td>
-                                        <td><a class="btn btn-info btn-xs">edit</a></td>
+                                        <td>
+                                            <a class="btn btn-info btn-xs">edit</a>
+                                        </td>
                                     </tr>
+                                    
                                     <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>Local Chapter Faculty</td>
-                                        <td><a class="btn btn-info btn-xs">edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>Bird</td>
-                                        <td>Local Chapter Representative</td>
-                                        <td><a class="btn btn-info btn-xs">edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="5" style="text-align:center">No members added yet</th>
+                                        <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -333,87 +246,13 @@
                                         <option>XXL</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group nonAcademicEvent">
                                     <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
                                     <label class="control-label">Non-Academic Events</label>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Battle of the Bands
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Debate
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Siniratura
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> That's My Bae
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> REO Showoff
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> JPIAN Idol
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Kalokalike
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> CineJPIA
-                                        </label>
-                                    </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group academicEvent">
                                     <label class="control-label">Academic Events</label>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 1 - Basic Accounting
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 2 - Financial Accounting and Reporting
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 3 - Advanced Financial Accounting and Reporting
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 4 - Management Accounting and Control
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 5 - Auditing
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 6 - Regulatory Framework for Business Transactions
-                                        </label>
-                                    </div>
-                                    <div class="checkbox reg-checkbox">
-                                        <label>
-                                            <input type="checkbox"> Cup 7 - Taxation Case Study
-                                        </label>
-                                    </div>
+                                    
                                 </div>
                             <br>
                             <div class="form-group">
@@ -528,8 +367,8 @@
                                 <input name="registration_number" class="form-control" type="number" placeholder="XXXXXX">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Valid ID</label>
-                                <input name="images[]" type="file">
+                                <label class="control-label">Deposit Slip</label>
+                                <input id="depositSlipFile" name="images[]" type="file">
                                 <p class="help-block">Upload a scanned copy of your deposit slips.</p>
                             </div>
                             <br>
@@ -559,7 +398,13 @@
             </div>
         </div>
     </div>
-
+    <div class="prototype" style="display:none">
+        <div class="eventItem checkbox reg-checkbox">
+            <label>
+                <input type="checkbox"> <span class="eventDescription">Cup 1 - Basic Accounting</span>
+            </label>
+        </div>
+    </div>
     <script type="text/javascript" src="<?=asset_url()?>js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>

@@ -41,8 +41,13 @@ class C_registration extends API_Controller {
              *  } 
              * 
              * ]
-             *              */
-            $this->form_validation->set_rules('local_chapter_ID', 'Local Chapter', 'required');
+             *              
+             */
+            $this->form_validation->set_rules('local_chapter_description', 'Local Chapter', 'required');
+            $this->form_validation->set_rules('local_chapter_chapter_type', 'Local Chapter', 'required');
+            $this->form_validation->set_rules('local_chapter_address', 'Local Chapter', 'required');
+            $this->form_validation->set_rules('local_chapter_region', 'Local Chapter', 'required');
+            
             $groupMemberList = $this->input->post("group_member_list");
             if($groupMemberList){
                 foreach($groupMemberList as $key =>$value){
@@ -52,9 +57,9 @@ class C_registration extends API_Controller {
                     $this->formValidationSetRule('group_member_list['.$key.'][local_chapter_position_ID]', 'Member '.$key." Position", 'required');
                     $this->formValidationSetRule('group_member_list['.$key.'][contact_number]', 'Member '.$key." Contact Number", 'required');
                     $this->formValidationSetRule('group_member_list['.$key.'][complete_address]', 'Member '.$key." Complete Address", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][email_address]', 'Member '.$key." Email Address", 'required');
+                    $this->formValidationSetRule('group_member_list['.$key.'][email_address]', 'Member '.$key." Email Address", 'required|email');
                     $this->formValidationSetRule('group_member_list['.$key.'][tshirt_size]', 'Member '.$key." T-shirt Size", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][member_type]', 'Member '.$key." Member Type", 'required');
+                    $this->formValidationSetRule('group_member_list['.$key.'][member_type]', 'Member '.$key." Member Type", 'required|numeric');
                     if(isset($value["event_participation"]["academic"]) && count($value["event_participation"]["academic"]) > 2){
                         $this->formValidationError["member_".$key."_event_participation_academic"] = 'Member '.$key."Participation in academic exceeds the limit";
                     }
@@ -71,9 +76,16 @@ class C_registration extends API_Controller {
                 $this->load->model("M_account_event_participation");
                 $this->load->model("M_account_local_chapter_group");
                 $this->load->model("M_file_uploaded");
+                /*Local Chapter*/
+                $localChapterResult = $this->M_local_chapter->createLocalChapter(
+                        $this->input->post("local_chapter_description"),
+                        $this->input->post("local_chapter_chapter_type"),
+                        $this->input->post("local_chapter_address"),
+                        $this->input->post("local_chapter_region")
+                        );
                 /*Create Local Group*/
                 $localChapterGroupResult = $this->M_local_chapter_group->createLocalChapterGroup(
-                        $this->input->post("local_chapter_ID")
+                        $localChapterResult
                         );
                 /*Create account for member*/
                 foreach($groupMemberList as $key => $value){
@@ -112,7 +124,6 @@ class C_registration extends API_Controller {
                                 $this->M_account_event_participation->createAccountEventParticipation($accountResult, $nonAcademicValue);
                             }
                         }
-                        
                     }
                 }
                 if($localChapterGroupResult){

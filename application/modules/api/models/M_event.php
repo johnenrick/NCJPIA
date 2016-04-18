@@ -7,38 +7,35 @@
  */
 
 /**
- * Description of m_local_chapter
+ * Description of m_event
  *
  * @author johnenrick
  */
-class M_local_chapter extends API_Model{
+class M_event extends API_Model{
     public function __construct() {
         parent::__construct();
-        $this->TABLE = "local_chapter";
+        $this->TABLE = "event";
     }
-    public function createLocalChapter($description, $chapterType, $address, $region){
+    public function createEvent($firstParameter){
         $newData = array(
-            "description" => $description,
-            "chapter_type" => $chapterType,
-            "address" => $address,
-            "region" => $region
+            "first_parameter" => $firstParameter
         );
         return $this->createTableEntry($newData);
     }
-    public function retrieveLocalChapter($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
+    public function retrieveEvent($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
             
         );
         $selectedColumn = array(
-            "local_chapter.*"
+            "event.*"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
     }
-    public function updateLocalChapter($ID = NULL, $condition = array(), $newData = array()) {
+    public function updateEvent($ID = NULL, $condition = array(), $newData = array()) {
         return $this->updateTableEntry($ID, $condition, $newData);
     }
-    public function deleteLocalChapter($ID = NULL, $condition = array()){
+    public function deleteEvent($ID = NULL, $condition = array()){
         return $this->deleteTableEntry($ID, $condition);
     }
 }
