@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Contact Number</label>
-                            <input name="group_member_list[0][contact_number]" class="form-control" type="text" placeholder="Cell No. or Tel. No." required>
+                            <input name="group_member_list[0][contact_number]" class="form-control" type="number" placeholder="Cell No. or Tel. No." required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Complete Address</label>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Email Address</label>
-                            <input name="group_member_list[0][email_address]" type="text" class="form-control" placeholder="name@email.com" required>
+                            <input name="group_member_list[0][email_address]" type="email" class="form-control" placeholder="name@email.com" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Valid ID</label>
@@ -110,7 +110,7 @@
                         <br>
                         <div class="form-group">
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -247,7 +247,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Contact Number</label>
-                                <input class="form-control" type="text" placeholder="Cell No. or Tel. No.">
+                                <input class="form-control" type="number" placeholder="Cell No. or Tel. No.">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Complete Address</label>
@@ -255,7 +255,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email Address</label>
-                                <input type="text" class="form-control" placeholder="name@email.com">
+                                <input type="email" class="form-control" placeholder="name@email.com">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Valid ID</label>
@@ -466,6 +466,7 @@
     <script type="text/javascript" src="<?=asset_url()?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="<?=asset_url()?>js/validator.js"></script>
 
 </body>
 

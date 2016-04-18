@@ -1,6 +1,7 @@
 <script type="text/javascript">
 	var registration = {}, count = 0;
 	registration.eventLimit = 2;
+	var button1 = false;
 
 	$(document).ready(function(){
 		$('.checkbox-control input.checkbox').on('change', function(evt) {
@@ -10,42 +11,15 @@
 		});
 
 		$('#button-step1').click(function(event){
-	        if(!this.checkValidity()){
-	            event.preventDefault();
-	            $('.reg-form-1 :input:visible[required="required"]').each(function(){
-				    if(!this.validity.valid){
-				        $(this).focus();
-				        // break
-				        return false;
-				    }
-				});
-	        }
+			$(".reg-form-1").validator("validate");
 	    });
 
 	    $('#button-step2').click(function(event){
-	        if(!this.checkValidity()){
-	            event.preventDefault();
-	            $('.reg-form-2 :input:visible[required="required"]').each(function(){
-				    if(!this.validity.valid){
-				        $(this).focus();
-				        // break
-				        return false;
-				    }
-				});
-	        }
+	        $(".reg-form-2").validator("validate");
 	    });
 
 	    $('#button-step3').click(function(event){
-	        if(!this.checkValidity()){
-	            event.preventDefault();
-	            $('.reg-form-3 :input:visible[required="required"]').each(function(){
-				    if(!this.validity.valid){
-				        $(this).focus();
-				        // break
-				        return false;
-				    }
-				});
-	        }
+	        $(".reg-form-3").validator("validate");
 	    });
 	});
 </script>
