@@ -244,6 +244,7 @@
                                 <!--<a class="btn btn-success btn-form-save">Save</a>
                                 <a class="btn btn-warning btn-form-cancel">Cancel</a>-->
                                 <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save" >Save</button>
+                                <button id="button-update-group-member" type="submit" class="btn btn-success btn-form-save" style="display: none">Update</button>
                                 <button id="button-cancel-group-member" type="submit" class="btn btn-warning btn-form-cancel">Cancel</button>
                             </div>
                         </div>
@@ -407,7 +408,10 @@
                 <td class="groupMemberLastName">Otto</td>
                 <td class="groupMemberLocalChapterPositionDescription" >Local Chapter Adviser</td>
                 <td>
-                    <a class="btn btn-info btn-xs">edit</a>
+                    <a class="btn btn-info btn-xs editMember">edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-xs removeMember">remove</a>
                 </td>
             </tr>
 

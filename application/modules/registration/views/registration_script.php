@@ -9,7 +9,7 @@
 		   	}
 		});
 
-		/*$("#reg-form-1-id").validator();
+		$("#reg-form-1-id").validator();
 		$("#reg-form-1-id").on("valid.bs.validator", function(){
 			$('#button-step1').removeAttr("disabled");
 		});
@@ -23,14 +23,14 @@
 		});
 	    $('#button-step2').click(function(event){
 	        $(".reg-form-2").validator("validate");
-	    });*/
+	    });
 
-	    /*$("#reg-form-member-id").validator();
+	    $("#reg-form-member-id").validator();
 		$("#reg-form-member-id").on("valid.bs.validator", function(){
 			$('#button-add-group-member').removeAttr("disabled");
-		});*/
+		});
 		$('#button-add-group-member').click(function(event){
-			//$("#reg-form-member-id").validator("validate");
+			$("#reg-form-member-id").validator("validate");
 			var temp = $(".prototype table tr").clone();
 			var container = $("#reg-form-member-id");
 			var academic = "";
@@ -57,8 +57,34 @@
 			temp.find(".groupMemberLocalChapterPositionDescription").text(container.find("#Position option:selected").text());
 
 			$(".registrationGroupMemberRow").append(temp);
+			container.find(".contact").val("");
+			container.find(".address").val("");
+			container.find(".emailadd").val("");
+			container.find("#shirtSize").val(1);
+			container.find(".fname").val("");
+			container.find(".lname").val("");
+			container.find("#Position").val(1);
+			$('#reg-form-4-id .academicEvent input').each(function() {
+			    if($(this).is(':checked')) $(this).prop("checked", false); 
+			});
+			$('#reg-form-4-id .nonAcademicEvent input').each(function() {
+			    if($(this).is(':checked')) $(this).prop("checked", false); 
+			});
+			academic = "";
+			nonacad = "";
 	    });	    
+		
+		$('#reg-form-4-id').on("click", ".editMember", function(){
+			var location = $(this).index();
+			$("#button-add-group-member").hide();
+			$("#button-update-group-member").show();
+			$(".reg-form-member").slideDown();
 
+			var temp = $(".registrationGroupMemberRow").eq(location);
+		});
 
+		$('#reg-form-4-id').on("click", ".removeMember", function(){
+			$(this).parent().parent().remove();
+		});
 	});
 </script>
