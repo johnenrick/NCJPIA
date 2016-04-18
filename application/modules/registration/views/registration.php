@@ -165,7 +165,7 @@
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-striped reg-table-member">
+                            <table id="groupMemberTable" class="table table-striped reg-table-member">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -175,8 +175,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody >
                                     <tr
+                                        class="groupMember"
                                         contact_number=""
                                         complete_address=""
                                         email_address=""
@@ -189,16 +190,33 @@
                                         non_academic_event_participation=""
                                         >
                                         <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>Local Chapter Adviser</td>
+                                        <td class="groupMemberFirstName">Mark</td>
+                                        <td class="groupMemberLastName">Otto</td>
+                                        <td class="groupMemberLocalChapterPositionDescription" local_chapter_group_position="">Local Chapter Adviser</td>
                                         <td>
                                             <a class="btn btn-info btn-xs">edit</a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
+                                    <tr
+                                        class="groupMember"
+                                        contact_number=""
+                                        complete_address=""
+                                        email_address=""
+                                        tshirt_size=""
+                                        member_type=""
+                                        local_chapter_ID=""
+                                        local_chapter_position_ID=""
+                                        event_participation=""
+                                        academic_event_participation=""
+                                        non_academic_event_participation=""
+                                        >
+                                        <th scope="row">1</th>
+                                        <td class="groupMemberFirstName">Mark</td>
+                                        <td class="groupMemberLastName">Otto</td>
+                                        <td class="groupMemberLocalChapterPositionDescription" local_chapter_position_ID="">Local Chapter Adviser</td>
+                                        <td>
+                                            <a class="btn btn-info btn-xs">edit</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -411,6 +429,33 @@
                 <input type="checkbox"> <span class="eventDescription">Cup 1 - Basic Accounting</span>
             </label>
         </div>
+        <table>
+            <tr
+                class="groupMember"
+                contact_number=""
+                complete_address=""
+                email_address=""
+                tshirt_size=""
+                member_type=""
+                local_chapter_ID=""
+                local_chapter_position_ID=""
+                event_participation=""
+                academic_event_participation=""
+                non_academic_event_participation=""
+                >
+                <th scope="row">1</th>
+                <td class="groupMemberFirstName">Mark</td>
+                <td class="groupMemberLastName">Otto</td>
+                <td class="groupMemberLocalChapterPositionDescription" local_chapter_group_position="">Local Chapter Adviser</td>
+                <td>
+                    <a class="btn btn-info btn-xs">edit</a>
+                </td>
+            </tr>
+
+            <tr class="noGroupMember">
+                <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
+            </tr>
+        </table>
     </div>
     <script type="text/javascript" src="<?=asset_url()?>js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/bootstrap.min.js"></script>
