@@ -15,6 +15,8 @@ class Portal extends FE_Controller{
     //put your code here
     function index(){
         $this->loadPage("portal", array("portal_script"), array("message" => false));
+        $this->load->view("system_application/system");
+        $this->load->view("system_application/system_script");
     }
     public function visitPage($pageLink = "portal", $pageLink2 = false, $extraData = false){
         $data = array(
