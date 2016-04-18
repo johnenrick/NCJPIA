@@ -76,7 +76,7 @@ class API_Model extends CI_Model{
         if($limit !== NULL){
             $this->db->limit($limit, $offset);
         }
-        $this->db->group_by("$this->TABLE.ID"); 
+        $this->db->group_by("$this->TABLE.ID");
         if(!($retrieveType)){
             $result = $this->db->get($this->TABLE);
             $this->db->flush_cache();
@@ -156,7 +156,6 @@ class API_Model extends CI_Model{
                 /*Concat*/
                 $plusColumns = explode("__CONCAT__", $tableColumnKey);
                 if(count($plusColumns) > 1){
-                    
                     $passArithmetic = true;
                     $tableColumnTemp ="";
                     foreach($plusColumns as $plusColumnsValue){
@@ -181,6 +180,7 @@ class API_Model extends CI_Model{
                     }
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
+                
                 
                 if(isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic){
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";

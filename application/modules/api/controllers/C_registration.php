@@ -63,7 +63,7 @@ class C_registration extends API_Controller {
                     }
                 }
             }
-            $imageError = $this->hasFileUploadError();
+            $imageError = $this->hasFileUploadError(count($groupMemberList));
             if($this->formValidationRun() && !$imageError){
                 $this->load->model("M_local_chapter_group");
                 $this->load->model("M_account_information");
@@ -83,10 +83,10 @@ class C_registration extends API_Controller {
                             9,//account type
                             1//status
                             );
-                    $fileUploaded = $this->do_upload_images($key);
+                    $fileUploaded = $this->do_upload_images($key, 'assets/images/identification_card');
                         
                     if($accountResult && $fileUploaded){
-                        $fileUploadedResult = $this->M_file_uploaded->createFileUploaded($fileUploaded["image_type"], $fileUploaded["file_name"], $fileUploaded["file_path"], $fileUploaded["file_size"]);
+                        
                         $this->M_account_information->createAccountInformation(
                                 $accountResult,
                                 $value["first_name"], 
@@ -95,7 +95,7 @@ class C_registration extends API_Controller {
                                 $value["local_chapter_position_ID"],
                                 $value["contact_number"],
                                 $value["email_address"],
-                                $fileUploadedResult,
+                                $fileUploaded["file_uploaded_ID"],
                                 $value["tshirt_size"]
                                 );
                         /*Add local chapter group member*/
@@ -137,6 +137,36 @@ class C_registration extends API_Controller {
             $this->responseError(1, "Not Authorized");
         }
         $this->outputResponse();
+    }
+    public function createPaymentReceipt(){
+        $this->accessNumber = 1;
+        if($this->checkACL()){
+            $this->formValidationSetRule('registration_number', 'Registraton Number', 'required');
+            $imageError = $this->hasFileUploadError();
+            if($this->formValidationRun() && !$imageError){
+                $this->load->model("M_payment_receipt");
+                for($key = 0; $key < count($_FILES['images'] ['name']); $key++){
+                    $fileUploaded = $this->do_upload_images($key, 'assets/images/payment_receipt');
+                    if($fileUploaded){
+                        $this->M_payment_receipt->createPaymentReceipt($this->input->post("registration_number"), $fileUploaded["file_uploaded_ID"]);
+                    }
+                }
+                $this->responseData(true);
+            }else{
+                if(count($this->formValidationError())){
+                    $this->responseError(102, $this->formValidationError());
+                }
+                if($imageError){
+                    if(is_array($imageError)){
+                        $this->responseError(5, $imageError);
+                    }else{
+                        $this->responseError(6, "Number of images does not match with the number of group member");
+                    }
+                }
+            }
+        }
+        $this->outputResponse();
+        
     }
     public function retrieveRegistration(){
         $this->accessNumber = 2;
@@ -212,14 +242,16 @@ class C_registration extends API_Controller {
      * 
      * @return bolean/array true if exceeds limit, array if multiple errors, false if no errors
      */
-    function hasFileUploadError(){
+    function hasFileUploadError($expectedFileQuantity = 0){
         if(!isset($_FILES['images'] ['name'])){
             return true;
         }
         $files = $_FILES;
         $cpt = count($_FILES['images'] ['name']);
-        if($cpt != count($this->input->post("group_member_list"))){
-            return true;
+        if($expectedFileQuantity != 0){
+            if($cpt != $expectedFileQuantity ){
+                return true;
+            }
         }
         $errorList = array();
         for($i = 0; $i < $cpt; $i ++) {
@@ -233,12 +265,12 @@ class C_registration extends API_Controller {
                 if(!isset($errorList[$i])){
                     $errorList[$i] = array();
                 }
-                $errorList[$i]["size"] = "Maximum file size exceeded";
+                $errorList[$i]["size"] = $files ['images'] ['name'][$i]." exceeded file size limit";
             }
         }
-        return (count($errorList) > 0) ? errorList : false;
+        return (count($errorList) > 0) ? $errorList : false;
     }
-    function do_upload_images($i) {
+    function do_upload_images($i, $path) {
         $files = $_FILES;
         $this->load->library('upload');
         $cpt = count ( $_FILES ['images'] ['name'] );
@@ -250,23 +282,27 @@ class C_registration extends API_Controller {
         $_FILES ['userfile'] ['tmp_name'] = $files ['images'] ['tmp_name'] [$i];
         $_FILES ['userfile'] ['error'] = $files ['images'] ['error'] [$i];
         $_FILES ['userfile'] ['size'] = $files ['images'] ['size'] [$i];
-        $this->upload->initialize ( $this->set_upload_options () );
+        $this->upload->initialize ( $this->set_upload_options ($path) );
         $this->upload->do_upload();
         
         $photoinfo = $this->upload->data();
         if($photoinfo["file_name"] != ""){
+            $this->load->model("M_file_uploaded");
+            $fileUploadedResult = $this->M_file_uploaded->createFileUploaded($photoinfo["image_type"], $photoinfo["file_name"], $photoinfo["file_path"], $photoinfo["file_size"]);
+            $photoinfo["file_uploaded_ID"] = $fileUploadedResult;
             return $photoinfo;
         }else{
             return false;
         }
     }
-    private function set_upload_options() {
+    private function set_upload_options($path) {
         // upload an image options
         $config = array ();
-        $config ['upload_path'] = 'assets/images/identification_card';
+        $config ['upload_path'] = $path;
         $config ['allowed_types'] = 'gif|jpg|png';
         $config ['encrypt_name'] = TRUE;
 
         return $config;
     }
+    
 }
