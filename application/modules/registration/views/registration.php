@@ -110,7 +110,7 @@
                         <br>
                         <div class="form-group">
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right reg-btn-next" disabled>Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right reg-btn-next" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right reg-btn-next" disabled>Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right reg-btn-next" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -163,63 +163,21 @@
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-4 hide-module">
+                    <div class="reg-form reg-form-4 hide-module" id="reg-form-4-id">
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
                         <div class="table-responsive">
                             <table id="groupMemberTable" class="table table-striped reg-table-member">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Position</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody >
-                                    <tr
-                                        class="groupMember"
-                                        contact_number=""
-                                        complete_address=""
-                                        email_address=""
-                                        tshirt_size=""
-                                        member_type=""
-                                        local_chapter_ID=""
-                                        local_chapter_position_ID=""
-                                        event_participation=""
-                                        academic_event_participation=""
-                                        non_academic_event_participation=""
-                                        >
-                                        <th scope="row">1</th>
-                                        <td class="groupMemberFirstName">Mark</td>
-                                        <td class="groupMemberLastName">Otto</td>
-                                        <td class="groupMemberLocalChapterPositionDescription" local_chapter_group_position="">Local Chapter Adviser</td>
-                                        <td>
-                                            <a class="btn btn-info btn-xs">edit</a>
-                                        </td>
-                                    </tr>
-                                    <tr
-                                        class="groupMember"
-                                        contact_number=""
-                                        complete_address=""
-                                        email_address=""
-                                        tshirt_size=""
-                                        member_type=""
-                                        local_chapter_ID=""
-                                        local_chapter_position_ID=""
-                                        event_participation=""
-                                        academic_event_participation=""
-                                        non_academic_event_participation=""
-                                        >
-                                        <th scope="row">1</th>
-                                        <td class="groupMemberFirstName">Mark</td>
-                                        <td class="groupMemberLastName">Otto</td>
-                                        <td class="groupMemberLocalChapterPositionDescription" local_chapter_position_ID="">Local Chapter Adviser</td>
-                                        <td>
-                                            <a class="btn btn-info btn-xs">edit</a>
-                                        </td>
-                                    </tr>
+                                <tbody class="registrationGroupMemberRow">
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -230,13 +188,13 @@
                             <div class="form-group">
                                 <label class="control-label">Name</label>
                                 <div class="form-inline">
-                                    <input class="form-control reg-input-inline" type="text" placeholder="First Name" required>
-                                    <input class="form-control reg-input-inline" type="text" placeholder="Last Name" required>
+                                    <input class="form-control reg-input-inline fname" type="text" placeholder="First Name" required>
+                                    <input class="form-control reg-input-inline lname" type="text" placeholder="Last Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Position</label>
-                                <select class="form-control" id="select" required>
+                                <select class="form-control localChapterPosition" id="Position" required>
                                     <option selected disabled>None</option>
                                     <option>Local Chapter Adviser</option>
                                     <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
@@ -246,15 +204,15 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Contact Number</label>
-                                <input class="form-control" type="number" placeholder="Cell No. or Tel. No." required>
+                                <input class="form-control contact" type="number" placeholder="Cell No. or Tel. No." required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Complete Address</label>
-                                <input type="text" class="form-control" placeholder="Address" required>
+                                <input type="text" class="form-control address" placeholder="Address" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email Address</label>
-                                <input type="email" class="form-control" placeholder="name@email.com" required>
+                                <input type="email" class="form-control emailadd" placeholder="name@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Valid ID</label>
@@ -263,7 +221,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">T-shirt Size</label>
-                                <select class="form-control" id="select" required>
+                                <select class="form-control" id="shirtSize" required>
                                     <option selected disabled>None</option>
                                     <option>XS</option>
                                     <option>S</option>
@@ -285,7 +243,7 @@
                             <div class="form-group">
                                 <!--<a class="btn btn-success btn-form-save">Save</a>
                                 <a class="btn btn-warning btn-form-cancel">Cancel</a>-->
-                                <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save" disabled>Save</button>
+                                <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save" >Save</button>
                                 <button id="button-cancel-group-member" type="submit" class="btn btn-warning btn-form-cancel">Cancel</button>
                             </div>
                         </div>
@@ -441,16 +399,13 @@
                 email_address=""
                 tshirt_size=""
                 member_type=""
-                local_chapter_ID=""
                 local_chapter_position_ID=""
-                event_participation=""
                 academic_event_participation=""
                 non_academic_event_participation=""
                 >
-                <th scope="row">1</th>
                 <td class="groupMemberFirstName">Mark</td>
                 <td class="groupMemberLastName">Otto</td>
-                <td class="groupMemberLocalChapterPositionDescription" local_chapter_group_position="">Local Chapter Adviser</td>
+                <td class="groupMemberLocalChapterPositionDescription" >Local Chapter Adviser</td>
                 <td>
                     <a class="btn btn-info btn-xs">edit</a>
                 </td>
