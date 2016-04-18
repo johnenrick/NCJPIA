@@ -1,6 +1,14 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#loginForm").validator();
+        $(".testForm").validator();
+        $(".testForm").on("valid.bs.validator", function(){
+            alert(1)
+        });
+        $(".testForm2").validator();
+        $(".testForm2").on("valid.bs.validator", function(){
+            alert(2)
+        });
         $("#loginForm").attr("action", base_url("portal/login"));
         $("#loginForm").ajaxForm({
             beforeSubmit : function(){
