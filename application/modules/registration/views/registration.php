@@ -57,7 +57,7 @@
                     <h3 class="reg-h-1 bold-1">Registration</h3>
                     <p class="reg-p-1">Welcome to registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
                     <br>
-                    <div class="reg-form reg-form-1">
+                    <div class="reg-form reg-form-1" id="reg-form-1-id">
                         <h4 class="bold-1">Group Leader Information</h4>
                         <hr>
                         <div class="form-group">
@@ -110,25 +110,25 @@
                         <br>
                         <div class="form-group">
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right reg-btn-next" disabled>Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
-                    <div class="reg-form reg-form-2 hide-module">
+                    <div class="reg-form reg-form-2 hide-module" id="reg-form-2-id">
                         <h4 class="bold-1">Local Chapter Information</h4>
                         <hr>
                         <div class="form-group">
                             <label class="control-label">Local Chapter (School/University)</label>
-                            <input name="local_chapter_description" type="text" class="form-control" placeholder="School/University">
+                            <input name="local_chapter_description" type="text" class="form-control" placeholder="School/University" required>
                             <input name="local_chapter_chapter_type" type="hidden" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label class="control-label">Local Chapter Address</label>
-                            <input name="local_chapter_address" type="text" class="form-control" placeholder="Address">
+                            <input name="local_chapter_address" type="text" class="form-control" placeholder="Address" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Region</label>
-                            <select name="local_chapter_region"  class="form-control" id="select2">
+                            <select name="local_chapter_region"  class="form-control" id="select2" required>
                                 <option selected disabled>None</option>
                                 <option>Region 1 & CAR</option>
                                 <option>Region 4</option>
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right reg-btn-next" disabled>Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -159,8 +159,7 @@
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
-                            <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step3" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
                         </div>
                     </div>
 
@@ -227,17 +226,17 @@
                         <div class="form-group">
                             <a id="reg-add-member" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Group Member</a>
                         </div>
-                        <div class="reg-form-member btn-form-con hide-module">
+                        <div class="reg-form-member btn-form-con hide-module" id="reg-form-member-id">
                             <div class="form-group">
                                 <label class="control-label">Name</label>
                                 <div class="form-inline">
-                                    <input class="form-control reg-input-inline" type="text" placeholder="First Name">
-                                    <input class="form-control reg-input-inline" type="text" placeholder="Last Name">
+                                    <input class="form-control reg-input-inline" type="text" placeholder="First Name" required>
+                                    <input class="form-control reg-input-inline" type="text" placeholder="Last Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Position</label>
-                                <select class="form-control" id="select">
+                                <select class="form-control" id="select" required>
                                     <option selected disabled>None</option>
                                     <option>Local Chapter Adviser</option>
                                     <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
@@ -247,24 +246,24 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Contact Number</label>
-                                <input class="form-control" type="number" placeholder="Cell No. or Tel. No.">
+                                <input class="form-control" type="number" placeholder="Cell No. or Tel. No." required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Complete Address</label>
-                                <input type="text" class="form-control" placeholder="Address">
+                                <input type="text" class="form-control" placeholder="Address" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email Address</label>
-                                <input type="email" class="form-control" placeholder="name@email.com">
+                                <input type="email" class="form-control" placeholder="name@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Valid ID</label>
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" id="exampleInputFile" required>
                                 <p class="help-block">Upload a scanned copy of valid ID.</p>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">T-shirt Size</label>
-                                <select class="form-control" id="select">
+                                <select class="form-control" id="select" required>
                                     <option selected disabled>None</option>
                                     <option>XS</option>
                                     <option>S</option>
@@ -286,7 +285,7 @@
                             <div class="form-group">
                                 <!--<a class="btn btn-success btn-form-save">Save</a>
                                 <a class="btn btn-warning btn-form-cancel">Cancel</a>-->
-                                <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save">Save</button>
+                                <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save" disabled>Save</button>
                                 <button id="button-cancel-group-member" type="submit" class="btn btn-warning btn-form-cancel">Cancel</button>
                             </div>
                         </div>
