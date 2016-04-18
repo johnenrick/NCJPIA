@@ -58,7 +58,6 @@
                     <p class="reg-p-1">Welcome to registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
                     <br>
                     <div class="reg-form reg-form-1">
-                        <form id="form-step1">
                         <h4 class="bold-1">Group Leader Information</h4>
                         <hr>
                         <div class="form-group">
@@ -113,11 +112,9 @@
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
                             <button type="submit" id="button-step1" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
-                        </form>
                     </div>
 
                     <div class="reg-form reg-form-2 hide-module">
-                        <form id="form-step2">
                         <h4 class="bold-1">Local Chapter Information</h4>
                         <hr>
                         <div class="form-group">
@@ -147,11 +144,9 @@
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
                             <button type="submit" id="button-step2" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
-                        </form>
                     </div>
 
                     <div class="reg-form reg-form-3 hide-module">
-                        <form id="form-step3">
                         <h4 class="bold-1">Choose an event to participate</h4>
                         <hr>
                         <div  class="form-group nonAcademicEvent control-checkbox">
@@ -167,7 +162,6 @@
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
                             <button type="submit" id="button-step3" class="btn btn-success reg-btn-right" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
-                        </form>
                     </div>
 
                     <div class="reg-form reg-form-4 hide-module">

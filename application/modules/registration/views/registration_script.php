@@ -9,16 +9,40 @@
 		   	}
 		});
 
-		$('#form-step1').submit(function(event){
+		$('#button-step1').click(function(event){
 	        if(!this.checkValidity()){
 	            event.preventDefault();
-	            $('#form-step1 :input:visible[required="required"]').each(function(){
+	            $('.reg-form-1 :input:visible[required="required"]').each(function(){
 				    if(!this.validity.valid){
 				        $(this).focus();
 				        // break
 				        return false;
-				    }else{
-				    	$("#button-step1").addClass("reg-btn-next").trigger("click");
+				    }
+				});
+	        }
+	    });
+
+	    $('#button-step2').click(function(event){
+	        if(!this.checkValidity()){
+	            event.preventDefault();
+	            $('.reg-form-2 :input:visible[required="required"]').each(function(){
+				    if(!this.validity.valid){
+				        $(this).focus();
+				        // break
+				        return false;
+				    }
+				});
+	        }
+	    });
+
+	    $('#button-step3').click(function(event){
+	        if(!this.checkValidity()){
+	            event.preventDefault();
+	            $('.reg-form-3 :input:visible[required="required"]').each(function(){
+				    if(!this.validity.valid){
+				        $(this).focus();
+				        // break
+				        return false;
 				    }
 				});
 	        }
