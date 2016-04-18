@@ -24,7 +24,9 @@ class C_account_payment extends API_Controller {
             
             if($this->form_validation->run()){
                 $result = $this->m_account_payment->createAccountPayment(
-                        $this->input->post("first_parameter")
+                        $this->input->post("assessment_item_ID"),
+                        $this->input->post("account_ID"),
+                        $this->input->post("amount")
                         );
                 if($result){
                     $this->actionLog($result);

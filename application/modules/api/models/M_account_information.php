@@ -34,13 +34,15 @@ class M_account_information extends API_Model{
     }
     public function retrieveAccountInformation($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            
+            "account" => "account.ID = account_information.account_ID",
+            "account_payment AS registration_fee" => "registration_fee.account_ID=account.ID AND registration_fee=1"
         );
         $selectedColumn = array(
-            "account_information.*"
+            "account_information.*",
+            "SUM(registration_fee.amount)"
         );
         
-        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
+        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, "account.ID");
     }
     public function updateAccountInformation($ID = NULL, $condition = array(), $newData = array()) {
         return $this->updateTableEntry($ID, $condition, $newData);

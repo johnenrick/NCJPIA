@@ -141,7 +141,7 @@ class C_registration extends API_Controller {
     public function createPaymentReceipt(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            $this->formValidationSetRule('registration_number', 'Registraton Number', 'required');
+            $this->formValidationSetRule('registration_number', 'Registraton Number', 'required|numeric');
             $imageError = $this->hasFileUploadError();
             if($this->formValidationRun() && !$imageError){
                 $this->load->model("M_payment_receipt");
@@ -158,9 +158,9 @@ class C_registration extends API_Controller {
                 }
                 if($imageError){
                     if(is_array($imageError)){
-                        $this->responseError(5, $imageError);
+                        $this->responseError(1002, $imageError);
                     }else{
-                        $this->responseError(6, "Number of images does not match with the number of group member");
+                        $this->responseError(6, "No image found");
                     }
                 }
             }

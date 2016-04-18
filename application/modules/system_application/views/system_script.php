@@ -161,15 +161,17 @@
      */
     function show_form_error(elementSelected, errorList){
         elementSelected.find(".formMessage").empty();
-        elementSelected.find(".has-error").removeClass(".has-error");
         errorList.forEach(function(errorValue){
             if(errorValue["status"] > 100 && errorValue["status"] < 1000){/*Form Validation Error*/
                 for(var index in errorValue["message"]){
                     elementSelected.find(".formMessage").append("* "+errorValue["message"][index]+"<br>");
-                    elementSelected.find("input[name='"+index+"']").parent().addClass("has-error");
                 }
             }else if(errorValue["status"] > 1000 && errorValue["status"] < 10000){/*System Error*/
-
+                for(var x = 0; x < errorValue["message"].length;x++){
+                    for(var index in errorValue["message"][x]){
+                        elementSelected.find(".formMessage").append("* "+errorValue["message"][x][index]+"<br>");
+                    }
+                }
             }else{
                 elementSelected.find(".formMessage").append("* "+errorValue["message"]+"<br>");
             }

@@ -39,7 +39,7 @@ class API_Model extends CI_Model{
      *                              e.g. [condition_type__database_table__table_column], [condition_type__table_column], [database_table__table_column]
      * @param array $selectedColumn Specify the columns to retrieve. All columns in default table is selected and prioritized
      */
-    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array()){
+    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array(), $groupBy = false){
         $this->initializeTableColumn($joinedTable);
         $this->db->start_cache();
         $this->db->flush_cache();
@@ -76,7 +76,7 @@ class API_Model extends CI_Model{
         if($limit !== NULL){
             $this->db->limit($limit, $offset);
         }
-        $this->db->group_by("$this->TABLE.ID");
+        $this->db->group_by($groupBy ? $groupBy :"$this->TABLE.ID");
         if(!($retrieveType)){
             $result = $this->db->get($this->TABLE);
             $this->db->flush_cache();

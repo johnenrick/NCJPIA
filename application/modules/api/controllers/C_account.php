@@ -12,7 +12,7 @@ class C_account extends API_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model("m_account");
-        $this->load->model("M_account_basic_information");
+        $this->load->model("M_account_information");
         $this->APICONTROLLERID = 9;
     }
     public function createAccount(){
@@ -47,8 +47,8 @@ class C_account extends API_Controller {
                         $this->input->post("status")
                         );
                 if($result){
-                    $this->load->model("m_account_basic_information");
-                    $this->m_account_basic_information->createAccountBasicInformation(
+                    $this->load->model("m_account_information");
+                    $this->m_account_information->createAccountBasicInformation(
                             $result,
                             $this->input->post("account_ID"),
                             $this->input->post("first_name"),
@@ -199,7 +199,7 @@ class C_account extends API_Controller {
                         $updatedData
                         );
                 $condition["account_ID"] = $ID;
-                $result1 = $this->M_account_basic_information->updateAccountBasicInformation(
+                $result1 = $this->M_account_information->updateAccountBasicInformation(
                         NULL,
                         array("account_ID" => $ID),
                         $updatedData

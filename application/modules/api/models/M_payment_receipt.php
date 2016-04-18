@@ -25,7 +25,6 @@ class M_payment_receipt extends API_Model{
     }
     public function retrievePaymentReceipt($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            
         );
         $selectedColumn = array(
             "payment_receipt.*"
