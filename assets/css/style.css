@@ -18,10 +18,10 @@ body {
 
 #reg-option {
     text-align: center;
-    padding-top: 25%;
+    padding-top: 10%;
 }
 #reg-option button {
-
+    width: 200px;
 }
 
 .hide-module {

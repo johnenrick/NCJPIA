@@ -40,9 +40,16 @@
             </div>
             <div class="col-md-8 full-height reg-con-2">
                 <div id="reg-option" class="full-height">
-                    <button type="button" name="op-reg" class="btn btn-success btn-lg">Registration</button>
-                    <h3>OR</h3>
+                    <h2 class="reg-h-1 bold-1">Welcome to NFJPIA Annual National Convention</h2>
                     <br>
+                    <h3>Step 1</h3>
+                    <h4>Register and fill out pertinent information.</h4>
+                    <button type="button" name="op-reg" class="btn btn-success btn-lg">Register</button>
+                    <br>
+                    <br>
+                    <br>
+                    <h3>Step 2</h3>
+                    <h4>Confirm your payment and get your confirmation number.</h4>
                     <button type="button" name="op-con" class="btn btn-warning btn-lg">Confirm Payment</button>
                 </div>
                 <div id="reg-module" class="col-md-8 full-height hide-module">
@@ -65,8 +72,8 @@
                             <select name="group_member_list[0][local_chapter_position_ID]" class="form-control localChapterPosition">
                                 <option selected disabled>None</option>
                                 <option>Local Chapter Adviser</option>
-                                <option>Local Chapter Faculty (Dean, Chairman)</option>
-                                <option>Local Chapter Officer (President, Vice President)</option>
+                                <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
+                                <option>Local Chapter Officer (President, Vice President, etc.)</option>
                                 <option>Local Chapter Representative</option>
                             </select>
                         </div>
@@ -126,7 +133,7 @@
                                 <option>Region 4</option>
                                 <option>Region 10 & CARAGA</option>
                                 <option>Region 12 & SOCCSKSARGEN</option>
-                                
+
                             </select>
                         </div>
 
@@ -153,7 +160,7 @@
                             <a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
                         </div>
                     </div>
-                    
+
                     <div class="reg-form reg-form-4 hide-module">
                         <h4 class="bold-1">Group Members</h4>
                         <hr>
@@ -169,12 +176,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr 
-                                        contact_number="" 
-                                        complete_address="" 
-                                        email_address="" 
-                                        tshirt_size="" 
-                                        member_type="" 
+                                    <tr
+                                        contact_number=""
+                                        complete_address=""
+                                        email_address=""
+                                        tshirt_size=""
+                                        member_type=""
                                         local_chapter_ID=""
                                         local_chapter_position_ID=""
                                         event_participation=""
@@ -189,7 +196,7 @@
                                             <a class="btn btn-info btn-xs">edit</a>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
                                     </tr>
@@ -212,8 +219,8 @@
                                     <select class="form-control" id="select">
                                         <option selected disabled>None</option>
                                         <option>Local Chapter Adviser</option>
-                                        <option>Local Chapter Faculty (Dean, Chairman)</option>
-                                        <option>Local Chapter Officer (President, Vice President)</option>
+                                        <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
+                                        <option>Local Chapter Officer (President, Vice President, etc.)</option>
                                         <option>Local Chapter Representative</option>
                                     </select>
                                 </div>
@@ -252,7 +259,7 @@
                                 </div>
                                 <div class="form-group academicEvent">
                                     <label class="control-label">Academic Events</label>
-                                    
+
                                 </div>
                             <br>
                             <div class="form-group">
@@ -356,10 +363,10 @@
                 <div id="con-module" class="col-md-8 full-height hide-module">
                     <h3 class="reg-h-1 bold-1">Payment Confirmation</h3>
                     <p class="reg-p-1">Verifying your registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
-                    
+
                     <form method="POST">
                         <div class="alert alert-danger formMessage" style="display:none">
-                        
+
                         </div>
                         <div class="reg-form reg-form-1">
                             <div class="form-group">
@@ -367,7 +374,7 @@
                                 <input name="registration_number" class="form-control" type="number" placeholder="XXXXXX">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Deposit Slip</label>
+                                <label class="control-label">Scanned Deposit Slip</label>
                                 <input id="depositSlipFile" name="images[]" type="file">
                                 <p class="help-block">Upload a scanned copy of your deposit slips.</p>
                             </div>
