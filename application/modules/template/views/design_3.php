@@ -100,7 +100,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr data-toggle="modal" data-target=".ml-modal">
                                             <td>
                                                 <input type="checkbox">
                                             </td>
@@ -114,7 +114,7 @@
                                                 <span class="label label-success">Success</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr data-toggle="modal" data-target=".ml-modal">
                                             <td>
                                                 <input type="checkbox">
                                             </td>
@@ -128,7 +128,7 @@
                                                 <span class="label label-warning">Warning</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr data-toggle="modal" data-target=".ml-modal">
                                             <td>
                                                 <input type="checkbox">
                                             </td>
@@ -142,7 +142,7 @@
                                                 <span class="label label-danger">Danger</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr data-toggle="modal" data-target=".ml-modal">
                                             <td>
                                                 <input type="checkbox">
                                             </td>
@@ -167,6 +167,232 @@
 
         </div>
         <!-- /#wrapper -->
+        <div class="modal fade ml-modal" tabindex="-1" role="dialog" aria-labelledby="Information">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Complete Information</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6" style="text-align:center">
+                                <a class="btn btn-success">Confirm Payment</a>
+                                <br>
+                                <br>
+                                <p>John Doe</p>
+                                <p>USC</p>
+                                <p>Region X</p>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?=asset_url()?>img/receipt.jpg" height="250" alt="No scanned copy of deposit slip uploaded.">
+                            </div>
+<!--
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <div class="form-inline">
+                                        <input class="form-control reg-input-inline" type="text" placeholder="First Name">
+                                        <input class="form-control reg-input-inline" type="text" placeholder="Last Name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Position</label>
+                                    <select class="form-control" id="select">
+                                        <option selected disabled>None</option>
+                                        <option>Local Chapter Adviser</option>
+                                        <option>Local Chapter Faculty (Dean, Chairman)</option>
+                                        <option>Local Chapter Officer (President, Vice President)</option>
+                                        <option>Local Chapter Representative</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Contact Number</label>
+                                    <input class="form-control" type="text" placeholder="Cell No. or Tel. No.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Complete Address</label>
+                                    <input type="text" class="form-control" placeholder="Address">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email Address</label>
+                                    <input type="text" class="form-control" placeholder="name@email.com">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">T-shirt Size</label>
+                                    <select class="form-control" id="select">
+                                        <option selected disabled>None</option>
+                                        <option>XS</option>
+                                        <option>S</option>
+                                        <option>M</option>
+                                        <option>L</option>
+                                        <option>XL</option>
+                                        <option>XXL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<?=asset_url()?>img/identification_card.png" height="250">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Local Chapter (School/University)</label>
+                                    <input type="text" class="form-control" placeholder="School/University" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Local Chapter Address</label>
+                                    <input type="text" class="form-control" placeholder="Address" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Region</label>
+                                    <select class="form-control" id="select" disabled>
+                                        <option selected disabled>None</option>
+                                        <option>Region 1</option>
+                                        <option>Region 2</option>
+                                        <option>Region 3</option>
+                                        <option>Region 4-A</option>
+                                        <option>Region 4-B</option>
+                                        <option>Region 5</option>
+                                        <option>Region 6</option>
+                                        <option>Region 7</option>
+                                        <option>Region 8</option>
+                                        <option>Region 9</option>
+                                        <option>Region 10</option>
+                                        <option>Region 11</option>
+                                        <option>Region 12</option>
+                                        <option>NCR</option>
+                                        <option>CAR</option>
+                                        <option>ARMM</option>
+                                        <option>NIR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
+                                    <label class="control-label">Non-Academic Events</label>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Battle of the Bands
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Debate
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Siniratura
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> That's My Bae
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> REO Showoff
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> JPIAN Idol
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Kalokalike
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> CineJPIA
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <label class="control-label">Academic Events</label>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 1 - Basic Accounting
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 2 - Financial Accounting and Reporting
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 3 - Advanced Financial Accounting and Reporting
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 4 - Management Accounting and Control
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 5 - Auditing
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 6 - Regulatory Framework for Business Transactions
+                                        </label>
+                                    </div>
+                                    <div class="checkbox reg-checkbox">
+                                        <label>
+                                            <input type="checkbox"> Cup 7 - Taxation Case Study
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="text/javascript" src="<?=asset_url()?>/js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>/js/bootstrap.min.js"></script>
