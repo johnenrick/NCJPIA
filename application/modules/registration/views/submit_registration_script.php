@@ -1,8 +1,10 @@
 <script type="text/javascript">
     $(document).ready(function(){
+        $("#registrationFormFull").attr("action", api_url("C_registration/createRegistration"));
         $("#registrationFormFull").ajaxForm({
             beforeSubmit : function(data, $form, options){
-                
+                clear_form_error($("#registrationFormFull"));
+                console.log(data);
                 /*Group Member*/
                 $("#groupMemberTable tbody").find("tr").each(function(){
                     data.push({
@@ -21,7 +23,7 @@
                         name : "group_member_list["+($(this).index()+1)+"][local_chapter_position_ID]",
                         required : true,
                         type : "text",
-                        value : $(this).find(".groupMemberLocalChapterPositionDescription").attr("local_chapter_position_ID")
+                        value : $(this).attr("local_chapter_position_ID")
                     });
                     data.push({
                         name : "group_member_list["+($(this).index()+1)+"][contact_number]",
@@ -53,22 +55,23 @@
                         type : "text",
                         value : $(this).attr("member_type")
                     });
-                    var academic = ($(this).attr("academic_event_participation")).split(",");
-                    if(academic[0] !== ""){
-                        for(var x = 0;x < academic.length; x++){
+                    var academic = ($(this).attr("academic_event_participation")).split(" ");
+                    
+                    for(var x = 0;x < academic.length; x++){
+                        if(academic[x]*1){
                             data.push({
-                                name : "group_member_list["+($(this).index()+1)+"][academic]["+x+"]",
+                                name : "group_member_list["+($(this).index()+1)+"][event_participation][academic]["+x+"]",
                                 required : true,
                                 type : "text",
                                 value : academic[x]
                             });
                         }
                     }
-                    var nonAcademic = ($(this).attr("non_academic_event_participation")).split(",");
-                    if(nonAcademic[0] !== ""){
-                        for(var x = 0;x < nonAcademic.length; x++){
+                    var nonAcademic = ($(this).attr("non_academic_event_participation")).split(" ");
+                    for(var x = 0;x < nonAcademic.length; x++){
+                        if(nonAcademic[x]*1){
                             data.push({
-                                name : "group_member_list["+($(this).index()+1)+"][non_academic]["+x+"]",
+                                name : "group_member_list["+($(this).index()+1)+"][event_participation][non_academic]["+x+"]",
                                 required : true,
                                 type : "text",
                                 value : nonAcademic[x]
@@ -76,10 +79,57 @@
                         }
                     }
                 });
+                /*Leader Event Participation*/
+                var nonAcademicEventCtr = 0;
+                $(".reg-form-3 .nonAcademicEvent").find("input:checked").each(function(){
+                    data.push({
+                        name : "group_member_list[0][event_participation][non_academic]["+nonAcademicEventCtr+"]",
+                        required : true,
+                        type : "text",
+                        value : $(this).val()
+                    });
+                    nonAcademicEventCtr++;
+                });
+                var academicEventCtr = 0;
+                $(".reg-form-3 .academicEvent").find("input:checked").each(function(){
+                    data.push({
+                        name : "group_member_list[0][event_participation][academic]["+academicEventCtr+"]",
+                        required : true,
+                        type : "text",
+                        value : $(this).val()
+                    });
+                    academicEventCtr++;
+                })
+                
             },
             success : function(data){
-                
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    $(".hide-module:not(#success-module)").hide();
+                    $("#success-module").fadeIn();
+                    $("#registrationNumberMessage").show();
+                    $("#registrationNumber").text(response["data"]);
+                }else{
+                    console.log(response);
+                    show_form_error($("#registrationFormFull"), response["error"])
+                }
             }
         });
+        
+        $("#agreement").on("click", "input", function(){
+           if($("#agreement input[name=first_agreement]").is(":checked") && $("#agreement input[name=second_agreement]").is(":checked")){
+               $("#submitRegistration").removeAttr("disabled");
+           }else{
+               $("#submitRegistration").attr("disabled", true);
+           }
+        });
+        $("#submitRegistration").click(function(){
+            $("#registrationFormFull").trigger("submit");
+            return false; 
+        });
     });
+    function pad(num, size) {
+        var s = "000000000" + num;
+        return s.substr(s.length-size);
+    }
 </script>

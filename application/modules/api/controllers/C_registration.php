@@ -17,7 +17,7 @@ class C_registration extends API_Controller {
     public function createRegistration(){
         $this->accessNumber = 1;
         if($this->checkACL()){
-            if($this->input->post("first_agreement") && $this->input->post("second_agreement")){
+            if(!$this->input->post("first_agreement") && !$this->input->post("second_agreement")){
                 $this->responseError(4, "You have to agree with the terms before you can proceed.");
                 $this->outputResponse();
             }
@@ -44,31 +44,38 @@ class C_registration extends API_Controller {
              *              
              */
             $this->form_validation->set_rules('local_chapter_description', 'Local Chapter', 'required');
-            $this->form_validation->set_rules('local_chapter_chapter_type', 'Local Chapter', 'required');
-            $this->form_validation->set_rules('local_chapter_address', 'Local Chapter', 'required');
-            $this->form_validation->set_rules('local_chapter_region', 'Local Chapter', 'required');
-            
+            $this->form_validation->set_rules('local_chapter_chapter_type', 'Local Chapter Type', 'required');
+            $this->form_validation->set_rules('local_chapter_address', 'Local Chapter Address', 'required');
+            $this->form_validation->set_rules('local_chapter_region', 'Local Chapter Region', 'required');
+            $leaderCount = 0;
             $groupMemberList = $this->input->post("group_member_list");
             if($groupMemberList){
                 foreach($groupMemberList as $key =>$value){
-                    $this->formValidationSetRule('group_member_list['.$key.'][first_name]', 'Member '.$key." First Name", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][middle_name]', 'Member '.$key." Middle Name", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][last_name]', 'Member '.$key." Last Name", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][local_chapter_position_ID]', 'Member '.$key." Position", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][contact_number]', 'Member '.$key." Contact Number", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][complete_address]', 'Member '.$key." Complete Address", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][email_address]', 'Member '.$key." Email Address", 'required|email');
-                    $this->formValidationSetRule('group_member_list['.$key.'][tshirt_size]', 'Member '.$key." T-shirt Size", 'required');
-                    $this->formValidationSetRule('group_member_list['.$key.'][member_type]', 'Member '.$key." Member Type", 'required|numeric');
+                    $this->formValidationSetRule("group_member_list[$key][first_name]", "Member ".$key." First Name", "required");
+//                    $this->formValidationSetRule("group_member_list[$key][middle_name]", "Member ".$key." Middle Name", "required");
+                    $this->formValidationSetRule("group_member_list[$key][last_name]", "Member ".$key." Last Name", "required");
+                    $this->formValidationSetRule("group_member_list[$key][local_chapter_position_ID]", "Member ".$key." Position", "required");
+                    $this->formValidationSetRule("group_member_list[$key][contact_number]", "Member ".$key." Contact Number", "required|max_length[11]");
+                    $this->formValidationSetRule("group_member_list[$key][complete_address]", "Member ".$key." Complete Address", "required");
+                    $this->formValidationSetRule("group_member_list[$key][email_address]", "Member ".$key." Email Address", "required|valid_email");
+                    $this->formValidationSetRule("group_member_list[$key][tshirt_size]", "Member ".$key." T-shirt Size", "required");
+                    $this->formValidationSetRule("group_member_list[$key][member_type]", "Member ".$key." Member Type", 'required|numeric');
                     if(isset($value["event_participation"]["academic"]) && count($value["event_participation"]["academic"]) > 2){
                         $this->formValidationError["member_".$key."_event_participation_academic"] = 'Member '.$key."Participation in academic exceeds the limit";
                     }
                     if(isset($value["event_participation"]["non_academic"]) && count($value["event_participation"]["non_academic"]) > 2){
                         $this->formValidationError["member_".$key."_event_participation_non_academic"] = 'Member '.$key."Participation in non academic exceeds the limit";
                     }
+                    if($this->input->post("group_member_list[$key][member_type]")*1 == 1){
+                        $leaderCount++;
+                    }
                 }
             }
+            if($leaderCount != 1){
+                $this->formValidationError["group_leader"] = "There must be only one group leader";
+            }
             $imageError = $this->hasFileUploadError(count($groupMemberList));
+            $this->responseDebug($this->input->post());
             if($this->formValidationRun() && !$imageError){
                 $this->load->model("M_local_chapter_group");
                 $this->load->model("M_account_information");
@@ -76,6 +83,7 @@ class C_registration extends API_Controller {
                 $this->load->model("M_account_event_participation");
                 $this->load->model("M_account_local_chapter_group");
                 $this->load->model("M_file_uploaded");
+                $this->load->model("M_local_chapter");
                 /*Local Chapter*/
                 $localChapterResult = $this->M_local_chapter->createLocalChapter(
                         $this->input->post("local_chapter_description"),
@@ -90,7 +98,7 @@ class C_registration extends API_Controller {
                 /*Create account for member*/
                 foreach($groupMemberList as $key => $value){
                     $accountResult = $this->M_account->createAccount(
-                            $value["first_name"].$value["last_name"].$this->input->post("local_chapter_ID"), 
+                            time()+  rand(1, 1000), 
                             $value["first_name"].$value["last_name"].$this->input->post("local_chapter_ID"), 
                             9,//account type
                             1//status
@@ -102,13 +110,14 @@ class C_registration extends API_Controller {
                         $this->M_account_information->createAccountInformation(
                                 $accountResult,
                                 $value["first_name"], 
-                                $value["middle_name"],
+                                isset($value["middle_name"]) ? $value["middle_name"] : "",
                                 $value["last_name"],
                                 $value["local_chapter_position_ID"],
                                 $value["contact_number"],
                                 $value["email_address"],
                                 $fileUploaded["file_uploaded_ID"],
-                                $value["tshirt_size"]
+                                $value["tshirt_size"],
+                                $value["complete_address"]
                                 );
                         /*Add local chapter group member*/
                         $this->M_account_local_chapter_group->createAccountLocalChapterGroup($accountResult, $localChapterGroupResult, $value["member_type"]);
@@ -138,7 +147,7 @@ class C_registration extends API_Controller {
                 }
                 if($imageError){
                     if(is_array($imageError)){
-                        $this->responseError(5, $imageError);
+                        $this->responseError(1005, $imageError);
                     }else{
                         $this->responseError(6, "Number of images does not match with the number of group member");
                     }
