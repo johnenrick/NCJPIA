@@ -99,7 +99,7 @@ class C_registration extends API_Controller {
                 foreach($groupMemberList as $key => $value){
                     $accountResult = $this->M_account->createAccount(
                             time()+  rand(1, 1000), 
-                            $value["first_name"].$value["last_name"].$this->input->post("local_chapter_ID"), 
+                            time()+  rand(1, 1000), 
                             9,//account type
                             1//status
                             );

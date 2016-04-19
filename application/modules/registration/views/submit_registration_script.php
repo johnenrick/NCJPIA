@@ -99,7 +99,7 @@
                         value : $(this).val()
                     });
                     academicEventCtr++;
-                })
+                });
                 
             },
             success : function(data){

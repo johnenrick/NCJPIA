@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2016 at 07:34 PM
+-- Generation Time: Apr 19, 2016 at 04:23 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -44,26 +44,22 @@ CREATE TABLE IF NOT EXISTS `account` (
   `password` varchar(70) DEFAULT NULL,
   `account_type_ID` int(10) unsigned NOT NULL,
   `status` int(11) NOT NULL COMMENT '1 - active, 2 - draft, 3 - deactivated, 4 -delete'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`ID`, `username`, `password`, `account_type_ID`, `status`) VALUES
-(1, '', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 9, 1),
-(8, '1', '356a192b7913b04c54574d18c28d46e6395428ab', 9, 1),
-(10, '12', '7b52009b64fd0a2a49e6d8a939753077792b0554', 9, 1),
-(13, '122', '05a8ea5382b9fd885261bb3eed0527d1d3b07262', 9, 1),
-(15, '1221', '22a366e578fc19525be71b6b3013ef8cc5cb1a74', 9, 1),
-(16, 'sa1', 'c600c917076fb4eae062f1577526a5780ad3840e', 9, 1),
-(18, 's2a1', 'f1172461ebbe8eb86509642dc3260d085c9eab4b', 9, 1),
-(20, 's22a1', 'abe2ab159982efc9a095e85ec64edf8bc46c2b0f', 9, 1),
-(22, 's222a1', 'ec76e4e7ac713448b4488cf35f601fce3682b8ad', 9, 1),
-(24, 's222sa1', '5f7f66caf3adac0c175d352f7c3197ea83b5b098', 9, 1),
-(25, 's222sda1', '459e3c9c5b639447b53f247f9a9be7d055acd5ae', 9, 1),
-(26, 's222sdda1', 'c5cf75faee0206f77e4936ba7c4c8f00b1a3d905', 9, 1),
-(27, 'johnplenos1', 'ff11e22b5a83f244f50a01d87afa3badd6416c66', 9, 1);
+(1, '1461042093', '30d1fbabab7191ae64644c66ddd67948f008e2a8', 3, 1),
+(2, '1461042423', '7199962667567775670fa6c0b2ae966cfa76e529', 9, 1),
+(3, '1461042466', '6b3566d8029089f23a5c41ffc83d42e120def08e', 9, 1),
+(4, '1461043642', 'e0c9035898dd52fc65c41454cec9c4d2611bfb37', 9, 1),
+(5, '1461043893', '9a900f538965a426994e1e90600920aff0b4e8d2', 9, 1),
+(6, '1461043912', 'bdb480de655aa6ec75ca058c849c4faf3c0f75b1', 9, 1),
+(7, '1461043583', 'dd7b7b74ea160e049dd128478e074ce47254bde8', 9, 1),
+(8, '1461044370', 'b2a801fc1f6cdddb5df949c5126817cb5c8562ce', 9, 1),
+(9, '1461044327', 'd7dacae2c968388960bf8970080a980ed5c5dcb7', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -75,30 +71,29 @@ CREATE TABLE IF NOT EXISTS `account_event_participation` (
 `ID` int(11) NOT NULL,
   `account_ID` int(11) NOT NULL,
   `event_ID` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `account_event_participation`
 --
 
 INSERT INTO `account_event_participation` (`ID`, `account_ID`, `event_ID`) VALUES
-(1, 18, 0),
-(2, 20, 3),
-(3, 22, 3),
-(4, 22, 1),
-(5, 22, 2),
-(6, 24, 3),
-(7, 24, 1),
-(8, 24, 2),
-(9, 25, 3),
-(10, 25, 1),
-(11, 25, 2),
-(12, 26, 3),
-(13, 26, 1),
-(14, 26, 2),
-(15, 27, 3),
-(16, 27, 1),
-(17, 27, 2);
+(1, 5, 14),
+(2, 5, 15),
+(3, 5, 7),
+(4, 5, 8),
+(5, 6, 15),
+(6, 6, 1),
+(7, 7, 9),
+(8, 7, 15),
+(9, 7, 1),
+(10, 7, 8),
+(11, 8, 14),
+(12, 8, 15),
+(13, 8, 7),
+(14, 8, 8),
+(15, 9, 6),
+(16, 9, 7);
 
 -- --------------------------------------------------------
 
@@ -117,24 +112,23 @@ CREATE TABLE IF NOT EXISTS `account_information` (
   `email_address` varchar(50) NOT NULL,
   `complete_address` text NOT NULL,
   `identification_file_uploaded_ID` int(11) NOT NULL,
-  `tshirt_size` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `tshirt_size` varchar(50) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `account_information`
 --
 
 INSERT INTO `account_information` (`ID`, `account_ID`, `first_name`, `middle_name`, `last_name`, `local_chapter_position_ID`, `contact_number`, `email_address`, `complete_address`, `identification_file_uploaded_ID`, `tshirt_size`) VALUES
-(1, 13, '122', '232', '', 0, '', '', '', 0, 0),
-(2, 15, '1221', '2322', '', 0, '', '', '', 0, 0),
-(3, 16, 's', '2322', 'a', 2, '2', '4', '', 0, 1),
-(4, 18, 's2', '2322', 'a', 2, '2', '4', '', 0, 1),
-(5, 20, 's22', '2322', 'a', 2, '2', '4', '', 0, 1),
-(6, 22, 's222', '2322', 'a', 2, '2', '4', '', 0, 1),
-(7, 24, 's222s', '2322', 'a', 2, '2', '4', '', 0, 1),
-(8, 25, 's222sd', '2322', 'a', 2, '2', '4', '', 0, 1),
-(9, 26, 's222sdd', '2322', 'a', 2, '2', '4', '', 0, 1),
-(10, 27, 'john', 'retubado', 'plenos', 2, '2', '4', '', 5, 1);
+(1, 1, 'John', '', 'Plenos', 1, '09275835504', 'plenosjohn@yahoo.com', '', 9, '0'),
+(2, 2, 'Kefer', '', 'Allego', 1, '09215478', 'khefe22@gmail.com', '', 10, '0'),
+(3, 3, 'Patrick', '', 'Maningo', 4, '0147852369', 'patrick.sage@yahoo.com', '', 11, '0'),
+(4, 4, 'a', '', 'a', 1, '1', 'a@a.a', 'a', 12, '0'),
+(5, 5, 'b', '', 'b', 1, '2', 'b@b.b', 'b', 13, '0'),
+(6, 6, 'c', '', 'c', 1, '3', 'c@c.c', 'c', 14, '0'),
+(7, 7, 'x', '', 'x', 1, '1', 'x@x.x', 'x', 15, 'XXS'),
+(8, 8, 'y', '', 'y', 1, '2', 'y@y.y', 'y', 16, 'XXS'),
+(9, 9, 'z', '', 'z', 1, '3', 'z@z.z', 'z', 17, 'XXS');
 
 -- --------------------------------------------------------
 
@@ -147,23 +141,22 @@ CREATE TABLE IF NOT EXISTS `account_local_chapter_group` (
   `account_ID` int(11) NOT NULL,
   `local_chapter_group_ID` int(11) NOT NULL,
   `member_type` int(11) NOT NULL COMMENT '1 - leader, 2 - member'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `account_local_chapter_group`
 --
 
 INSERT INTO `account_local_chapter_group` (`ID`, `account_ID`, `local_chapter_group_ID`, `member_type`) VALUES
-(1, 13, 13, 0),
-(2, 15, 15, 0),
-(3, 16, 16, 12),
-(4, 18, 18, 12),
-(5, 20, 20, 12),
-(6, 22, 22, 12),
-(7, 24, 24, 12),
-(8, 25, 25, 12),
-(9, 26, 26, 12),
-(10, 27, 27, 12);
+(1, 1, 1, 1),
+(2, 2, 1, 2),
+(3, 3, 1, 2),
+(4, 4, 2, 1),
+(5, 5, 2, 2),
+(6, 6, 2, 2),
+(7, 7, 3, 1),
+(8, 8, 3, 2),
+(9, 9, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -176,17 +169,7 @@ CREATE TABLE IF NOT EXISTS `account_payment` (
   `assessment_item_ID` int(11) NOT NULL,
   `account_ID` int(11) NOT NULL,
   `amount` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `account_payment`
---
-
-INSERT INTO `account_payment` (`ID`, `assessment_item_ID`, `account_ID`, `amount`) VALUES
-(1, 1, 27, 1000),
-(2, 1, 27, 1200),
-(3, 1, 27, 1300),
-(4, 2, 27, 1400);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -223,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `action_log` (
   `access_number_ID` int(11) NOT NULL,
   `detail` text NOT NULL,
   `datetime` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=136 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=334 ;
 
 --
 -- Dumping data for table `action_log`
@@ -364,7 +347,205 @@ INSERT INTO `action_log` (`ID`, `account_ID`, `api_controller_ID`, `access_numbe
 (132, 0, 1, 2, '[]', 1460999455),
 (133, 0, 1, 2, '[]', 1460999455),
 (134, 0, 1, 2, '[]', 1460999797),
-(135, 0, 1, 2, '[]', 1460999797);
+(135, 0, 1, 2, '[]', 1460999797),
+(136, 27, 1, 2, '[]', 1461041373),
+(137, 27, 1, 2, '[]', 1461041373),
+(138, 27, 1, 2, '[]', 1461041376),
+(139, 27, 1, 2, '[]', 1461041376),
+(140, 27, 1, 2, '[]', 1461041525),
+(141, 27, 1, 2, '[]', 1461041525),
+(142, 27, 1, 1, '1', 1461041693),
+(143, 27, 1, 2, '[]', 1461041748),
+(144, 27, 1, 2, '[]', 1461041748),
+(145, 27, 1, 2, '[]', 1461042180),
+(146, 27, 1, 2, '[]', 1461042180),
+(147, 27, 1, 2, '[]', 1461042465),
+(148, 27, 1, 2, '[]', 1461042465),
+(149, 27, 1, 2, '[]', 1461042700),
+(150, 27, 1, 2, '[]', 1461042700),
+(151, 27, 1, 2, '[]', 1461042873),
+(152, 27, 1, 2, '[]', 1461042873),
+(153, 27, 1, 1, '2', 1461042939),
+(154, 27, 1, 2, '[]', 1461043246),
+(155, 27, 1, 2, '[]', 1461043246),
+(156, 27, 1, 1, '3', 1461043552),
+(157, 27, 1, 2, '[]', 1461048669),
+(158, 27, 1, 2, '[]', 1461048669),
+(159, 27, 1, 2, '[]', 1461048736),
+(160, 27, 1, 2, '[]', 1461048736),
+(161, 27, 1, 2, '[]', 1461048782),
+(162, 27, 1, 2, '[]', 1461048782),
+(163, 27, 9, 2, '{"sort":{"ID":"desc"}}', 1461053089),
+(164, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461055522),
+(165, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461056344),
+(166, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461056370),
+(167, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461056421),
+(168, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057781),
+(169, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057788),
+(170, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057836),
+(171, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057837),
+(172, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057838),
+(173, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057838),
+(174, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057838),
+(175, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057838),
+(176, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057858),
+(177, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461057861),
+(178, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058213),
+(179, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058255),
+(180, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058292),
+(181, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058319),
+(182, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058346),
+(183, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058360),
+(184, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058656),
+(185, 27, 1, 2, '[]', 1461058760),
+(186, 27, 1, 2, '[]', 1461058760),
+(187, 27, 1, 2, '[]', 1461058804),
+(188, 27, 1, 2, '[]', 1461058804),
+(189, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461058947),
+(190, 27, 1, 2, '[]', 1461059151),
+(191, 27, 1, 2, '[]', 1461059151),
+(192, 27, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461059164),
+(193, 1, 9, 2, '{"account_type":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461060229),
+(194, 1, 9, 2, '{"account_type_ID":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461060268),
+(195, 1, 9, 2, '{"account_type_ID":"9","local_chapter_group_ID":"","payment_status":"Unpaid"}', 1461060295),
+(196, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"3"},"payment_status":"Unpaid"}', 1461060369),
+(197, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"3"},"payment_status":"Unpaid"}', 1461060377),
+(198, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"3"},"payment_status":"Unpaid"}', 1461060431),
+(199, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"3"},"payment_status":"Unpaid"}', 1461060432),
+(200, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"1"},"payment_status":"Unpaid"}', 1461060438),
+(201, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group_ID":"2"},"payment_status":"Unpaid"}', 1461060441),
+(202, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1"},"payment_status":"Unpaid"}', 1461060512),
+(203, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"2"},"payment_status":"Unpaid"}', 1461060515),
+(204, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"3"},"payment_status":"Unpaid"}', 1461060517),
+(205, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"2"},"payment_status":"Unpaid"}', 1461060537),
+(206, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"3"},"payment_status":"Unpaid"}', 1461060543),
+(207, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"3"},"payment_status":"Unpaid"}', 1461061096),
+(208, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":""},"payment_status":"Unpaid"}', 1461061597),
+(209, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"2"},"payment_status":"Unpaid"}', 1461061604),
+(210, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":""},"payment_status":"Pending","not_payment_receipt_file_uploaded_name":""}', 1461061632),
+(211, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":""},"payment_status":"Pending","not_payment_receipt_file_uploaded_name":""}', 1461061634),
+(212, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":""},"payment_status":"Paid","not_payment_receipt_file_uploaded_name":""}', 1461061636),
+(213, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":""},"payment_status":"Unpaid","not_payment_receipt_file_uploaded_name":""}', 1461061639),
+(214, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461061672),
+(215, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Paid"}', 1461061679),
+(216, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461061681),
+(217, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461061681),
+(218, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461061682),
+(219, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"null","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461061682),
+(220, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461064149),
+(221, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461064157),
+(222, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461064159),
+(223, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461064162),
+(224, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461064163),
+(225, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"2","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461064165),
+(226, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"2","not_payment_receipt_file_uploaded_name":""}}', 1461064568),
+(227, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461064678),
+(228, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"2","not_payment_receipt_file_uploaded_name":""}}', 1461064682),
+(229, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461064684),
+(230, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461064832),
+(231, 1, 1, 2, '[]', 1461065110),
+(232, 1, 1, 2, '[]', 1461065414),
+(233, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter_ID":"1","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065417),
+(234, 1, 1, 2, '[]', 1461065438),
+(235, 1, 1, 2, '[]', 1461065440),
+(236, 1, 1, 2, '[]', 1461065624),
+(237, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"1","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065626),
+(238, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065629),
+(239, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"2","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065631),
+(240, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"1","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065633),
+(241, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461065636),
+(242, 1, 1, 2, '[]', 1461066414),
+(243, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"1","not_payment_receipt_file_uploaded_name":""}}', 1461066426),
+(244, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""}}', 1461066429),
+(245, 1, 1, 2, '[]', 1461066564),
+(246, 1, 1, 2, '[]', 1461066579),
+(247, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066586),
+(248, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066589),
+(249, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066591),
+(250, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066591),
+(251, 1, 1, 2, '[]', 1461066666),
+(252, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066668),
+(253, 1, 1, 2, '[]', 1461066682),
+(254, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066684),
+(255, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"1","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066694),
+(256, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066696),
+(257, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066703),
+(258, 1, 1, 2, '[]', 1461066762),
+(259, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066764),
+(260, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066869),
+(261, 1, 1, 2, '[]', 1461066880),
+(262, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded_name":"null"},"payment_status":"Pending"}', 1461066883),
+(263, 1, 1, 2, '[]', 1461066966),
+(264, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded_name":""},"payment_status":"Pending"}', 1461066969),
+(265, 1, 1, 2, '[]', 1461066985),
+(266, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461066987),
+(267, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461066990),
+(268, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461066990),
+(269, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461066990),
+(270, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461066990),
+(271, 1, 1, 2, '[]', 1461067291),
+(272, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461067395),
+(273, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067399),
+(274, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067428),
+(275, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067429),
+(276, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067429),
+(277, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067437),
+(278, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067437),
+(279, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067437),
+(280, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067438),
+(281, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067470),
+(282, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067471),
+(283, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067471),
+(284, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067472),
+(285, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067472),
+(286, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067472),
+(287, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067472),
+(288, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067473),
+(289, 1, 1, 2, '[]', 1461067495),
+(290, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067500),
+(291, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067503),
+(292, 1, 1, 2, '[]', 1461067513),
+(293, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067516),
+(294, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067580),
+(295, 1, 1, 2, '[]', 1461067612),
+(296, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067614),
+(297, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067652),
+(298, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067652),
+(299, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067668),
+(300, 1, 1, 2, '[]', 1461067979),
+(301, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":""},"payment_status":"Pending"}', 1461067981),
+(302, 1, 1, 2, '[]', 1461068045),
+(303, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461068046),
+(304, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461068047),
+(305, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461068049),
+(306, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","greater_equal__registration_fee_total_amount":"5600"},"payment_status":"Paid"}', 1461068051),
+(307, 1, 9, 2, '[]', 1461068499),
+(308, 1, 9, 2, '[]', 1461068703),
+(309, 1, 1, 2, '[]', 1461068722),
+(310, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461068725),
+(311, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","greater_equal__registration_fee_total_amount":"5600"},"payment_status":"Paid"}', 1461068731),
+(312, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","greater_equal__registration_fee_total_amount":"5600"},"payment_status":"Paid"}', 1461068732),
+(313, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","greater_equal__registration_fee_total_amount":"5600"},"payment_status":"Paid"}', 1461068733),
+(314, 1, 9, 2, '[]', 1461068746),
+(315, 1, 9, 2, '{"greater_equal__registration_fee_total_amount":"5600"}', 1461068809),
+(316, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461068854),
+(317, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","greater_equal__registration_fee_total_amount":"5600"},"payment_status":"Paid"}', 1461068856),
+(318, 1, 9, 2, '{"greater_equal__registration_fee_total_amount":"5600"}', 1461068926),
+(319, 1, 9, 2, '{"greater_equal__registration_fee_total_amount":"5600"}', 1461069082),
+(320, 1, 9, 2, '{"greater_equal__registration_fee_total_amount":"5600"}', 1461069099),
+(321, 1, 9, 2, '{"greater_equal__registration_fee_total_amount":"5600"}', 1461069121),
+(322, 1, 9, 2, '{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}', 1461069131),
+(323, 1, 9, 2, '{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}', 1461069152),
+(324, 1, 9, 2, '{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}', 1461069158),
+(325, 1, 9, 2, '{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}', 1461069165),
+(326, 1, 9, 2, '{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}', 1461069170),
+(327, 1, 9, 2, '{"condition":{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}}', 1461069222),
+(328, 1, 9, 2, '{"condition":{"greater_equal__registration_fee_total_amount__registration_fee_total_amount":"5600"}}', 1461069234),
+(329, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461069265),
+(330, 1, 1, 2, '[]', 1461070466),
+(331, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","payment_receipt_file_uploaded_name":""},"payment_status":"Unpaid"}', 1461070468),
+(332, 1, 9, 2, '{"condition":{"account_type_ID":"9","local_chapter__ID":"","local_chapter_group__ID":"","not_null__payment_receipt_file_uploaded__name":"null"},"payment_status":"Pending"}', 1461070470),
+(333, 1, 1, 2, '[]', 1461070487);
 
 -- --------------------------------------------------------
 
@@ -461,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `file_uploaded` (
   `path` text NOT NULL,
   `size` double NOT NULL,
   `datetime` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `file_uploaded`
@@ -475,7 +656,18 @@ INSERT INTO `file_uploaded` (`ID`, `type`, `name`, `path`, `size`, `datetime`) V
 (5, 'png', '2397e71fbfc3833591946fbaf688ff4a.png', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 2.55, 1460974366),
 (6, 'png', '9338df0efa86d78fab4d227688db445b.png', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 0.54, 1460981285),
 (7, 'png', 'cefcb9a0ce5deebbbba2cba9f3dc77fa.png', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 0.54, 1460981600),
-(8, 'jpeg', '5498f2773e8005b9652f71ad6008ea67.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 246.57, 1460983086);
+(8, 'jpeg', '5498f2773e8005b9652f71ad6008ea67.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 246.57, 1460983086),
+(9, 'jpeg', '0c7068bd3325d27e596456efaa509532.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 1522.18, 1461041692),
+(10, 'jpeg', '3fc1cd4541752f27745422344821a996.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 1522.18, 1461041692),
+(11, 'jpeg', '54cf6dd6caea726782437b5b4c5b4fa4.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 126.67, 1461041693),
+(12, 'jpeg', '980b867347c23e99fb094081e042d216.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 1522.18, 1461042939),
+(13, 'jpeg', '2811f4df2426017b5435ef538b6ac449.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 126.67, 1461042939),
+(14, 'jpeg', '3c6863a781439bcc535d9c8c0fdf992e.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 246.57, 1461042939),
+(15, 'jpeg', '733876c1499968d0be358de39c646991.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 126.67, 1461043552),
+(16, 'jpeg', '6539feeba33fae7b360dfa99317070bd.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 1522.18, 1461043552),
+(17, 'jpeg', '6769dd0c1039ed4f7c88c2da3eb697c4.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/identification_card/', 246.57, 1461043552),
+(18, 'jpeg', '39c3e76d8b75399f637e1f98b43fcfd7.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 1522.18, 1461058813),
+(19, 'jpeg', '24a914f786f9ebe0cf03ee5d98cf68ec.jpg', 'C:/xampp/htdocs/NCJPIA/assets/images/payment_receipt/', 1522.18, 1461059161);
 
 -- --------------------------------------------------------
 
@@ -501,7 +693,16 @@ CREATE TABLE IF NOT EXISTS `local_chapter` (
   `chapter_type` int(11) NOT NULL,
   `address` text NOT NULL,
   `region` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `local_chapter`
+--
+
+INSERT INTO `local_chapter` (`ID`, `description`, `chapter_type`, `address`, `region`) VALUES
+(1, 'USC', 1, 'talamban', 'Region 7'),
+(2, 'a', 1, 'a', 'Region 1 &'),
+(3, 'x', 1, 'x', 'Region 5');
 
 -- --------------------------------------------------------
 
@@ -513,40 +714,16 @@ CREATE TABLE IF NOT EXISTS `local_chapter_group` (
 `ID` int(11) NOT NULL,
   `local_chapter_ID` int(11) NOT NULL,
   `registration_datetime` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `local_chapter_group`
 --
 
 INSERT INTO `local_chapter_group` (`ID`, `local_chapter_ID`, `registration_datetime`) VALUES
-(1, 1, 1460645022),
-(2, 1, 1460645094),
-(3, 1, 1460645193),
-(4, 1, 1460645200),
-(5, 1, 1460645403),
-(6, 1, 1460645427),
-(7, 1, 1460645488),
-(8, 1, 1460645491),
-(9, 1, 1460645540),
-(10, 1, 1460645544),
-(11, 1, 1460645563),
-(12, 1, 1460645567),
-(13, 1, 1460645572),
-(14, 1, 1460653002),
-(15, 1, 1460653007),
-(16, 1, 1460653781),
-(17, 1, 1460654025),
-(18, 1, 1460654030),
-(19, 1, 1460654050),
-(20, 1, 1460654056),
-(21, 1, 1460654085),
-(22, 1, 1460654089),
-(23, 1, 1460854861),
-(24, 1, 1460854865),
-(25, 1, 1460856541),
-(26, 1, 1460856814),
-(27, 1, 1460974366);
+(1, 1, 1461041692),
+(2, 2, 1461042938),
+(3, 3, 1461043552);
 
 -- --------------------------------------------------------
 
@@ -607,20 +784,15 @@ CREATE TABLE IF NOT EXISTS `payment_receipt` (
 `ID` int(11) NOT NULL,
   `registration_number` int(11) NOT NULL,
   `file_uploaded_ID` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `payment_receipt`
 --
 
 INSERT INTO `payment_receipt` (`ID`, `registration_number`, `file_uploaded_ID`) VALUES
-(1, 0, 1),
-(2, 0, 2),
-(3, 12, 3),
-(4, 12, 4),
-(5, 1, 6),
-(6, 2, 7),
-(7, 2, 8);
+(1, 2, 18),
+(2, 1, 19);
 
 --
 -- Indexes for dumped tables
@@ -759,27 +931,27 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `account_event_participation`
 --
 ALTER TABLE `account_event_participation`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `account_information`
 --
 ALTER TABLE `account_information`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `account_local_chapter_group`
 --
 ALTER TABLE `account_local_chapter_group`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `account_payment`
 --
 ALTER TABLE `account_payment`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `account_type`
 --
@@ -789,7 +961,7 @@ MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT for table `action_log`
 --
 ALTER TABLE `action_log`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=136;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=334;
 --
 -- AUTO_INCREMENT for table `api_controller`
 --
@@ -814,7 +986,7 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `file_uploaded`
 --
 ALTER TABLE `file_uploaded`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `group_access_control_list`
 --
@@ -824,12 +996,12 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `local_chapter`
 --
 ALTER TABLE `local_chapter`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `local_chapter_group`
 --
 ALTER TABLE `local_chapter_group`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `local_chapter_position`
 --
@@ -849,7 +1021,7 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `payment_receipt`
 --
 ALTER TABLE `payment_receipt`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --

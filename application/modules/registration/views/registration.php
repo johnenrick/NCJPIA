@@ -397,6 +397,9 @@
                         <h3>Registration Number : <b id="registrationNumber">1</b></h3>
                         <h4>Please take note of you registration number. It will be needed for the next step! <a href="./registration">Go to first page</a></h4>
                     </div>
+                    <div id="confirmationMessage" style="display:none">
+                        <h4>We will send your confirmation pass through your email one we had confirmed your payment slip.</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -438,10 +441,11 @@
     </div>
     <script type="text/javascript" src="<?=asset_url()?>js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>
+    
     <script type="text/javascript" src="<?=asset_url()?>js/jquery.form.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/validator.js"></script>
-
+    <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
+    <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>
 </body>
 
 </html>

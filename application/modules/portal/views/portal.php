@@ -29,11 +29,11 @@
                                         <br>
                                         <div class="alert alert-danger formMessage" style="display:none">
                                         </div>
-                                        <div class="form-group testForm2">
+                                        <div class="form-group">
                                             <input name="username" class="form-control input-sm" type="text" placeholder="Username" required>
                                         </div>
-                                        <div class="form-group testForm">
-                                            <input name="password" class="form-control input-sm" type="email" placeholder="Password" required>
+                                        <div class="form-group">
+                                            <input name="password" class="form-control input-sm" type="password" placeholder="Password" required>
                                         </div>
                                         <div class="form-group">
                                             <button class="submitButton btn btn-success btn-right">Log in</button>
@@ -56,6 +56,7 @@
         <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>js/validator.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="<?=asset_url()?>js/initial.min.js"></script>
 </body>
 
 </html>

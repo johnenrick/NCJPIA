@@ -39,10 +39,15 @@ class API_Model extends CI_Model{
      *                              e.g. [condition_type__database_table__table_column], [condition_type__table_column], [database_table__table_column]
      * @param array $selectedColumn Specify the columns to retrieve. All columns in default table is selected and prioritized
      */
-    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array(), $groupBy = false){
+    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array(), $groupBy = false, $aliasedColumn = false){
         $this->initializeTableColumn($joinedTable);
         $this->db->start_cache();
         $this->db->flush_cache();
+        if($aliasedColumn){
+            foreach($aliasedColumn as $aliasedColumnKey => $aliasedColumnValue){
+                $this->DATABASETABLE[$aliasedColumnKey][$aliasedColumnValue] = 9; 
+            }
+        }
         //Select column
         if(is_array($selectedColumn)){
             $selectedQuery = "";
@@ -143,7 +148,6 @@ class API_Model extends CI_Model{
         return $result;
     }
     public function addCondition($condition = array()){
-        
         if(is_array($condition)){
             if($this->TABLE == "account_contact_information"){
             }
@@ -181,8 +185,7 @@ class API_Model extends CI_Model{
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
                 
-                
-                if(isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic){
+                if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !="")){
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";
                     $this->HASCONDITION = true;
                     switch($segment[0]){
@@ -211,8 +214,13 @@ class API_Model extends CI_Model{
                             $this->db->where("$leftValue>=", $tableColumnValue);
                             break;
                         case "greater":
-                            
                             $this->db->where("$leftValue>", $tableColumnValue);
+                            break;
+                        case "not_null":
+                            $this->db->where("$leftValue is not null", null);
+                            break;
+                        case "is_null":
+                            $this->db->where("$leftValue is null", null);
                             break;
                         default :
                             if(is_array($tableColumnValue)){

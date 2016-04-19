@@ -259,4 +259,5 @@
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
     });
+    
 </script>
