@@ -5,7 +5,7 @@
             if(!response["error"].length){
                 $(".localChapterPosition").empty();
                 for(var x = 0; x < response["data"].length; x++){
-                    $(".localChapterPosition").append("<option value='"+response["data"][x]["ID"]+"'>"+response["data"][x]["description"]+"</option>")
+                    $(".localChapterPosition").append("<option value='"+response["data"][x]["ID"]+"'>"+response["data"][x]["description"]+"</option>");
                 }
             }else{
                 alert("Please contact administrator");
@@ -14,7 +14,6 @@
         $.post(api_url("C_event/retrieveEvent"), {}, function(data){//non academic
             var response = JSON.parse(data);
             if(!response["error"].length){
-                $(".localChapterPosition").empty();
                 for(var x = 0; x < response["data"].length; x++){
                     var eventItem = $(".prototype .eventItem").clone();
                     eventItem.find(".eventDescription").text(response["data"][x]["description"]);

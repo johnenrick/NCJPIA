@@ -1,7 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#reg-module form").ajaxForm({
+        $("#registrationFormFull").ajaxForm({
             beforeSubmit : function(data, $form, options){
+                
+                /*Group Member*/
                 $("#groupMemberTable tbody").find("tr").each(function(){
                     data.push({
                         name : "group_member_list["+($(this).index()+1)+"][first_name]",
@@ -74,7 +76,6 @@
                         }
                     }
                 });
-                console.log(data);
             },
             success : function(data){
                 

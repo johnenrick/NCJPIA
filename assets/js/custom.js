@@ -17,6 +17,8 @@ $(document).ready(function () {
     });
 
     $("#reg-add-member").click(function () {
+        $("#button-add-group-member").show();
+        $("#button-updae-group-member").hide();
         var con = $(".reg-form-member");
         con.slideDown();
     });

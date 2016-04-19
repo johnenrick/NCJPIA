@@ -161,6 +161,7 @@
      */
     function show_form_error(elementSelected, errorList){
         elementSelected.find(".formMessage").empty();
+        elementSelected.find(".formMessage").show();
         errorList.forEach(function(errorValue){
             if(errorValue["status"] > 100 && errorValue["status"] < 1000){/*Form Validation Error*/
                 for(var index in errorValue["message"]){
