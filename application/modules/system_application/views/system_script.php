@@ -180,6 +180,7 @@
     }
     function clear_form_error(elementSelected){
         elementSelected.find(".formMessage").empty();
+        elementSelected.find(".formMessage").hide();
         elementSelected.find(".has-error").removeClass(".has-error");
     }
     /**

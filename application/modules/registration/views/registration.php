@@ -53,16 +53,20 @@
                     <button type="button" name="op-con" class="btn btn-warning btn-lg">Confirm Payment</button>
                 </div>
                 <div id="reg-module" class="col-md-8 full-height hide-module">
-                    <form id="registrationFormFull">
+                    <form id="registrationFormFull" method="POST" Accept-Charset="utf-8" enctype="multipart/form-data">
                     <h3 class="reg-h-1 bold-1">Registration</h3>
                     <p class="reg-p-1">Welcome to registration for Annual National Convention. Please take a moment to complete all of the information below as carefully and completely as possible.</p>
                     <br>
+                    <div class="alert alert-danger formMessage" style="display:none">
+
+                    </div>
                     <div class="reg-form reg-form-1" id="reg-form-1-id">
                         <h4 class="bold-1">Group Leader Information</h4>
                         <hr>
                         <div class="form-group">
                             <label class="control-label">Name</label>
                             <div class="form-inline">
+                                <input name="group_member_list[0][member_type]" type="hidden" value="1" required>
                                 <input name="group_member_list[0][first_name]" class="form-control reg-input-inline" type="text" placeholder="First Name" required>
                                 <input name="group_member_list[0][last_name]" class="form-control reg-input-inline" type="text" placeholder="Last Name" required>
                             </div>
@@ -79,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Contact Number</label>
-                            <input name="group_member_list[0][contact_number]" class="form-control" type="number" placeholder="Cell No. or Tel. No." required>
+                            <input name="group_member_list[0][contact_number]" class="form-control" type="number" placeholder="Cell No. or Tel. No." required  max="99999999999">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Complete Address</label>
@@ -91,26 +95,27 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Valid ID</label>
-                            <input name="images[]" type="file" required>
+                            <input name="images[0]" type="file" required>
                             <p class="help-block">Upload a scanned copy of valid ID.</p>
                         </div>
                         <div class="form-group">
                             <label class="control-label">T-shirt Size</label>
                             <select name="group_member_list[0][tshirt_size]" class="form-control" required>
-                                <option selected disabled>None</option>
-                                <option value="XS">XS</option>
-                                <option value="S" >S</option>
-                                <option value="M" >M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
+                                <option value="XXS">XXS (25"x17")</option>
+                                <option value="XS">XS (26"x18")</option>
+                                <option value="S">S (27"x19")</option>
+                                <option value="M">M (28"x20")</option>
+                                <option value="L">L (29"x21")</option>
+                                <option value="XL">XL (30"x22")</option>
+                                <option value="2XL">2XL(31"x23")</option>
+                                <option value="3XL">3XL (32"x24")</option>
                             </select>
                         </div>
 
                         <br>
                         <div class="form-group">
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right reg-btn-next" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step1" class="btn btn-success reg-btn-right reg-btn-next"  disabled="">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -120,7 +125,7 @@
                         <div class="form-group">
                             <label class="control-label">Local Chapter (School/University)</label>
                             <input name="local_chapter_description" type="text" class="form-control" placeholder="School/University" required>
-                            <input name="local_chapter_chapter_type" type="hidden" class="form-control" >
+                            <input name="local_chapter_chapter_type" value="1" type="hidden" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label class="control-label">Local Chapter Address</label>
@@ -129,9 +134,15 @@
                         <div class="form-group">
                             <label class="control-label">Region</label>
                             <select name="local_chapter_region"  class="form-control" id="select2" required>
-                                <option selected disabled>None</option>
                                 <option>Region 1 & CAR</option>
+                                <option>Region 2</option>
+                                <option>Region 3</option>
                                 <option>Region 4</option>
+                                <option>Region 5</option>
+                                <option>Region 6</option>
+                                <option>Region 7</option>
+                                <option>Region 8</option>
+                                <option>Region 9</option>
                                 <option>Region 10 & CARAGA</option>
                                 <option>Region 12 & SOCCSKSARGEN</option>
 
@@ -142,7 +153,7 @@
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
                             <!--<a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>-->
-                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right reg-btn-next" >Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                            <button type="submit" id="button-step2" class="btn btn-success reg-btn-right reg-btn-next" disabled>Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -159,7 +170,7 @@
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
-                            <a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+                            <button id="button-step3" type="button" class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -176,15 +187,17 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody class="registrationGroupMemberRow">
-                                    
+                                <tbody class="">
+                                    <tr class="noGroupMember">
+                                        <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="form-group">
                             <a id="reg-add-member" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Group Member</a>
                         </div>
-                        <div class="reg-form-member btn-form-con hide-module" id="reg-form-member-id">
+                        <div id="reg-form-member-id" class="reg-form-member btn-form-con hide-module"  row_index="0" novalidate>
                             <div class="form-group">
                                 <label class="control-label">Name</label>
                                 <div class="form-inline">
@@ -195,16 +208,11 @@
                             <div class="form-group">
                                 <label class="control-label">Position</label>
                                 <select class="form-control localChapterPosition" id="Position" required>
-                                    <option selected disabled>None</option>
-                                    <option>Local Chapter Adviser</option>
-                                    <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
-                                    <option>Local Chapter Officer (President, Vice President, etc.)</option>
-                                    <option>Local Chapter Representative</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Contact Number</label>
-                                <input class="form-control contact" type="number" placeholder="Cell No. or Tel. No." required>
+                                <input class="form-control contact" type="number" placeholder="Cell No. or Tel. No." required max="99999999999">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Complete Address</label>
@@ -216,19 +224,22 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Valid ID</label>
-                                <input type="file" id="exampleInputFile" required>
+                                <div id="memberIdentificationCardList">
+                                    
+                                </div>
                                 <p class="help-block">Upload a scanned copy of valid ID.</p>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">T-shirt Size</label>
                                 <select class="form-control" id="shirtSize" required>
-                                    <option selected disabled>None</option>
-                                    <option>XS</option>
-                                    <option>S</option>
-                                    <option>M</option>
-                                    <option>L</option>
-                                    <option>XL</option>
-                                    <option>XXL</option>
+                                    <option value="XXS">XXS (25"x17")</option>
+                                    <option value="XS">XS (26"x18")</option>
+                                    <option value="S">S (27"x19")</option>
+                                    <option value="M">M (28"x20")</option>
+                                    <option value="L">L (29"x21")</option>
+                                    <option value="XL">XL (30"x22")</option>
+                                    <option value="2XL">2XL(31"x23")</option>
+                                    <option value="3XL">3XL (32"x24")</option>
                                 </select>
                             </div>
                             <div class="form-group nonAcademicEvent control-checkbox">
@@ -243,15 +254,15 @@
                             <div class="form-group">
                                 <!--<a class="btn btn-success btn-form-save">Save</a>
                                 <a class="btn btn-warning btn-form-cancel">Cancel</a>-->
-                                <button id="button-add-group-member" type="submit" class="btn btn-success btn-form-save" >Save</button>
-                                <button id="button-update-group-member" type="submit" class="btn btn-success btn-form-save" style="display: none">Update</button>
-                                <button id="button-cancel-group-member" type="submit" class="btn btn-warning btn-form-cancel">Cancel</button>
+                                <button id="saveGroupMember" type="submit" class="btn btn-success btn-form-save" >Save</button>
+                                <button id="updateGroupMember" type="submit" class="btn btn-success btn-form-save" style="display: none">Update</button>
+                                <button id="cancelGroupMember" type="button" class="btn btn-warning btn-form-cancel">Cancel</button>
                             </div>
                         </div>
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
-                            <a class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+                            <button id="button-step4" type="button" class="btn btn-success reg-btn-right reg-btn-next">Next Step <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
                         </div>
                     </div>
 
@@ -320,15 +331,15 @@
 
                         <h4 class="bold-1">Agreements</h4>
                         <hr>
-                        <div class="form-group">
+                        <div id="agreement" class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> I have reviewed my entries and agree to pay the billed amount at the specified bank account before April 27, 2016 to confirm our group’s participation.
+                                    <input name="first_agreement" value="true" type="checkbox"> I have reviewed my entries and agree to pay the billed amount at the specified bank account before April 27, 2016 to confirm our group’s participation.
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> I acknowledge that until our registration is confirmed, our accommodation and kits are not guaranteed.
+                                    <input name="second_agreement" value="true" type="checkbox"> I acknowledge that until our registration is confirmed, our accommodation and kits are not guaranteed.
                                 </label>
                             </div>
                         </div>
@@ -336,7 +347,7 @@
                         <br>
                         <div class="form-group">
                             <a class="btn btn-default reg-btn-left reg-btn-prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous Step</a>
-                            <button type="submit" class="btn btn-success reg-btn-right reg-btn-submit">Submit</button>
+                            <button id="submitRegistration" type="submit" class="btn btn-success reg-btn-right reg-btn-submit" disabled="">Submit</button>
                         </div>
                     </div>
                     </form>
@@ -381,7 +392,11 @@
                     <a href="https://www.instagram.com/nfjpiaofficial" target="_blank">
                         <i class="fa fa-instagram" aria-hidden="true"></i> @nfjpiaofficial
                     </a>
-
+                    <br>
+                    <div id="registrationNumberMessage" style="display:none">
+                        <h3>Registration Number : <b id="registrationNumber">1</b></h3>
+                        <h4>Please take note of you registration number. It will be needed for the next step! <a href="./registration">Go to first page</a></h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -399,7 +414,7 @@
                 complete_address=""
                 email_address=""
                 tshirt_size=""
-                member_type=""
+                member_type="2"
                 local_chapter_position_ID=""
                 academic_event_participation=""
                 non_academic_event_participation=""
@@ -419,6 +434,7 @@
                 <td colspan="5" style="text-align:center; font-weight: bold">No members added yet</td>
             </tr>
         </table>
+        <input class="memberIdentificationCard" type="file" name="" required>
     </div>
     <script type="text/javascript" src="<?=asset_url()?>js/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/bootstrap.min.js"></script>

@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
     $(".reg-btn-next").click(function () {
-        var ths = $(this);
-        var container = ths.closest('.reg-form');
-
-        container.hide();
-        container.next().fadeIn();
+//        var ths = $(this);
+//        var container = ths.closest('.reg-form');
+//
+//        container.hide();
+//        container.next().fadeIn();
     });
 
     $(".reg-btn-prev").click(function () {
@@ -16,23 +16,18 @@ $(document).ready(function () {
         container.prev().fadeIn();
     });
 
-    $("#reg-add-member").click(function () {
-        $("#button-add-group-member").show();
-        $("#button-updae-group-member").hide();
-        var con = $(".reg-form-member");
-        con.slideDown();
-    });
+    
 
-    $(".btn-form-cancel, .btn-form-save").click(function () {
+    $(".btn-form-cancel").click(function () {
         var con = $(this).closest(".btn-form-con");
         con.slideUp();
     });
 
     $(".reg-form-4 .reg-btn-prev, .reg-form-4 .reg-btn-next").click(function () {
-        var con = $(".reg-form-4 .btn-form-con");
-        if (con.css("display") == "block") {
-            con.hide();
-        }
+//        var con = $(".reg-form-4 .btn-form-con");
+////        if (con.css("display") == "block") {
+////            con.hide();
+////        }
     });
 
     $("#reg-option button[name=op-reg]").click(function(){
