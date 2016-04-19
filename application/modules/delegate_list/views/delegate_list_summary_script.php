@@ -13,6 +13,8 @@
 			var response = JSON.parse(data);
 			if(!response["error"].length){
 				$("#delegateListRegistered").text((response["data"]).length);
+			}else{
+				$("#delegateListRegistered").text("0");
 			}
 		});
 	}
@@ -29,11 +31,11 @@
 			}
 		}
 		$.post(api_url(url + "retrieveAccount"), temp, function(data){
-			console.log(data);
 			var response = JSON.parse(data);
 			if(!response["error"].length){
-				//$("#delegateListPending").text((response["data"]).length);
-				console.log(response);
+				$("#delegateListPending").text((response["data"]).length);
+			}else{
+				$("#delegateListPending").text("0");
 			}
 		});
 	}
