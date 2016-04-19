@@ -3,7 +3,6 @@
 	var url = "C_account/";
 
 	summaryList.retrieveRegisteredList = function(){
-		$("#delegateListRegistered").text("...");
 		var temp = {
 			condition : {
 				"account__account_type_ID" : "9"
@@ -24,7 +23,6 @@
 	}
 
 	summaryList.retrievePendingList = function(){
-		$("#delegateListPending").text("...");
 		var temp = {
 			condition : {
 				"not_null__payment_receipt_file_uploaded__name" : "null"
@@ -43,5 +41,9 @@
 	$(document).ready(function(){
 		summaryList.retrieveRegisteredList();
 		summaryList.retrievePendingList();
+		setInterval(function(){
+			summaryList.retrieveRegisteredList();
+			summaryList.retrievePendingList();
+		}, 20000);
 	});
 </script>
