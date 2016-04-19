@@ -1,25 +1,18 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#loginForm").validator();
-        $(".testForm").validator();
-        $(".testForm").on("valid.bs.validator", function(){
-            alert(1)
-        });
-        $(".testForm2").validator();
-        $(".testForm2").on("valid.bs.validator", function(){
-            alert(2)
-        });
         $("#loginForm").attr("action", base_url("portal/login"));
         $("#loginForm").ajaxForm({
             beforeSubmit : function(){
                 $("#loginForm").find(".submitButton").button("loading");
             },
             success : function(data){
+                console.log(data);
                 var response = JSON.parse(data);
                 console.log(response);
                 clear_form_error($("#loginForm"));
                 if(!response["error"].length){
-                    window.location = base_url();
+                    window.location = base_url("portal/visitPage/Delegate_list");
                 }else{
                     show_form_error($("#loginForm"), response["error"]);
                 }

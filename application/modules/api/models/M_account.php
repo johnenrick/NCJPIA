@@ -24,17 +24,26 @@ class M_account extends API_Model{
         return $this->createTableEntry($newData);
     }
     public function retrieveAccount($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array()) {
-        
         $joinedTable = array(
             "account_information" => "account_information.account_ID=account.ID",
-            "account_payment AS registration_fee" => "registration_fee.account_ID=account.ID AND registration_fee.assessment_item_ID=1"
+            "account_payment AS registration_fee" => "registration_fee.account_ID=account.ID AND registration_fee.assessment_item_ID=1",
+            "account_local_chapter_group" => "account_local_chapter_group.account_ID=account_information.account_ID",
+            "file_uploaded AS account_identification_file_uploaded" => "account_identification_file_uploaded.ID = account_information.identification_file_uploaded_ID",
+            "local_chapter_group" => "local_chapter_group.ID=account_local_chapter_group.local_chapter_group_ID",
+            "local_chapter" => "local_chapter.ID=local_chapter_group.local_chapter_ID",
+            "payment_receipt" => "payment_receipt.registration_number = local_chapter_group.ID",
+            "file_uploaded AS payment_receipt_file_uploaded" => "payment_receipt_file_uploaded.ID=payment_receipt.file_uploaded_ID"
         );
         $selectedColumn = array(
             "account.username, account.account_type_ID, account.status",
             "account_information.*",
-            "SUM(registration_fee.amount) AS registration_fee_total_amount"
+            "SUM(registration_fee.amount) AS registration_fee_total_amount",
+            "local_chapter.*, local_chapter.description AS local_chapter_description",
+            "local_chapter_group.ID AS local_chapter_group_ID",
+            "payment_receipt_file_uploaded.name AS payment_receipt_file_uploaded_name, payment_receipt_file_uploaded.type AS payment_receipt_file_uploaded_type",
+            "account_identification_file_uploaded.name AS account_identification_file_uploaded_name, account_identification_file_uploaded.type AS account_identification_file_uploaded_type"
         );
-        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);
+        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, false, array("registration_fee" => "registration_fee_total_amount"));
     }
     public function updateAccount($ID = NULL, $condition = array(), $newData = array()) {
         if(isset($newData["password"])){

@@ -4,7 +4,6 @@
         tableComponent.tableContainer = $(containerSelector);
         tableComponent.tableContainer.append($("#pageComponentContainer .table_component").clone());
         /*Defaul Values*/
-        tableConfig["result_limit"] = (typeof tableConfig['result_limit'] === "undefined") ? 20: tableConfig["result_limit"];
         /**Creation of Table**/
         /*Header*/
         if(typeof tableConfig["header"] !== "undefined" && tableConfig["header"]){
@@ -64,17 +63,9 @@
         /*Sorting*/
         /**Functions**/
         /*Request Result*/
-        tableComponent.tableContainer.find(".tableComponentFilterForm").find("input[name=limit]").val(tableConfig["result_limit"]);
         tableComponent.tableContainer.find(".tableComponentFilterForm").attr("action", tableConfig["api_link"]);
         tableComponent.tableContainer.find(".tableComponentFilterForm").ajaxForm({
             beforeSubmit : function(data, $form, options){
-                //set offset for current page
-                data.push({
-                    name : "offset",
-                    type : "text",
-                    required : false,
-                    value : tableConfig["result_limit"]*((tableComponent.tableContainer.find(".tableComponentCurrentPage").val() > 0) ? tableComponent.tableContainer.find(".tableComponentCurrentPage").val() - 1 : 0)
-                });
                 //add sorting parameters
                 tableComponent.tableContainer.find(".tableComponentTable thead th[sort!='0']").each(function(){
                     var column = $(this).attr("sort_column").split(",");
@@ -104,25 +95,13 @@
             success : function(data){
                 var response = JSON.parse(data);
                 tableComponent.tableContainer.find("table tbody").empty();
-                tableComponent.tableContainer.find(".tableComponentTotalPage").text(Math.ceil(response["result_count"]/tableConfig.result_limit));
-                tableComponent.tableContainer.find(".tableComponentTotalResult").text(response["result_count"]);
                 if(!response["error"].length){
-                    tableComponent.tableContainer.find(".tableComponentCurrentPage").val((tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1 <= 0) ? 1 :  tableComponent.tableContainer.find(".tableComponentCurrentPage").val());
                     tableConfig.result_callback(response["data"]);
                 }else{
                     if(response["error"][0]["status"]*1 === 2){//No Result
-                        if((tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1  > tableComponent.tableContainer.find(".tableComponentTotalPage").text()*1) && response["result_count"]*1){
-                            tableComponent.tableContainer.find(".tableComponentPreviousPage").trigger("click");
-                        }else{
-                            tableComponent.tableContainer.find(".tableComponentCurrentPage").val(0);
-                        }
                     }
                 }
-                if(tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1 > 1){
-                    tableComponent.tableContainer.find(".tableComponentPreviousPage").show();
-                }
-                tableComponent.tableContainer.find(".tableComponentNextPage").show();
-                tableComponent.tableContainer.find(".tableComponentLoading").hide();
+//                tableComponent.tableContainer.find(".tableComponentLoading").hide();
             }
         });
         //get result
@@ -165,23 +144,6 @@
                 }
             });
         };
-        /*Pagination*/
-        tableComponent.tableContainer.find(".tableComponentPreviousPage").click(function(){
-           if(tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1 > 1){
-               tableComponent.tableContainer.find(".tableComponentCurrentPage").val((tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1)-1);
-               tableComponent.tableContainer.find(".tableComponentFilterForm").trigger("submit");
-            }
-        });
-        tableComponent.tableContainer.find(".tableComponentNextPage").click(function(){
-            tableComponent.tableContainer.find(".tableComponentCurrentPage").val(tableComponent.tableContainer.find(".tableComponentCurrentPage").val()*1+1);
-            tableComponent.tableContainer.find(".tableComponentFilterForm").trigger("submit");
-        });
-        tableComponent.tableContainer.find(".tableComponentCurrentPage").change(function(){
-            if(isNaN($(this).val()*1)){
-                $(this).val(1);
-            }
-            tableComponent.tableContainer.find(".tableComponentFilterForm").trigger("submit");
-        })
         /**
          * Appending Row
          *

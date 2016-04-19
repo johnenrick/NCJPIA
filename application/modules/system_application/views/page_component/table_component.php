@@ -1,55 +1,24 @@
-<div class="table_component">
-    <div class="row">
-        <div class="col-xs-12">
-            <form action="" class="tableComponentFilterForm form-inline" method="post">
-                <input name="limit" value="20" type="hidden">
+<div class="table_component ml-container-botton full-height">
+    <div class="col-md-2 ml-list-controls">
+        <form action="" class="tableComponentFilterForm form-inline" method="post">
+            
+            <div class="form-group">
                 <button type="submit" class="btn btn-raised btn-warning btn-sm"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</button>
-            </form>
-        </div>
-    </div>
-    <div class="row table-responsive">
-        <div class="col-xs-12">
-            <table class="tableComponentTable table table-hover ">
-                <thead>
-                    <tr>
-
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-xs-4">
-            <form class="form-inline ">
-                <div class="form-group">
-                    <label class="tableComponentTotalResult"></label>
-                    <label>Result(s)</label>
-                </div>
-            </form>
-        </div>
-        <div class="col-xs-4 ">
-            <nav>
-                <ul class="pager">
-                    <li class="tableComponentPreviousPage"><a href="#" class="inactive-link"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous</a></li>
-                    <li class="tableComponentLoading"><a href="#" class="inactive-link"> Retrieving Data</a></li>
-                    <li class="tableComponentNextPage" ><a href="#">Next <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="col-xs-4">
-            <div class="form-inline pull-right">
-                <div class="form-group">
-                    <label>Page</label>
-                    <input type="text" class="form-control input-sm tableComponentCurrentPage" placeholder="" size="2" value="0" style="text-align:right">
-                    <label>/ <span class="tableComponentTotalPage">3</span></label>
-                </div>
             </div>
-        </div>
+        </form>
+    </div>
+    
+    
+    <div class="col-md-10 ml-list">
+        <table class="tableComponentTable table table-hover">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
     </div>
     <div class="prototype" style="display:none">
         <input name="sort" value="0" type="hidden">
@@ -62,8 +31,30 @@
             </select>
         </div>
         <div class="tableComponentFilterOption form-group">
-            <label ></label>
+            <label></label>
             <input class="form-control">
         </div>
+        <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">14</span> Registered
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">2</span> Paid
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">1</span> Pending
+                </li>
+            </ul>
+            <hr>
+            <div class="form-group">
+                <label>Group by</label>
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
     </div>
 </div>

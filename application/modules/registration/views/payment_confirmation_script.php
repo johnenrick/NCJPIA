@@ -13,6 +13,7 @@
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
                     $("#success-module").fadeIn();
+                    $("#confirmationMessage").show();
                 }else{
                     $("#con-module").find(".formMessage").show();
                     $("#con-module").find(".formMessage").empty();
