@@ -39,8 +39,8 @@
             <div class="form-group">
                 <label>Payment Status</label>
                 <select name="payment_status" class="form-control">
-                    <option>Unpaid</option>
                     <option>Pending</option>
+                    <option>Unpaid</option>
                     <option>Paid</option>
                 </select>
             </div>
@@ -56,7 +56,7 @@
             <thead>
                 <tr>
                     <th width="20px">
-                        <input type="checkbox">
+                        <!--<input type="checkbox">-->
                     </th>
                     <th>Full Name</th>
                     <th class="center-align">Local Chapter</th>
@@ -69,11 +69,38 @@
         </table>
     </div>
 </div>
+<div id="delegateInformation" class="modal fade ml-modal" tabindex="-1" role="dialog" aria-labelledby="Information">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Complete Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6" style="text-align:center">
+                        <a id="delegateConfirmPayment" class="btn btn-success">Confirm Payment</a>
+                        <br>
+                        <br>
+                        <p id="delegateName" >John Doe</p>
+                        <p id="delegateLocalChapter" >USC</p>
+                        <p id="delegateRegion">Region X</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" height="250" alt="No scanned copy of deposit slip uploaded.">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="prototype" style="display:none">
     <table>
         <tr class="delegateListRow">
             <td>
-                <input type="checkbox">
+                <!--<input type="checkbox">-->
             </td>
             <td class="delegateListFullName">Mark Otto</td>
             <td class="delegateListLocalChapter center-align">USC</td>
