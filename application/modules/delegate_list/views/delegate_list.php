@@ -87,7 +87,7 @@
                         <p id="delegateRegion">Region X</p>
                     </div>
                     <div class="col-md-6">
-                        <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" height="250" alt="No scanned copy of deposit slip uploaded.">
+                        <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" width="100%" alt="No scanned copy of deposit slip uploaded.">
                     </div>
                 </div>
                 <div class="modal-footer">

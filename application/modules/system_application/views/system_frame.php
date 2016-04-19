@@ -49,7 +49,7 @@
                                 <input class="form-control input-sm ml-search" type="text" placeholder="Search...">
                             </div>
                             <div class="col-md-7 col-xs-2">
-                                <a id="logout">
+                                <a id="logout" href="#">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                                 </a>
                                 <span class="ml-profile-separator">|</span>
