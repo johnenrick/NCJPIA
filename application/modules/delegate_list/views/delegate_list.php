@@ -2,13 +2,13 @@
     <div class="col-md-2 ml-list-controls">
         <ul class="list-group">
             <li class="list-group-item">
-                <span class="badge">14</span> Registered
+                <span class="badge" id="delegateListRegistered">0</span> Registered
             </li>
             <li class="list-group-item">
-                <span class="badge">2</span> Paid
+                <span class="badge" id="delegateListPaid">0</span> Paid
             </li>
             <li class="list-group-item">
-                <span class="badge">1</span> Pending
+                <span class="badge" id="delegateListPending">0</span> Pending
             </li>
         </ul>
         <hr>
