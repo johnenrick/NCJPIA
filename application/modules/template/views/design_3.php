@@ -22,7 +22,7 @@
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a>
-                            N
+                            <img src="<?=asset_url('img/NF Logo.png')?>" width="40">
                         </a>
                     </li>
                     <li>
@@ -40,74 +40,48 @@
                 <div class="container-fluid full-height">
                     <div class="row full-height">
                         <div class="col-md-12 ml-container-top">
-                            <div class="col-md-2">
-
+                            <div class="col-md-2 col-xs-2">
+                                <a id="menu-toggle">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </a>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-8">
                                 <input class="form-control input-sm ml-search" type="text" placeholder="Search...">
+                            </div>
+                            <div class="col-md-7 col-xs-2">
+                                <a id="logout">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                </a>
+                                <span class="ml-profile-separator">|</span>
+                                <span class="ml-profile-name">Admin</span>
+                                <img data-name="Admin" class="ml-profile-initial" width="35" />
                             </div>
                         </div>
                         <div class="col-md-12 ml-container-bottom">
                             <div class="col-md-2 ml-list-controls">
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-default">Default</a>
-                                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <span class="badge">14</span> Registered
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">2</span> Paid
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="badge">1</span> Pending
+                                    </li>
+                                </ul>
+                                <hr>
+                                <div class="form-group">
+                                    <label>Group by</label>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
 
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-primary">Primary</a>
-                                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-success">Success</a>
-                                    <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-info">Info</a>
-                                    <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-warning">Warning</a>
-                                    <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="col-md-10 ml-list">
                                 <table class="table table-hover">
@@ -198,11 +172,6 @@
         <script type="text/javascript" src="<?=asset_url()?>/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>/js/custom.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.ml-name-initial').initial();
-            });
-        </script>
 </body>
 
 </html>

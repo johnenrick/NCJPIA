@@ -35,19 +35,41 @@ $(document).ready(function () {
         }
     });
 
-    $("#reg-option button[name=op-reg]").click(function(){
+    $("#reg-option button[name=op-reg]").click(function () {
         var btn = $(this);
         btn.parent().hide();
         $("#reg-module").fadeIn();
     });
-    $("#reg-option button[name=op-con]").click(function(){
+    $("#reg-option button[name=op-con]").click(function () {
         var btn = $(this);
         btn.parent().hide();
         $("#con-module").fadeIn();
     });
 
-//    $(".reg-btn-submit").click(function(){
-//        $(".hide-module:not(#success-module)").hide();
-//        $("#success-module").fadeIn();
-//    })
+    //    $(".reg-btn-submit").click(function(){
+    //        $(".hide-module:not(#success-module)").hide();
+    //        $("#success-module").fadeIn();
+    //    })
+
+
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(this).toggleClass('active');
+    });
+
+    $(".ml-list thead input[type=checkbox]").on('change', function () {
+        var chckbox = $(this)
+        if (chckbox.prop('checked'))
+            chckbox.closest('table').find('tbody input[type=checkbox]').prop('checked', true);
+        else
+            chckbox.closest('table').find('tbody input[type=checkbox]').prop('checked', false);
+    });
+
+    $(".ml-list tbody input[type=checkbox]").on('change', function () {
+        if ($(".ml-list thead input[type=checkbox]").prop('checked'))
+            $(".ml-list thead input[type=checkbox]").prop('checked', false)
+    });
+
+    $('.ml-name-initial, .ml-profile-initial').initial();
 });

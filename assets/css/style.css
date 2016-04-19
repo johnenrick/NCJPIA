@@ -302,6 +302,7 @@ body {
     background-color: #1672b4;
     border-bottom: solid 1px #ddd;
     height: 60px;
+    padding-top: 11px;
 }
 
 .ml-container-bottom {
@@ -315,6 +316,8 @@ body {
     border-right: solid 1px #ddd;
     height: 100%;
     text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .ml-list {
@@ -329,8 +332,38 @@ body {
     widows: 20px;
 }
 
-.ml-search {
-    margin-top: 11px;
+#menu-toggle,
+#logout {
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#menu-toggle.active i {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+    -webkit-transition: all 0.6s ease-out; /* Safari */
+    transition: all 0.6s ease-out;
+}
+
+#logout,
+.ml-profile-name,
+.ml-profile-initial,
+.ml-profile-separator {
+    float: right;
+    margin-left: 10px;
+}
+
+.ml-profile-name {
+    font-size: 20px;
+    color: #fff;
+    padding-top: 2px;
+}
+
+.ml-profile-separator {
+    font-size: 20px;
+    color: #fff;
 }
 
 @media (max-width: 991px) {
