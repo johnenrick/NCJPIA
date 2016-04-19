@@ -7,4 +7,7 @@ class Template extends FE_Controller{
     public function portal(){
         $this->load->view('design_2');
     }
+    public function master_list(){
+        $this->load->view('design_3');
+    }
 }

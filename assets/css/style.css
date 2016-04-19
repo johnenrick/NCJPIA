@@ -1,4 +1,4 @@
-html,
+    html,
 body {
     height: 100%;
     overflow: hidden;
@@ -10,6 +10,11 @@ body {
 
 .full-height {
     height: 100%;
+    margin: 0;
+}
+
+.center-align {
+    text-align: center;
 }
 
 .bold-1 {
@@ -20,6 +25,7 @@ body {
     text-align: center;
     padding-top: 10%;
 }
+
 #reg-option button {
     width: 200px;
 }
@@ -42,8 +48,13 @@ body {
     font-size: 30px;
     color: #1672b4
 }
+
 #success-module a {
     margin: 0 10px;
+}
+
+.container-fluid {
+    padding: 0;
 }
 
 
@@ -238,7 +249,6 @@ body {
     overflow: hidden;
 }
 
-
 #portal-con .modal-dialog.modal-lg {
     width: 800px;
 }
@@ -250,6 +260,7 @@ body {
 #portal-con .portal-con-left {
     padding: 20px;
 }
+
 #portal-con .portal-con-right {
     padding: 0;
     overflow: hidden;
@@ -258,13 +269,14 @@ body {
 #portal-con .row {
     margin: 0;
 }
+
 #portal-con .btn-right {
     float: right;
 }
+
 #portal-con .btn-left {
     float: left;
 }
-
 
 @media (max-width: 991px) {
     #portal-con .portal-con-right {
@@ -280,5 +292,50 @@ body {
 @media (max-width: 799px) {
     #portal-con .modal-dialog.modal-lg {
         width: 80%;
+    }
+}
+
+
+/* master list */
+
+.ml-container-top {
+    background-color: #1672b4;
+    border-bottom: solid 1px #ddd;
+    height: 60px;
+}
+
+.ml-container-bottom {
+    background-color: #fff;
+    height: calc(100% - 60px);
+    padding: 0;
+}
+
+.ml-list-controls {
+    background-color: #eee;
+    border-right: solid 1px #ddd;
+    height: 100%;
+    text-align: center;
+}
+
+.ml-list {
+    background-color: #fff;
+    height: 100%;
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+.ml-list .ml-name-initial {
+    height: 20px;
+    widows: 20px;
+}
+
+.ml-search {
+    margin-top: 11px;
+}
+
+@media (max-width: 991px) {
+    .ml-container-bottom {
+        height: auto;
+        min-height: calc(100% - 60px);
     }
 }
