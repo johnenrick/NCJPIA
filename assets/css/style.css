@@ -21,6 +21,20 @@
         font-weight: 400;
     }
 
+    .form-control[disabled] {
+        background-color: #fff;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+    }
+
+    select.form-control[disabled] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
     #reg-option {
         text-align: center;
         padding-top: 10%;
