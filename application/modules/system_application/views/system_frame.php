@@ -26,10 +26,10 @@
                         </a>
                     </li>
                     <li>
-                        <a class="active"><i class="fa fa-users" aria-hidden="true"></i></a>
+                        <a class="moduleNavigation active" module_name="delegate_list" module_link="delegate_list"><i class="fa fa-users" aria-hidden="true"></i></a>
                     </li>
                     <li>
-                        <a><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        <a class="moduleNavigation" module_name="user_management" module_link="user_management" ><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>

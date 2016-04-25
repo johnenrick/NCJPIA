@@ -21,12 +21,15 @@ class C_account_payment extends API_Controller {
             $this->form_validation->set_rules('assessment_item_ID', 'Assessment Item', 'required');
             $this->form_validation->set_rules('account_ID', 'Acount ID', 'required');
             $this->form_validation->set_rules('amount', 'Amount', 'required');
+            $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required');
             
             if($this->form_validation->run()){
                 $result = $this->m_account_payment->createAccountPayment(
                         $this->input->post("assessment_item_ID"),
                         $this->input->post("account_ID"),
-                        $this->input->post("amount")
+                        $this->input->post("amount"),
+                        $this->input->post("payment_mode"),
+                        user_id()
                         );
                 if($result){
                     $this->actionLog($result);

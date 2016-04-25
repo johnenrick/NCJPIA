@@ -2,10 +2,39 @@
     var delegateList = {};
     
     $(document).ready(function(){
+        
+        $.post(api_url("C_local_chapter_position/retrieveLocalChapterPosition"), {}, function(data){
+            var response = JSON.parse(data);
+            if(!response["error"].length){
+                $(".localChapterPosition").empty();
+                for(var x = 0; x < response["data"].length; x++){
+                    $(".localChapterPosition").append("<option value='"+response["data"][x]["ID"]+"'>"+response["data"][x]["description"]+"</option>");
+                }
+            }else{
+                alert("Please contact administrator");
+            }
+        });
+        $.post(api_url("C_event/retrieveEvent"), {}, function(data){//non academic
+            var response = JSON.parse(data);
+            if(!response["error"].length){
+                for(var x = 0; x < response["data"].length; x++){
+                    var eventItem = $(".prototype .eventItem").clone();
+                    eventItem.find(".eventDescription").text(response["data"][x]["description"]);
+                    eventItem.find("input").val(response["data"][x]["ID"]);
+                    if(response["data"][x]["event_type_ID"]*1 === 1){
+                        $(".nonAcademicEvent").append(eventItem);
+                    }else{
+                        $(".academicEvent").append(eventItem);
+                    }
+                }
+            }else{
+                alert("Please contact administrator");
+            }
+        });
+        
         $.post(api_url("C_local_chapter/retrieveLocalChapter"), {}, function(data){
             var response = JSON.parse(data);
             if(!response["error"].length){
-                
                 for(var x =0; x < response["data"].length;x++){
                     $("#delegateListTableFilter").find("select[name='condition[local_chapter__ID]']").append("<option value='"+response["data"][x]["ID"]+"'>"+response["data"][x]["description"]+"</option>");
                 }
@@ -14,35 +43,41 @@
         $("#delegateListTableFilter").attr("action", api_url("C_account/retrieveAccount"));
         $("#delegateListTableFilter").ajaxForm({
             beforeSubmit : function(data, $form, options){
-                //payment status 3                
-                if(data[3]["value"] === "Unpaid"){
+                
+                //payment status 3
+                if(data[3]["value"] === "1"){ //Unpaid
                     data.push({
-                        name : "condition[is_null__payment_receipt_file_uploaded_name]",
+                        name : "condition[is_null__payment_receipt_file_uploaded__name]",
                         required : false,
                         type : "text",
                         value : "null"
                     });
-                }else if(data[3]["value"] === "Paid"){
+                }else if(data[3]["value"] === "2"){ //Paid
                     data.push({
-                        name : "condition[greater_equal__registration_fee_total_amount]",
+                        name : "having[greater_equal__SUM__registration_fee__amount]",
                         required : false,
                         type : "text",
                         value : 5600
                     });
-                }else{
+                }else if(data[3]["value"] === "0"){ //Pending
                     data.push({
                         name : "condition[not_null__payment_receipt_file_uploaded__name]",
                         required : false,
                         type : "text",
                         value : "null"
                     });
+                    data.push({
+                        name : "condition[is_null__registration_fee__amount]",
+                        required : false,
+                        type : "text",
+                        value : 5600
+                    });
                 }
-                console.log(data);
                 $("#delegateListTableFilter").find("button[type=submit]").button("loading");
             },
             success : function(data){
                 var response = JSON.parse(data);
-                console.log(response);
+                
                 $("#delegateListTable tbody").empty();
                 if(!response["error"].length){
                    
@@ -75,35 +110,71 @@
             }
         });
         $("#delegateListTable tbody").on("click", "tr", function(){
-            $.post(api_url("C_account/retrieveAccount"), {ID : $(this).attr("account_id")}, function(data){
+            $.post(api_url("C_account/retrieveAccount"), {ID : $(this).attr("account_id"), with_event_participation : true}, function(data){
                 var response = JSON.parse(data);
-                console.log(response);
                 if(!response["error"].length){
+                    $(".eventItem input").prop("checked", false);
                     $("#delegateInformation").attr("account_id", response["data"]["account_ID"]);
                     $("#delegateInformation").attr("local_chapter_position_ID", response["data"]["local_chapter_position_ID"]);
                     $("#delegateName").text(response["data"]["first_name"]+" "+response["data"]["last_name"]);
                     $("#delegateLocalChapter").text(response["data"]["local_chapter_description"]);
                     $("#delegateRegion").text(response["data"]["region"]);
-                    $("#delegateConfirmationImage").attr("src", asset_url("images/payment_receipt/"+response["data"]["payment_receipt_file_uploaded_name"]));
+                    
+                    $("#delegateListAccountDetail input[name='updated_data[first_name]']").val(response["data"]["first_name"]);
+                    $("#delegateListAccountDetail input[name='updated_data[last_name]']").val(response["data"]["last_name"]);
+                    $("#delegateListAccountDetail input[name='updated_data[local_chapter_position_ID]']").val(response["data"]["local_chapter_position_ID"]);
+                    $("#delegateListAccountDetail input[name='updated_data[contact_number]']").val(response["data"]["contact_number"]);
+                    $("#delegateListAccountDetail input[name='updated_data[complete_address]']").val(response["data"]["complete_address"]);
+                    $("#delegateListAccountDetail input[name='updated_data[email_address]']").val(response["data"]["email_address"]);
+                    $("#delegateListAccountDetail input[name='updated_data[tshirt_size]']").val(response["data"]["tshirt_size"]);
+                    
+                    $("#delegateListAccountDetail input[name='local_chapter_updated_data[description]']").val(response["data"]["local_chapter_description"]);
+                    $("#delegateListAccountDetail input[name='local_chapter_updated_data[address]']").val(response["data"]["address"]);
+                    $("#delegateListAccountDetail input[name='local_chapter_updated_data[region]']").val(response["data"]["region"]);
+                    
+                    $("#delegateListIdentificationImage").attr("src", asset_url("images\\identification_card\\"+response["data"]["account_identification_file_uploaded_name"]));
+                    
+                    if(response["data"]["payment_receipt_file_uploaded_name"]){
+                        $("#delegateConfirmationImage").attr("src", asset_url("images/payment_receipt/"+response["data"]["payment_receipt_file_uploaded_name"]));
+                    }else{
+                        $("#delegateConfirmationImage").attr("src", asset_url("img/receipt.jpg"));
+                    }
+                    
+                    if(response["data"]["event_participation"]){
+                        for(var x = 0; x < response["data"]["event_participation"].length; x++){
+                            $(".eventItem input[value='"+response["data"]["event_participation"][x]["event_ID"]+"']").prop("checked", true);
+                        }
+                    }
+                    
                     $("#delegateInformation").modal("show");
                     if(response["data"]["local_chapter_position_ID"]*1 === 1 || response["data"]["local_chapter_position_ID"]*1 === 2 || response["data"]["local_chapter_position_ID"]*1 === 3){
                         if(response["data"]["registration_fee_total_amount"]*1 >= 5700){
-                            $("#delegateConfirmPayment").hide();
+                            $(".delegateConfirmPayment").hide();
+                            $("#delegatePaymentMode").show();
+                            if(response["data"]["registration_fee_payment_mode"]){
+                                $("#delegatePaymentMode").text("Paid through bank");
+                            }
                         }else{
-                            $("#delegateConfirmPayment").show();
+                            $(".delegateConfirmPayment").show();
+                            $("#delegatePaymentMode").hide();
                         }
                     }else{
                         if(response["data"]["registration_fee_total_amount"]*1 >= 5600){
-                            $("#delegateConfirmPayment").hide();
+                            $(".delegateConfirmPayment").hide();
+                            $("#delegatePaymentMode").show();
+                            if(response["data"]["registration_fee_payment_mode"]){
+                                $("#delegatePaymentMode").text("Paid through bank");
+                            }
                         }else{
-                            $("#delegateConfirmPayment").show();
+                            $(".delegateConfirmPayment").show();
+                            $("#delegatePaymentMode").hide();
                         }
                     }
                 }
             });
         });
-        $("#delegateConfirmPayment").click(function(){
-            $("#delegateConfirmPayment").button("loading");
+        $(".delegateConfirmPayment").click(function(){
+            $(".delegateConfirmPayment").button("loading");
             var amount = 0;
             if($("#delegateInformation").attr("local_chapter_position_ID")*1 === 1 ||$("#delegateInformation").attr("local_chapter_position_ID")*1 === 2 ||$("#delegateInformation").attr("local_chapter_position_ID")*1 === 3 ){
                 amount = 5700;
@@ -114,15 +185,16 @@
             var newData = {
                 assessment_item_ID  : 1,
                 account_ID : $("#delegateInformation").attr("account_id"),
-                amount : amount
+                amount : amount,
+                payment_mode : $(this).attr("payment_mode")
             };
             $.post(api_url("C_account_payment/createAccountPayment"), newData, function(data){
                 var response = JSON.parse(data);
                 if(!response["error"].length){
-                    $("#delegateConfirmPayment").hide();
+                    $(".delegateConfirmPayment").hide();
                     $("#delegateListTableFilter").trigger("submit");
                 }
-                $("#delegateConfirmPayment").button("reset");
+                $(".delegateConfirmPayment").button("reset");
             });
         });
         $("#delegateListTableFilter").trigger("submit");

@@ -93,7 +93,8 @@ class C_account extends API_Controller {
                         $this->input->post("offset"),
                         $this->input->post("sort"),
                         $ID,
-                        $this->input->post("condition")
+                        $this->input->post("condition"),
+                        $this->input->post("having")
                         );
                 $this->responseDebug($this->input->post());
                 if($this->input->post("limit")){
@@ -107,37 +108,13 @@ class C_account extends API_Controller {
                         ));
                 }
                 if($result){
-                    if($this->input->post("with_contact_information") || $this->input->post("all_information")){
-                        $this->load->model("m_account_contact_information");
+                    if($this->input->post("with_event_participation") || $this->input->post("all_information")){
+                        $this->load->model("M_account_event_participation");
 
                         if($this->input->post("ID")){
-                            $condition = array("account_contact_information__account_ID" => $result["ID"]);
-                            $result["contact_information"] = $this->m_account_contact_information->retrieveAccountContactInformation(NULL, NULL, NULL, NULL, NULL, $condition);
-                        }else{
-                            foreach($result as $resulKey => $resultValue){
-                                $condition = array("account_contact_information__account_ID" => $resultValue["ID"]);
-                                $result[$resulKey]["contact_information"] = $this->m_account_contact_information->retrieveAccountContactInformation(NULL, NULL, NULL, NULL, NULL, $condition);
-                            }
+                            $condition = array("account_ID" => $result["account_ID"]);
+                            $result["event_participation"] = $this->M_account_event_participation->retrieveAccountEventParticipation(NULL, NULL, NULL, NULL, NULL, $condition);
                         }
-                    }
-                    if($this->input->post("with_address") || $this->input->post("all_information")){
-                        $this->load->model("M_account_address");
-                        if($this->input->post("ID")){
-                            $condition = array("account_address__account_ID" => $result["ID"]);
-                            $result["address"] = $this->M_account_address->retrieveAccountAddress(NULL, NULL, NULL, NULL, NULL, $condition);
-                        }else{
-                            foreach($result as $resulKey => $resultValue){
-                                $condition = array("account_address__account_ID" => $resultValue["ID"]);
-                                $result[$resulKey]["address"] = $this->M_account_address->retrieveAccountAddress(NULL, NULL, NULL, NULL, NULL, $condition);
-                            }
-                        }
-                    }
-                    if($this->input->post("with_waste_post")){
-                        $this->load->model("M_waste_post");
-                        $result["waste_post"] = $this->M_waste_post->retrieveWastePost(false, NULL, 0, array("waste_post_type_ID"=>"asc"), NULL, array(
-                            "account_ID" => $ID,
-                            "status" => 1
-                        ));
                     }
                     $this->actionLog(json_encode($this->input->post()));
                     $this->responseData($result);

@@ -1,27 +1,9 @@
 <div class="col-md-12 ml-container-bottom">
     <div class="col-md-2 ml-list-controls">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span class="badge" id="delegateListRegistered">0</span> Registered
-            </li>
-            <li class="list-group-item">
-                <span class="badge" id="delegateListPaid">0</span> Paid
-            </li>
-            <li class="list-group-item">
-                <span class="badge" id="delegateListPending">0</span> Pending
-            </li>
-        </ul>
-        <hr>
-        <form id="delegateListTableFilter" method='POST'>
-            <input name="condition[account_type_ID]" value="9" type="hidden">
+        
+        <form id="userManagementTableFilter" method='POST'>
             <div class="form-group">
                 <label>FILTER TABLE</label>
-            </div>
-            <div class="form-group">
-                <label>Local Chapter</label>
-                <select name="condition[local_chapter__ID]" class="form-control">
-                    <option value="">All</option>
-                </select>
             </div>
 <!--
             <div class="form-group">
@@ -33,16 +15,12 @@
                 <input  type="text" class="form-control">
             </div>-->
             <div class="form-group">
-                <label>Registration Number</label>
-                <input name="condition[local_chapter_group__ID]" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Payment Status</label>
-                <select name="payment_status" class="form-control">
-                    <option value="null">All</option>
-                    <option value="0">Pending</option>
-                    <option value="1">Unpaid</option>
-                    <option value="2">Paid</option>
+                <label>User Type</label>
+                <select name="condition[account_type_ID]" class="form-control">
+                    <option value="">All</option>
+                    <option value="3">Registration Committee</option>
+                    <option value="4">Audit Committee</option>
+                    <option value="8">Hotel Accommodation</option>
                 </select>
             </div>
             <div class="form-group">
@@ -53,9 +31,9 @@
         </form>
     </div>
     <div class="col-md-10 ml-list">
-        <table id="delegateListTable" class="table table-hover">
+        <table id="userManagementTable" class="table table-hover">
             <thead>
-                <tr>
+                <tr>    
                     <th width="20px">
                         <!--<input type="checkbox">-->
                     </th>
@@ -70,7 +48,7 @@
         </table>
     </div>
 </div>
-<div id="delegateInformation" class="modal fade ml-modal" tabindex="-1" role="dialog" aria-labelledby="Information">
+<div id="userManagementInformation" class="modal fade ml-modal" tabindex="-1" role="dialog" aria-labelledby="Information">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,18 +58,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6" style="text-align:center">
-                        <a  payment_mode="1" class="delegateConfirmPayment btn btn-success"> <i class="fa fa-bank" aria-hidden="true"></i> Confirm Bank Payment</a>
-                        <a  payment_mode="2" class="delegateConfirmPayment btn btn-primary"> <i class="fa fa-money" aria-hidden="true"></i> Confirm Cash Payment </a>
-                        <h5><p id="delegatePaymentMode">Paid though bank</p></h5>
-                        <h3><p id="delegateName" >John Doe</p></h3>
-                        <h4><p id="delegateLocalChapter" >USC</p></h4>
-                        <h5><p id="delegateRegion">Region X</p></h5>
+                        <a  payment_mode="1" class="userManagementConfirmPayment btn btn-success"> <i class="fa fa-bank" aria-hidden="true"></i> Confirm Bank Payment</a>
+                        <a  payment_mode="2" class="userManagementConfirmPayment btn btn-primary"> <i class="fa fa-money" aria-hidden="true"></i> Confirm Cash Payment </a>
+                        <h5><p id="userManagementPaymentMode">Paid though bank</p></h5>
+                        <h3><p id="userManagementName" >John Doe</p></h3>
+                        <h4><p id="userManagementLocalChapter" >USC</p></h4>
+                        <h5><p id="userManagementRegion">Region X</p></h5>
                     </div>
                     <div class="col-md-6">
-                        <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" width="100%" alt="No scanned copy of deposit slip uploaded.">
+                        <img id="userManagementConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" width="100%" alt="No scanned copy of deposit slip uploaded.">
                     </div>
                     </div>
-                        <form id="delegateListAccountDetail" method="POST">
+                        <form id="userManagementAccountDetail" method="POST">
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
@@ -151,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <img id="delegateListIdentificationImage"  src="<?=asset_url()?>img/identification_card.png" width="100%">
+                                    <img id="userManagementIdentificationImage"  src="<?=asset_url()?>img/identification_card.png" width="100%">
                                 </div>
                             </div>
                             <hr>
@@ -216,12 +194,12 @@
 </div>
 <div class="prototype" style="display:none">
     <table>
-        <tr class="delegateListRow">
+        <tr class="userManagementRow">
             <td>
                 <!--<input type="checkbox">-->
             </td>
-            <td class="delegateListFullName">Mark Otto</td>
-            <td class="delegateListLocalChapter center-align">USC</td>
+            <td class="userManagementFullName">Mark Otto</td>
+            <td class="userManagementLocalChapter center-align">USC</td>
             <td class="center-align">
                 <span class="label label-success" style="display:none">Paid</span>
                 <span class="label label-warning" style="display:none">Pending</span>

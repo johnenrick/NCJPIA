@@ -4,9 +4,8 @@
         $("#registrationFormFull").ajaxForm({
             beforeSubmit : function(data, $form, options){
                 clear_form_error($("#registrationFormFull"));
-                console.log(data);
                 /*Group Member*/
-                $("#groupMemberTable tbody").find("tr").each(function(){
+                $("#groupMemberTable tbody").find("tr[class!='noGroupMember']").each(function(){
                     data.push({
                         name : "group_member_list["+($(this).index()+1)+"][first_name]",
                         required : true,
@@ -108,10 +107,9 @@
                     $(".hide-module:not(#success-module)").hide();
                     $("#success-module").fadeIn();
                     $("#registrationNumberMessage").show();
-                    $("#registrationNumber").text(response["data"]);
+                    $("#registrationNumber").text(pad(response["data"]*1, 5));
                 }else{
-                    console.log(response);
-                    show_form_error($("#registrationFormFull"), response["error"])
+                    show_form_error($("#registrationFormFull"), response["error"]);
                 }
             }
         });

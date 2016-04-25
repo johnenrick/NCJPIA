@@ -103,15 +103,15 @@
         if($("#moduleContainer").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
-
                 var moduleHolder = $("#systemComponent").find(".moduleHolder").clone();
 
                 moduleHolder.attr("module_link", moduleLink);
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
-                moduleHolder.append(moduleHolder);
-                $("#moduleContainer").append(data);
+                moduleHolder.append(data);
+                $("#moduleContainer").append(moduleHolder);
+                console.log(moduleHolder);
                 /*show page*/
-                $('.wl-page-content:not(.moduleHolder[module_link="'+moduleLink+'"])').hide();
+                $("#moduleContainer").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                     $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                     refresh_call(moduleName);
@@ -120,7 +120,7 @@
             });
         }else{
             /*show page*/
-            $('.wl-page-content:not(.moduleHolder[module_link="'+moduleLink+'"])').hide();
+            $("#moduleContainer").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
             if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
                 $('.moduleHolder[module_link="'+moduleLink+'"]').fadeIn(500);
                 refresh_call(moduleName);
@@ -177,6 +177,7 @@
                 elementSelected.find(".formMessage").append("* "+errorValue["message"]+"<br>");
             }
         });
+        elementSelected.scrollTo("#formMessage");
     }
     function clear_form_error(elementSelected){
         elementSelected.find(".formMessage").empty();

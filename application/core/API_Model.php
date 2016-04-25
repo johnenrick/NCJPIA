@@ -39,15 +39,10 @@ class API_Model extends CI_Model{
      *                              e.g. [condition_type__database_table__table_column], [condition_type__table_column], [database_table__table_column]
      * @param array $selectedColumn Specify the columns to retrieve. All columns in default table is selected and prioritized
      */
-    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array(), $groupBy = false, $aliasedColumn = false){
+    public function retrieveTableEntry($retrieveType = 0, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = array(), $selectedColumn = array(), $joinedTable = array(), $groupBy = false, $having = array()){
         $this->initializeTableColumn($joinedTable);
         $this->db->start_cache();
         $this->db->flush_cache();
-        if($aliasedColumn){
-            foreach($aliasedColumn as $aliasedColumnKey => $aliasedColumnValue){
-                $this->DATABASETABLE[$aliasedColumnKey][$aliasedColumnValue] = 9; 
-            }
-        }
         //Select column
         if(is_array($selectedColumn)){
             $selectedQuery = "";
@@ -66,9 +61,12 @@ class API_Model extends CI_Model{
         //Filtering entry
         if($ID === NULL){
             $this->addCondition($condition);
-           
         }else{
             $this->db->where("$this->TABLE.ID", $ID);
+        }
+        //Having Clause
+        if($having){
+            $this->addHaving($having);
         }
         //Sorting entry
         if(is_array($sort)){
@@ -149,8 +147,7 @@ class API_Model extends CI_Model{
     }
     public function addCondition($condition = array()){
         if(is_array($condition)){
-            if($this->TABLE == "account_contact_information"){
-            }
+            
             foreach($condition as $tableColumnKey => $tableColumnValue){
                 $segment = explode("__", $tableColumnKey);
                 $tableColumn = $segment[count($segment)-1];
@@ -184,7 +181,6 @@ class API_Model extends CI_Model{
                     }
                     $tableColumn = "CONCAT($tableColumnTemp)";
                 }
-                
                 if((isset($this->DATABASETABLE[$tableName][$tableColumn]) || $passArithmetic) && ($tableColumnValue !="")){
                     $leftValue = ($passArithmetic) ? $tableColumn: "$tableName.$tableColumn";
                     $this->HASCONDITION = true;
@@ -221,6 +217,61 @@ class API_Model extends CI_Model{
                             break;
                         case "is_null":
                             $this->db->where("$leftValue is null", null);
+                            break;
+                        default :
+                            if(is_array($tableColumnValue)){
+                                $this->db->where_in("$leftValue", $tableColumnValue);
+                            }else{
+                                $this->db->where("$leftValue=", $tableColumnValue);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * 
+     * @param type $condition
+     *              condition__operation__table__column
+     *              greater_equal__SUM__account__money
+     */
+    public function addHaving($condition = array()){
+        
+        if(is_array($condition)){
+            foreach($condition as $tableColumnKey => $tableColumnValue){
+                $segment = explode("__", $tableColumnKey);
+                $tableColumn = $segment[3];
+                $tableName = $segment[2];
+                if((isset($this->DATABASETABLE[$tableName][$tableColumn])) && ($tableColumnValue !="")){
+                    $this->HASCONDITION = true;
+                    $havingField = "";
+                    switch($segment[1]){
+                        case "SUM" : 
+                            $havingField = "SUM($tableName.$tableColumn)*1";
+                            break;
+                    }
+                    switch($segment[0]){
+                        case "not" :
+                            $this->db->having("$havingField!=", $tableColumnValue);
+                            break;
+                        case "lesser":
+                            $this->db->having("$havingField <", $tableColumnValue);
+                            break;
+                        case "lesser_equal":
+                            $this->db->having("$havingField<=", $tableColumnValue);
+                            break;
+                        case "greater_equal":
+                            $this->db->having("$havingField>=", $tableColumnValue);
+                            break;
+                        case "greater":
+                            $this->db->having("$havingField>", $tableColumnValue);
+                            break;
+                        case "not_null":
+                            $this->db->having("$havingField is not null", null);
+                            break;
+                        case "is_null":
+                            $this->db->where("$havingField is null", null);
                             break;
                         default :
                             if(is_array($tableColumnValue)){

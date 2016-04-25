@@ -134,6 +134,7 @@
                         <div class="form-group">
                             <label class="control-label">Region</label>
                             <select name="local_chapter_region"  class="form-control" id="select2" required>
+                                <option>NCR</option>
                                 <option>Region 1 & CAR</option>
                                 <option>Region 2</option>
                                 <option>Region 3</option>
@@ -144,6 +145,7 @@
                                 <option>Region 8</option>
                                 <option>Region 9</option>
                                 <option>Region 10 & CARAGA</option>
+                                <option>Region 11</option>
                                 <option>Region 12 & SOCCSKSARGEN</option>
 
                             </select>
@@ -267,26 +269,36 @@
                     </div>
 
                     <div class="reg-form reg-form-5 hide-module">
-                        <h4 class="bold-1">Event Links</h4>
+                        <h4 class="bold-1">Implementing Rules and Regulation Links</h4>
                         <hr>
                         <div class="form-group">
-                            <label>Event 1</label>
-                            <a href="https://www.google.com.ph" target="_blank"> event 1 link</a>
+                            <label>IRR 1</label>
+                            <a href="http://tinyurl.com/ANCAcadsIRR" target="_blank"> NATIONAL ACADEMIC LEAGUE</a>
                             <br>
                         </div>
                         <div class="form-group">
-                            <label>Event 2</label>
-                            <a href="https://www.google.com.ph" target="_blank"> event 2 link</a>
+                            <label>IRR 2</label>
+                            <a href="http://tinyurl.com/ANCNonAcadsIRR" target="_blank"> NON-ACADEMIC TOURNAMENT</a>
                             <br>
                         </div>
                         <div class="form-group">
-                            <label>Event 3</label>
-                            <a href="https://www.google.com.ph" target="_blank"> event 3 link</a>
+                            <label>IRR 3</label>
+                            <a href="http://tinyurl.com/ANCCineJpiaIRR" target="_blank"> SHORT FILM FESTIVAL</a>
                             <br>
                         </div>
                         <div class="form-group">
-                            <label>Event 4</label>
-                            <a href="https://www.google.com.ph" target="_blank"> event 4 link</a>
+                            <label>IRR 4</label>
+                            <a href="http://tinyurl.com/ANCAtTESTIRR" target="_blank"> ACCOUNTANCY TEAM EXTEMPORANEOUS SPEAKING TOURNAMENT</a>
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <label>IRR 5</label>
+                            <a href="http://tinyurl.com/DigiJPIArtistPacket" target="_blank"> DIGITAL JPIARTIST</a>
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <label>IRR 6</label>
+                            <a href="http://tinyurl.com/YEA2016AppForms​" target="_blank"> YEAR END AWARDS</a>
                             <br>
                         </div>
                         <br>
@@ -334,7 +346,7 @@
                         <div id="agreement" class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input name="first_agreement" value="true" type="checkbox"> I have reviewed my entries and agree to pay the billed amount at the specified bank account before April 27, 2016 to confirm our group’s participation.
+                                    <input name="first_agreement" value="true" type="checkbox"> I have reviewed my entries and agree to pay the billed amount at the specified bank account before April 29, 2016 to confirm our group’s participation.
                                 </label>
                             </div>
                             <div class="checkbox">
@@ -446,6 +458,7 @@
     <script type="text/javascript" src="<?=asset_url()?>js/validator.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
     <script type="text/javascript" src="<?=asset_url()?>js/custom.js"></script>
+    <script type="text/javascript" src="<?=asset_url()?>js/scrollTo.js"></script>
 </body>
 
 </html>
