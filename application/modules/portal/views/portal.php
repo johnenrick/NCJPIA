@@ -57,6 +57,7 @@
         <script type="text/javascript" src="<?=asset_url()?>js/validator.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>js/jquery.form.min.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>js/initial.min.js"></script>
+        <script type="text/javascript" src="<?=asset_url()?>js/scrollTo.js"></script>
 </body>
 
 </html>

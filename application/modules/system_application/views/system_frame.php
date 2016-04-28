@@ -26,10 +26,10 @@
                         </a>
                     </li>
                     <li>
-                        <a class="moduleNavigation active" module_name="delegate_list" module_link="delegate_list"><i class="fa fa-users" aria-hidden="true"></i></a>
+                        <a class="moduleNavigation active" module_id="1" module_name="delegate_list" module_link="delegate_list" ><i class="fa fa-users" aria-hidden="true"></i></a>
                     </li>
                     <li>
-                        <a class="moduleNavigation" module_name="user_management" module_link="user_management" ><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                        <a class="moduleNavigation" module_id="2" module_name="user_management" module_link="user_management" ><i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
@@ -73,6 +73,7 @@
         <script type="text/javascript" src="<?=asset_url()?>/js/custom.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
         <script type="text/javascript" src="<?=asset_url()?>/js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="<?=asset_url()?>/js/scrollTo.js"></script>
 </body>
 
 </html>

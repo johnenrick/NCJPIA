@@ -23,7 +23,6 @@ class C_account extends API_Controller {
                 $this->responseError(5, "Invalid Captcha");
                 $this->outputResponse();
             }
-            $this->responseDebug($this->input->post("username"));
             $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_numeric|callback_is_unique_username');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]');
             $this->form_validation->set_rules('status', 'Status', 'required');
@@ -32,13 +31,7 @@ class C_account extends API_Controller {
             $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|callback_alpha_dash_space');
             ($this->input->post("middle_name")) ? $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|callback_alpha_dash_space') : null;
             $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|callback_alpha_dash_space');
-            $this->form_validation->set_rules('email_detail', 'Email Detail', 'required|valid_email|callback_is_unique_email');
-            if($this->input->post("account_type_ID") == 9){
-                $this->form_validation->set_rules('local_chapter_position_ID', 'Local Chapter Position', 'required');
-                $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
-                $this->form_validation->set_rules('email_address', 'Email Address', 'required');
-                $this->form_validation->set_rules('tshirt_size', 'T-shirt Size', 'required');
-            }
+            $this->form_validation->set_rules('email_address', 'Email Address', 'required|valid_email');
             if($this->form_validation->run()){
                 $result = $this->m_account->createAccount(
                         $this->input->post("username"),
@@ -46,19 +39,20 @@ class C_account extends API_Controller {
                         $this->input->post("account_type_ID"),
                         $this->input->post("status")
                         );
+                
                 if($result){
                     $this->load->model("m_account_information");
-                    $this->m_account_information->createAccountBasicInformation(
+                    $this->M_account_information->createAccountInformation(
                             $result,
-                            $this->input->post("account_ID"),
                             $this->input->post("first_name"),
-                            $this->input->post("middle_name"),
+                            "",
                             $this->input->post("last_name"),
-                            $this->input->post("local_chapter_position_ID"),
+                            0,
                             $this->input->post("contact_number"),
                             $this->input->post("email_address"),
-                            $this->input->post("identification_file_uploaded_ID"),
-                            $this->input->post("tshirt_size")                            
+                            0,
+                            0,
+                            $this->input->post("complete_address")     
                             );
                                         
                     $this->actionLog($result);
@@ -96,7 +90,6 @@ class C_account extends API_Controller {
                         $this->input->post("condition"),
                         $this->input->post("having")
                         );
-                $this->responseDebug($this->input->post());
                 if($this->input->post("limit")){
                     $this->responseResultCount($this->m_account->retrieveAccount(
                         1,
@@ -129,9 +122,6 @@ class C_account extends API_Controller {
                 }
             }
         }else{
-            $this->responseDebug(user_id());
-            $this->responseDebug($this->APICONTROLLERID);
-            $this->responseDebug($this->accessNumber);
             $this->responseError(1, "Not Authorized");
         }
         $this->outputResponse();
@@ -139,11 +129,10 @@ class C_account extends API_Controller {
     public function updateAccount(){
         $this->accessNumber = 4;
         if($this->checkACL()){
-            if($this->input->post("updated_data[username]") != username()){
+            if($this->input->post("updated_data[username]") && $this->input->post("updated_data[username]") != username()){
                 $this->form_validation->set_rules('updated_data[username]', 'Username', 'alpha_numeric|callback_is_unique_username');
             }
             $this->form_validation->set_rules('updated_data[password]', 'Password', 'min_length[6]');
-            ($this->input->post("updated_data[email_detail]")) ? $this->form_validation->set_rules('updated_data[email_detail]', 'Email Address', 'valid_email|callback_is_unique_email') : null;
             if($this->input->post("updated_data[account_address_longitude]") !== NULL){
                 $this->form_validation->set_rules('updated_data[account_address_description]', 'Complete Address', 'trim|required|min_length[2]');
             }
@@ -161,101 +150,30 @@ class C_account extends API_Controller {
                 $updatedData = $this->input->post('updated_data');
                 $ID = $this->input->post('ID');
                 $condition = $this->input->post("condition");
-                if(!$this->checkACL(32)){// accessNumber 32 Dont allow to change account type if not admin or LGU
+                //if(!$this->checkACL(32)){// accessNumber 32 Dont allow to change account type if not admin or LGU
+                if(user_type() != 2){
                     if($this->input->post("account_type_ID")){
                         $updatedData["account_type_ID"] = user_type();
                     }
                     if(isset($updatedData["status"])){ // Dont allow to change status
                         unset($updatedData["status"]);
-                        $this->responseDebug("deleted");
                     }
                     $ID = user_id();
                 }
+                $this->responseDebug($updatedData);
+                $this->responseDebug($this->input->post('ID'));
                 $result = $this->m_account->updateAccount(
                         $ID,
                         $condition,
                         $updatedData
                         );
                 $condition["account_ID"] = $ID;
-                $result1 = $this->M_account_information->updateAccountBasicInformation(
+                $result1 = $this->M_account_information->updateAccountInformation(
                         NULL,
                         array("account_ID" => $ID),
                         $updatedData
                         );
                 if($result || $result1){
-                    /**Updating Contact Information**/
-                    
-                    $this->load->model("M_account_contact_information");
-                    /*Email*/
-                    if(isset($updatedData["email_ID"]) && $updatedData["email_ID"] && $updatedData["email_detail"]){//update email
-                        $this->M_account_contact_information->updateAccountContactInformation( 
-                                NULL, 
-                                array(
-                                    "account_ID" => user_id(), 
-                                    "ID" => $updatedData["email_ID"],
-                                    "account_contact_information_type_ID" => 1
-                                ), 
-                                array(
-                                    "detail" => $updatedData["email_detail"]
-                                ));
-                        $this->m_account->updateAccount($ID, NULL, array(
-                            "account_type_ID" => 4
-                        ));
-                        if(user_type() == 4 || user_type() == 2){
-                            $datetime = time();
-                            $this->sendEmail("Wasteline Registration Verification", $this->input->post("email_detail"), "Good day ".$this->input->post('username') ."! Thank you for using in Wasteline.\nTo verify your account, please click the following link: ".  base_url("portal/accountVerification/".(sprintf("%d%d", user_id(), $datetime))));
-                            $this->responseDebug(base_url("portal/accountVerification/".(sprintf("%d%d", user_id(), $datetime))));
-                            
-                        }
-                    }else if(isset($updatedData["email_ID"]) && isset($updatedData["email_detail"]) && $updatedData["email_ID"] == 0 && $updatedData["email_detail"]){//create email
-                        $this->M_account_contact_information->createAccountContactInformation(user_id(), 1, $updatedData["email_detail"]);
-                        $this->responseDebug(user_type());
-                        
-                    }
-                    /*Contact Number*/
-                    if(isset($updatedData["contact_number_ID"]) && $updatedData["contact_number_ID"] && $updatedData["contact_number_detail"]){//update contact_number
-                        $this->M_account_contact_information->updateAccountContactInformation( 
-                                NULL, 
-                                array(
-                                    "account_ID" => user_id(), 
-                                    "ID" => $updatedData["contact_number_ID"],
-                                    "account_contact_information_type_ID" => 3
-                                ), 
-                                array(
-                                    "detail" => $this->stripHTMLtags($updatedData["contact_number_detail"])
-                                ));
-                    }else if(isset($updatedData["contact_number_ID"]) && $updatedData["contact_number_ID"] == 0 && $updatedData["contact_number_detail"]){//create contact_number
-                        $this->M_account_contact_information->createAccountContactInformation(user_id(), 3, $updatedData["contact_number_detail"]);
-                    }
-                    /**Updating Address Information**/
-                    $this->load->model("M_account_address");
-                    $this->load->model("M_map_marker");
-                    if(isset($updatedData["account_address_ID"]) && ($updatedData["account_address_ID"]*1 !== 0) && $updatedData["account_address_description"]){//update account_address
-                       
-                        /*Account Address*/
-                        $this->M_account_address->updateAccountAddress( NULL, 
-                                array(
-                                    "account_ID" => user_id(),
-                                    "ID" => $updatedData["account_address_ID"]
-                                ), 
-                                array(
-                                    "description" => $this->stripHTMLtags($updatedData["account_address_description"]),
-                                ));
-                        /*Map Marker*/
-                        $this->M_map_marker->updateMapMarker( NULL, 
-                                array(
-                                    "account_address.account_ID" => user_id(),
-                                    "ID" => $updatedData["account_address_map_marker_ID"],
-                                    "map_marker_type_ID" => 1
-                                ), 
-                                array(
-                                    "longitude" => $updatedData["account_address_longitude"],
-                                    "latitude" => $updatedData["account_address_latitude"],
-                                ));
-                    }else if(isset($updatedData["account_address_ID"]) && $updatedData["account_address_ID"]*1 == 0 && $updatedData["account_address_description"]){//create account_address
-                        $accountAddressID = $this->M_account_address->createAccountAddress(user_id(), 1, $updatedData["account_address_description"]);
-                        $this->M_map_marker->createMapMarker($accountAddressID, 1, $updatedData["account_address_longitude"], $updatedData["account_address_latitude"]);
-                    }
                     $this->actionLog(json_encode($this->input->post()));
                     $this->responseData($result || $result1);
                 }else{
@@ -296,24 +214,11 @@ class C_account extends API_Controller {
         $this->form_validation->set_message('alpha_dash_space', '{field} only accepts alphabets and spaces');
         return ( !preg_match('/^[ a-z - ñÑ]+$/iu', $str)) ? false : true;
     }
-    public function is_unique_email($str){
-        $this->load->model("M_account_contact_information");
-        $result = $this->M_account_contact_information->retrieveAccountContactInformation(false, NULL, 0, array(), NULL, array(
-            "detail"=>$str
-        ));
-        $this->form_validation->set_message('is_unique_email', '{field} already used.');
-        if($result){
-            return false;
-        }else{
-            return true;
-        }
-    }
     public function is_unique_username($str){
         $this->load->model("M_account");
         $result = $this->m_account->retrieveAccount(false, NULL, 0, array(), NULL, array(
             "username"=>$str
         ));
-        $this->responseDebug($str);
         $this->form_validation->set_message('is_unique_username', '{field} already used.');
         if($result){
             return false;
@@ -322,6 +227,8 @@ class C_account extends API_Controller {
         }
     }
     public function validReCaptcha(){
+        return true;
+        /*
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = array(
             'secret' => '6Ld26BkTAAAAAHFkrfknWzaQhRkey-edRO5KEMU0', 
@@ -339,6 +246,6 @@ class C_account extends API_Controller {
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
         $response = json_decode($result, true);
-        return $response["success"];
+        return $response["success"];*/
     }
 }

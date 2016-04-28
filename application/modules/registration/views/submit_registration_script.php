@@ -99,9 +99,11 @@
                     });
                     academicEventCtr++;
                 });
+                $("#submitRegistration").button("loading");
                 
             },
             success : function(data){
+                $("#submitRegistration").button("reset");
                 var response = JSON.parse(data);
                 if(!response["error"].length){
                     $(".hide-module:not(#success-module)").hide();
@@ -111,6 +113,7 @@
                 }else{
                     show_form_error($("#registrationFormFull"), response["error"]);
                 }
+                
             }
         });
         

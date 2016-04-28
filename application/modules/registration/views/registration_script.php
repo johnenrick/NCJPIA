@@ -18,7 +18,15 @@
             $('#button-step1').click(function(){
                 
                 nextPage($(this));
+                console.log($("select[name='group_member_list[0][local_chapter_position_ID]']").val())
                 $("#reg-form-1-id").validator("validate");
+                if($("select[name='group_member_list[0][local_chapter_position_ID]']").val()*1 === 7){
+                    $("input[name='local_chapter_description']").val($("#regionalChapterRegion option:selected").text());
+                    $("input[name='local_chapter_address']").val($("#regionalChapterRegion option:selected").text());
+                    $("input[name='local_chapter_chapter_type']").val(2);
+                    $("select[name='local_chapter_region']").val($("#regionalChapterRegion select").val());
+                    $('#button-step2').trigger("click");
+                }
                 return false;
 	    }); 
             
@@ -39,6 +47,17 @@
                 nextPage($(this));
                 return false;
 	    });
+            $("select[name='group_member_list[0][local_chapter_position_ID]']").change(function(){
+                console.log($(this).val());
+                if($(this).val()*1 === 7){
+                    $("#regionalChapterRegion").show();
+                    $("#regionalChapterRegion").find("select").attr("required", true);
+                }else{
+                    $("#regionalChapterRegion").hide();
+                    $("#regionalChapterRegion").val(0);
+                    $("#regionalChapterRegion").find("select").attr("required", false);
+                }
+            });
 	});
         function nextPage(button){
             if(button.hasClass("disabled")){

@@ -32,7 +32,11 @@ class M_account extends API_Model{
             "local_chapter_group" => "local_chapter_group.ID=account_local_chapter_group.local_chapter_group_ID",
             "local_chapter" => "local_chapter.ID=local_chapter_group.local_chapter_ID",
             "payment_receipt" => "payment_receipt.registration_number = local_chapter_group.ID",
-            "file_uploaded AS payment_receipt_file_uploaded" => "payment_receipt_file_uploaded.ID=payment_receipt.file_uploaded_ID"
+            "file_uploaded AS payment_receipt_file_uploaded" => "payment_receipt_file_uploaded.ID=payment_receipt.file_uploaded_ID",
+            "account_type" => "account_type.ID=account.account_type_ID",
+            "account_attendance" => "account_attendance.account_ID=account.ID",
+            "account_payment AS penalty_fee" => "penalty_fee.account_ID=account.ID AND penalty_fee.assessment_item_ID=2",
+            "local_chapter_position" => "local_chapter_position.ID=account_information.local_chapter_position_ID",
         );
         $selectedColumn = array(
             "account.username, account.account_type_ID, account.status",
@@ -41,7 +45,11 @@ class M_account extends API_Model{
             "local_chapter.*, local_chapter.description AS local_chapter_description",
             "local_chapter_group.ID AS local_chapter_group_ID",
             "payment_receipt_file_uploaded.name AS payment_receipt_file_uploaded_name, payment_receipt_file_uploaded.type AS payment_receipt_file_uploaded_type",
-            "account_identification_file_uploaded.name AS account_identification_file_uploaded_name, account_identification_file_uploaded.type AS account_identification_file_uploaded_type"
+            "account_identification_file_uploaded.name AS account_identification_file_uploaded_name, account_identification_file_uploaded.type AS account_identification_file_uploaded_type",
+            "account_type.description AS account_type_description",
+            "account_attendance.ID AS account_attendance_ID",
+            "SUM(penalty_fee.amount) AS penalty_fee_total_amount",
+            "local_chapter_position.description AS local_chapter_position_description"
         );
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, false, $having);
     }

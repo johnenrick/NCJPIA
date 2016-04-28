@@ -74,11 +74,26 @@
                         <div class="form-group">
                             <label class="control-label">Position</label>
                             <select name="group_member_list[0][local_chapter_position_ID]" class="form-control localChapterPosition" required>
-                                <option selected disabled>None</option>
-                                <option>Local Chapter Adviser</option>
-                                <option>Local Chapter Faculty (Dean, Chairman, etc.)</option>
-                                <option>Local Chapter Officer (President, Vice President, etc.)</option>
-                                <option>Local Chapter Representative</option>
+                            </select>
+                        </div>
+                        <div id="regionalChapterRegion" class="form-group" style="display:none">
+                            <label class="control-label">Region</label>
+                            <select name="local_chapter_region"  class="form-control" >
+                                <option value="null">None</option>
+                                <option >NCR</option>
+                                <option>Region 1 & CAR</option>
+                                <option>Region 2</option>
+                                <option>Region 3</option>
+                                <option>Region 4</option>
+                                <option>Region 5</option>
+                                <option>Region 6</option>
+                                <option>Region 7</option>
+                                <option>Region 8</option>
+                                <option>Region 9</option>
+                                <option>Region 10 & CARAGA</option>
+                                <option>Region 11</option>
+                                <option>Region 12 & SOCCSKSARGEN</option>
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -134,7 +149,7 @@
                         <div class="form-group">
                             <label class="control-label">Region</label>
                             <select name="local_chapter_region"  class="form-control" id="select2" required>
-                                <option>NCR</option>
+                                <option >NCR</option>
                                 <option>Region 1 & CAR</option>
                                 <option>Region 2</option>
                                 <option>Region 3</option>

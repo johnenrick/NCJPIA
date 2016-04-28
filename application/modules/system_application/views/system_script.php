@@ -87,10 +87,11 @@
         });
     }
     function formSideBar(){
-        $(".sidebar-nav").find("li:not(.sidebar-brand, .wl-btn-logout)").hide();
-        $(".sidebar-nav").find("li").each(function(e){
+        $(".moduleNavigation").each(function(e){
             if(typeof system_data.access_control_list[$(this).attr("module_id")] !== "undefined"){
                 $(this).show();
+            }else{
+                $(this).hide();
             }
         });
     }
@@ -100,6 +101,8 @@
 <script>
     /*Loading Modules*/
     function load_module(moduleLink, moduleName){
+        moduleName = moduleName.toLowerCase();
+        moduleLink = moduleLink.toLowerCase();
         if($("#moduleContainer").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
@@ -109,7 +112,6 @@
                 moduleHolder.attr("id",moduleName.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); }));
                 moduleHolder.append(data);
                 $("#moduleContainer").append(moduleHolder);
-                console.log(moduleHolder);
                 /*show page*/
                 $("#moduleContainer").find(".moduleHolder[module_link!='"+moduleLink+"']").hide();
                 if($('.moduleHolder[module_link="'+moduleLink+'"]').is(":visible") === false){
@@ -177,7 +179,7 @@
                 elementSelected.find(".formMessage").append("* "+errorValue["message"]+"<br>");
             }
         });
-        elementSelected.scrollTo("#formMessage");
+        elementSelected.scrollTo(".formMessage");
     }
     function clear_form_error(elementSelected){
         elementSelected.find(".formMessage").empty();
@@ -259,6 +261,7 @@
         if(window.location.href.indexOf("www") === 0){
             window.history.pushState('Object', 'Title', window.location.href.replace("www."));
         }
+        retrieve_access_control();
     });
     
 </script>

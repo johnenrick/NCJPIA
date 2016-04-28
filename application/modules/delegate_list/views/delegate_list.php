@@ -61,6 +61,7 @@
                     </th>
                     <th>Full Name</th>
                     <th class="center-align">Local Chapter</th>
+                    <th class="center-align">Local Chapter Position</th>
                     <th class="center-align">Status</th>
                 </tr>
             </thead>
@@ -75,7 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Complete Information</h4>
+                <h4 class="modal-title">Delegate Information</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -90,8 +91,25 @@
                     <div class="col-md-6">
                         <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" width="100%" alt="No scanned copy of deposit slip uploaded.">
                     </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 center-align">
+                        <button id="delegateConfirmAttendance" class="btn btn-success"><i class="fa fa-child" aria-hidden="true"></i> Confirm Attendance</button>
+                        <button id="delegateAttendanceConfirmed" disabled class="btn btn-success"><i class='fa fa-check-square-o' aria-hidden='true'></i> Attendance Confirmed</button>
                     </div>
+                    <div class="col-md-6" style="text-align:center">
+                        <div class="form-inline">
+                            <label class="control-label"><b>Penalty : </b></label>
+                            <input id="delegatePenaltyAmount" name="penalty_amount" class="form-control reg-input-inline" type="number" placeholder="Amount" style="text-align:right">
+                            <button id="delegateGivePenalty" class="btn btn-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Give Penalty</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <form id="delegateListAccountDetail" method="POST">
+                            <input name="ID" type="hidden">
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
@@ -109,7 +127,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Position</label>
                                         <select name="updated_data[local_chapter_position_ID]" class="form-control localChapterPosition" id="select">
-                                            
+
                                         </select>
                                     </div>
                                 </div>
@@ -195,20 +213,23 @@
                                     <div class="form-group nonAcademicEvent">
                                         <label>Events Participating In (Limit of 2 Academic, 2 Non-Academic Events)</label>
                                         <label class="control-label">Non-Academic Events</label>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group academicEvent">
                                         <label>&nbsp;</label><br>
                                         <label class="control-label">Academic Events</label>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+                </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="delegateSaveChanges" type="butotn" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -220,8 +241,9 @@
             <td>
                 <!--<input type="checkbox">-->
             </td>
-            <td class="delegateListFullName">Mark Otto</td>
-            <td class="delegateListLocalChapter center-align">USC</td>
+            <td class="delegateListFullName"></td>
+            <td class="delegateListLocalChapter center-align"></td>
+            <td class="delegateListLocalChapterPosition center-align"></td>
             <td class="center-align">
                 <span class="label label-success" style="display:none">Paid</span>
                 <span class="label label-warning" style="display:none">Pending</span>

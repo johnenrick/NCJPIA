@@ -49,6 +49,57 @@ class C_account_payment extends API_Controller {
         }
         $this->outputResponse();
     }
+    public function createGroupAccountPayment(){
+        $this->accessNumber = 1;
+        if($this->checkACL()){
+            $this->form_validation->set_rules('assessment_item_ID', 'Assessment Item', 'required');
+            $this->form_validation->set_rules('local_chapter_group_ID', 'Local Group', 'required');
+            $this->form_validation->set_rules('amount', 'Amount', 'required');
+            $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required');
+            
+            if($this->form_validation->run()){
+                $this->load->model("M_account");
+                $groupMember = $this->M_account->retrieveAccount(0, NULL, 0, NULL, NULL, array(
+                    "account_local_chapter_group__local_chapter_group_ID" => $this->input->post("local_chapter_group_ID")
+                ));
+                
+                $result = true;
+                if($groupMember){
+                    foreach($groupMember as $groupMemberValue){
+                        $amount = 5600;
+                        if($groupMemberValue["local_chapter_position_ID"]*1 == 1 || $groupMemberValue["local_chapter_position_ID"]*1 == 2 || $groupMemberValue["local_chapter_position_ID"]*1 == 3 ){
+                            $amount = 5700;
+                        }
+                        $this->m_account_payment->createAccountPayment(
+                            $this->input->post("assessment_item_ID"),
+                            $groupMemberValue["ID"],
+                            $amount,
+                            $this->input->post("payment_mode"),
+                            user_id()
+                        );
+                    }
+                }else{
+                    $result = false;
+                }
+                
+                if($result){
+                    $this->actionLog($result);
+                    $this->responseData($result);
+                }else{
+                    $this->responseError(3, "Failed to create");
+                }
+            }else{
+                if(count($this->form_validation->error_array())){
+                    $this->responseError(102, $this->form_validation->error_array());
+                }else{
+                    $this->responseError(100, "Required Fields are empty");
+                }
+            }
+        }else{
+            $this->responseError(1, "Not Authorized");
+        }
+        $this->outputResponse();
+    }
     public function retrieveAccountPayment(){
         $this->accessNumber = 2;
         if($this->checkACL()){

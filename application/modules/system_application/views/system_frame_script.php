@@ -1,6 +1,7 @@
 <script>
+    /*global system_data*/
     $(document).ready(function(){
-        load_module("delegate_list", "delegate_list");
+        load_module(system_data.data.default_page, system_data.data.default_page);
         $("#logout").click(function(){
             window.location = base_url("portal/logout");
         });

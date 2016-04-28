@@ -2,7 +2,12 @@
     var delegateList = {};
     
     $(document).ready(function(){
-        
+        if(user_type()*1 === 4 && user_type()*1 === 8){
+            $(".delegateConfirmPayment").hide();
+            $("#delegateConfirmAttendance").parent().parent().hide();
+        }
+        var currentDate = new Date();
+        (currentDate.getTime()/1000 < 1462064400) ? $("#delegateConfirmAttendance").parent().parent().hide() : null;
         $.post(api_url("C_local_chapter_position/retrieveLocalChapterPosition"), {}, function(data){
             var response = JSON.parse(data);
             if(!response["error"].length){
@@ -21,6 +26,7 @@
                     var eventItem = $(".prototype .eventItem").clone();
                     eventItem.find(".eventDescription").text(response["data"][x]["description"]);
                     eventItem.find("input").val(response["data"][x]["ID"]);
+                    eventItem.find("input").attr("disabled", true);
                     if(response["data"][x]["event_type_ID"]*1 === 1){
                         $(".nonAcademicEvent").append(eventItem);
                     }else{
@@ -80,12 +86,13 @@
                 
                 $("#delegateListTable tbody").empty();
                 if(!response["error"].length){
-                   
+                   console.log(response);
                     for(var x = 0; x < response["data"].length; x++){
                         var newRow = $(".prototype .delegateListRow").clone();
                         newRow.attr("account_id", response["data"][x]["account_ID"]);
                         newRow.find(".delegateListFullName").text(response["data"][x]["last_name"]+", "+response["data"][x]["first_name"]);
                         newRow.find(".delegateListLocalChapter").text(response["data"][x]["local_chapter_description"]);
+                        newRow.find(".delegateListLocalChapterPosition").text(response["data"][x]["local_chapter_position_description"]);
                         if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
                             if(response["data"][x]["registration_fee_total_amount"]*1 >= 5700){
                                 newRow.find(".label-success").show();
@@ -112,8 +119,11 @@
         $("#delegateListTable tbody").on("click", "tr", function(){
             $.post(api_url("C_account/retrieveAccount"), {ID : $(this).attr("account_id"), with_event_participation : true}, function(data){
                 var response = JSON.parse(data);
+                console.log(response);
                 if(!response["error"].length){
                     $(".eventItem input").prop("checked", false);
+                    $("#delegateInformation").attr("local_chapter_group_id", response["data"]["local_chapter_group_ID"]);
+                    $("#delegateListAccountDetail input[name='ID']").val(response["data"]["account_ID"]);
                     $("#delegateInformation").attr("account_id", response["data"]["account_ID"]);
                     $("#delegateInformation").attr("local_chapter_position_ID", response["data"]["local_chapter_position_ID"]);
                     $("#delegateName").text(response["data"]["first_name"]+" "+response["data"]["last_name"]);
@@ -122,7 +132,7 @@
                     
                     $("#delegateListAccountDetail input[name='updated_data[first_name]']").val(response["data"]["first_name"]);
                     $("#delegateListAccountDetail input[name='updated_data[last_name]']").val(response["data"]["last_name"]);
-                    $("#delegateListAccountDetail input[name='updated_data[local_chapter_position_ID]']").val(response["data"]["local_chapter_position_ID"]);
+                    $("#delegateListAccountDetail select[name='updated_data[local_chapter_position_ID]']").val(response["data"]["local_chapter_position_ID"]);
                     $("#delegateListAccountDetail input[name='updated_data[contact_number]']").val(response["data"]["contact_number"]);
                     $("#delegateListAccountDetail input[name='updated_data[complete_address]']").val(response["data"]["complete_address"]);
                     $("#delegateListAccountDetail input[name='updated_data[email_address]']").val(response["data"]["email_address"]);
@@ -170,6 +180,26 @@
                             $("#delegatePaymentMode").hide();
                         }
                     }
+                    if(response["data"]["account_attendance_ID"]*1){
+                        $("#delegateConfirmAttendance").hide();
+                        $("#delegateAttendanceConfirmed").show();
+                    }else{
+                        $("#delegateConfirmAttendance").show();
+                        $("#delegateAttendanceConfirmed").hide();
+                    }
+                    if(response["data"]["penalty_fee_total_amount"]*1){
+                        $("#delegatePenaltyAmount").val(response["data"]["penalty_fee_total_amount"]*1);
+                        $("#delegatePenaltyAmount").attr("disabled", true);
+                        $("#delegateGivePenalty").hide();
+                    }else{
+                        $("#delegatePenaltyAmount").val("");
+                        $("#delegatePenaltyAmount").attr("disabled", false);
+                        $("#delegateGivePenalty").show();
+                    }
+                }
+                if(user_type()*1 === 4 && user_type()*1 === 8){
+                    $(".delegateConfirmPayment").hide();
+                    $("#delegateConfirmAttendance").parent().parent().hide();
                 }
             });
         });
@@ -184,11 +214,12 @@
             }
             var newData = {
                 assessment_item_ID  : 1,
-                account_ID : $("#delegateInformation").attr("account_id"),
+                local_chapter_group_ID : $("#delegateInformation").attr("local_chapter_group_id"),
                 amount : amount,
                 payment_mode : $(this).attr("payment_mode")
             };
-            $.post(api_url("C_account_payment/createAccountPayment"), newData, function(data){
+            $.post(api_url("C_account_payment/createGroupAccountPayment"), newData, function(data){
+                console.log(data);
                 var response = JSON.parse(data);
                 if(!response["error"].length){
                     $(".delegateConfirmPayment").hide();
@@ -198,5 +229,57 @@
             });
         });
         $("#delegateListTableFilter").trigger("submit");
+        $("#delegateConfirmAttendance").click(function(){
+            $(this).button("loading");
+            $.post(api_url("C_account_attendance/createAccountAttendance"), {account_ID : $("#delegateInformation").attr("account_id")}, function(data){
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    $("#delegateConfirmAttendance").hide();
+                    $("#delegateAttendanceConfirmed").show();
+                }else{
+                    console.log(response);
+                    
+                }
+                $("#delegateConfirmAttendance").button("reset");
+            });
+        });
+        $("#delegateGivePenalty").click(function(){
+            $(this).button("loading");
+            var data = {
+                account_ID : $("#delegateInformation").attr("account_id"),
+                payment_mode : 2,
+                assessment_item_ID : 2,
+                amount : $("#delegatePenaltyAmount").val()
+            };
+            $.post(api_url("C_account_payment/createAccountPayment"), data, function(data){
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    $("#delegatePenaltyAmount").attr("disabled", true);
+                    $("#delegateGivePenalty").hide();
+                }else{
+                    
+                }
+                $("#delegateGivePenalty").button("reset");
+            });
+        });
+        $("#delegateSaveChanges").click(function(){
+            $("#delegateListAccountDetail").trigger("submit");
+        });
+        $("#delegateListAccountDetail").attr("action", api_url("C_account/updateAccount"));
+        $("#delegateListAccountDetail").ajaxForm({
+            beforeSubmit : function(data, $form, options){
+                $("#delegateSaveChanges").button("loading");
+            },
+            success : function(data){
+                var response = JSON.parse(data);
+                console.log(response);
+                if(!response["error"].length){
+                    $("#delegateListTableFilter").trigger("submit");
+                }else{
+                    
+                }
+                $("#delegateSaveChanges").button("reset");
+            }
+        });
     });
 </script>
