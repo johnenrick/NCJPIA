@@ -82,6 +82,16 @@
                                     </select>
                                 </div>
 
+                                <div class="panel panel-success ml-qsno">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Now Serving</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <h2 style="margin: 0;">3</h2>
+                                        <br>
+                                        <a href="#" class="btn btn-primary">Next</a></div>
+                                </div>
+
                             </div>
                             <div class="col-md-10 ml-list">
                                 <table class="table table-hover">
@@ -187,7 +197,7 @@
                             <div class="col-md-6">
                                 <img src="<?=asset_url()?>img/receipt.jpg" height="250" alt="No scanned copy of deposit slip uploaded.">
                             </div>
-<!--
+                            <!--
                         </div>
                         <hr>
                         <div class="row">
@@ -385,19 +395,19 @@
                             </div>
                         </div>
 -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script type="text/javascript" src="<?=asset_url()?>/js/jquery-1.12.0.min.js"></script>
-        <script type="text/javascript" src="<?=asset_url()?>/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="<?=asset_url()?>/js/custom.js"></script>
-        <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
+            <script type="text/javascript" src="<?=asset_url()?>/js/jquery-1.12.0.min.js"></script>
+            <script type="text/javascript" src="<?=asset_url()?>/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="<?=asset_url()?>/js/custom.js"></script>
+            <script type="text/javascript" src="<?=asset_url()?>/js/initial.min.js"></script>
 </body>
 
 </html>
