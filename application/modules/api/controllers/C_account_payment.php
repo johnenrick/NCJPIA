@@ -22,6 +22,7 @@ class C_account_payment extends API_Controller {
             $this->form_validation->set_rules('account_ID', 'Acount ID', 'required');
             $this->form_validation->set_rules('amount', 'Amount', 'required');
             $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required');
+            $this->form_validation->set_rules('description', 'Payment Mode', 'required');
             
             if($this->form_validation->run()){
                 $result = $this->m_account_payment->createAccountPayment(
@@ -29,7 +30,8 @@ class C_account_payment extends API_Controller {
                         $this->input->post("account_ID"),
                         $this->input->post("amount"),
                         $this->input->post("payment_mode"),
-                        user_id()
+                        user_id(),
+                        $this->input->post("description")
                         );
                 if($result){
                     $this->actionLog($result);
@@ -56,6 +58,7 @@ class C_account_payment extends API_Controller {
             $this->form_validation->set_rules('local_chapter_group_ID', 'Local Group', 'required');
             $this->form_validation->set_rules('amount', 'Amount', 'required');
             $this->form_validation->set_rules('payment_mode', 'Payment Mode', 'required');
+            $this->form_validation->set_rules('description', 'Description', 'required');
             
             if($this->form_validation->run()){
                 $this->load->model("M_account");
@@ -75,7 +78,8 @@ class C_account_payment extends API_Controller {
                             $groupMemberValue["ID"],
                             $amount,
                             $this->input->post("payment_mode"),
-                            user_id()
+                            user_id(),
+                            $this->input->post("description")
                         );
                     }
                 }else{

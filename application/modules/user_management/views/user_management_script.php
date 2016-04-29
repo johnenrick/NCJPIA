@@ -42,6 +42,17 @@
                         value : "9"
                     });
                 }
+                if($("#systemNameSearch").val() !== ""){
+                    var accountName = ($("#systemNameSearch").val()).split(" ");
+                    for(var y = 0; y < accountName.length; y++){
+                        data.push({
+                            name : "condition["+"like__account_information__first_name__CONCAT__account_information__middle_name__CONCAT__account_information__last_name"+"]["+y+"]",
+                            value : accountName[y],
+                            type : "text",
+                            required : false
+                        });
+                    }
+                }
                 $("#userManagementTableFilter").find("button[type=submit]").button("loading");
             },
             success : function(data){
@@ -89,6 +100,7 @@
             },
             success : function(data){
                 var response = JSON.parse(data);
+                clear_form_error($("#userManagementAccountDetail"));
                 if(!response["error"].length){
                     $("#userManagementInformation").modal("hide");
                     $("#userManagementTableFilter").trigger("submit");
@@ -101,6 +113,7 @@
         $("#userManagementTable tbody").on("click", "tr", function(){
             $.post(api_url("C_account/retrieveAccount"), {ID : $(this).attr("account_id"), with_event_participation : true}, function(data){
                 var response = JSON.parse(data);
+                clear_form_error($("#userManagementAccountDetail"));
                 if(!response["error"].length){
                     $(".userManagementButton[action_id='2']").show();
                     $(".userManagementButton[action_id='3']").hide();

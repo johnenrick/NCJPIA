@@ -37,6 +37,7 @@ class M_account extends API_Model{
             "account_attendance" => "account_attendance.account_ID=account.ID",
             "account_payment AS penalty_fee" => "penalty_fee.account_ID=account.ID AND penalty_fee.assessment_item_ID=2",
             "local_chapter_position" => "local_chapter_position.ID=account_information.local_chapter_position_ID",
+            "account_payment AS registration_discount" => "registration_discount.account_ID=account.ID AND registration_discount.assessment_item_ID=3",
         );
         $selectedColumn = array(
             "account.username, account.account_type_ID, account.status",
@@ -48,8 +49,9 @@ class M_account extends API_Model{
             "account_identification_file_uploaded.name AS account_identification_file_uploaded_name, account_identification_file_uploaded.type AS account_identification_file_uploaded_type",
             "account_type.description AS account_type_description",
             "account_attendance.ID AS account_attendance_ID",
-            "SUM(penalty_fee.amount) AS penalty_fee_total_amount",
-            "local_chapter_position.description AS local_chapter_position_description"
+            "SUM(penalty_fee.amount) AS penalty_fee_total_amount, penalty_fee.description AS penalty_fee_description",
+            "local_chapter_position.description AS local_chapter_position_description",
+            "SUM(registration_discount.amount) AS registration_discount_total_amount, registration_discount.description AS registration_discount_description"
         );
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, false, $having);
     }

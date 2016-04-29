@@ -160,8 +160,7 @@ class C_account extends API_Controller {
                     }
                     $ID = user_id();
                 }
-                $this->responseDebug($updatedData);
-                $this->responseDebug($this->input->post('ID'));
+                
                 $result = $this->m_account->updateAccount(
                         $ID,
                         $condition,
@@ -170,9 +169,17 @@ class C_account extends API_Controller {
                 $condition["account_ID"] = $ID;
                 $result1 = $this->M_account_information->updateAccountInformation(
                         NULL,
-                        array("account_ID" => $ID),
+                        array("account_information__account_ID" => $ID),
                         $updatedData
                         );
+                if(user_type() == 2 && $this->input->post("event_participation")){
+                    $this->load->model("M_account_event_participation");
+                    $this->M_account_event_participation->deleteAccountEventParticipation(NULL, array("account_ID" => $ID));
+                    $eventParticipation = $this->input->post("event_participation");
+                    foreach($eventParticipation as $eventParticipationValue){
+                        $this->M_account_event_participation->createAccountEventParticipation($ID, $eventParticipationValue);
+                    }
+                }
                 if($result || $result1){
                     $this->actionLog(json_encode($this->input->post()));
                     $this->responseData($result || $result1);

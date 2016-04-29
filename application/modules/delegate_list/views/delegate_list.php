@@ -43,6 +43,7 @@
                     <option value="0">Pending</option>
                     <option value="1">Unpaid</option>
                     <option value="2">Paid</option>
+                    <option value="3">Complete</option>
                 </select>
             </div>
             <div class="form-group">
@@ -83,10 +84,16 @@
                     <div class="col-md-6" style="text-align:center">
                         <a  payment_mode="1" class="delegateConfirmPayment btn btn-success"> <i class="fa fa-bank" aria-hidden="true"></i> Confirm Bank Payment</a>
                         <a  payment_mode="2" class="delegateConfirmPayment btn btn-primary"> <i class="fa fa-money" aria-hidden="true"></i> Confirm Cash Payment </a>
+                        <br>
+                        <br>
+                        <a  payment_mode="3" class="delegateConfirmPayment btn btn-success"> <i class="fa fa-bank" aria-hidden="true"></i> Individual Payment</a>
+                        <a  payment_mode="4" class="delegateConfirmPayment btn btn-primary"> <i class="fa fa-money" aria-hidden="true"></i> Individual Payment</a>
+                        
                         <h5><p id="delegatePaymentMode">Paid though bank</p></h5>
                         <h3><p id="delegateName" >John Doe</p></h3>
-                        <h4><p id="delegateLocalChapter" >USC</p></h4>
+                        <h4><p><span id="delgateLocalChapter">USC</span> <span id="delegateLocalChapterName" style="display:none;">USC</span></p></h4>
                         <h5><p id="delegateRegion">Region X</p></h5>
+                        <h5><p>Reg# : <span id="delegateRegistrationNumber" style="font-weight:bold"></span></p></h5>
                     </div>
                     <div class="col-md-6">
                         <img id="delegateConfirmationImage" src="<?=asset_url()?>img/receipt.jpg" width="100%" alt="No scanned copy of deposit slip uploaded.">
@@ -97,12 +104,34 @@
                     <div class="col-md-6 center-align">
                         <button id="delegateConfirmAttendance" class="btn btn-success"><i class="fa fa-child" aria-hidden="true"></i> Confirm Attendance</button>
                         <button id="delegateAttendanceConfirmed" disabled class="btn btn-success"><i class='fa fa-check-square-o' aria-hidden='true'></i> Attendance Confirmed</button>
+                        
                     </div>
                     <div class="col-md-6" style="text-align:center">
-                        <div class="form-inline">
-                            <label class="control-label"><b>Penalty : </b></label>
-                            <input id="delegatePenaltyAmount" name="penalty_amount" class="form-control reg-input-inline" type="number" placeholder="Amount" style="text-align:right">
-                            <button id="delegateGivePenalty" class="btn btn-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Give Penalty</button>
+                        <button id="delegatePrintOficialReceipt" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print Official Receipt</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6" style="text-align:center">
+                        <div class="form-group">
+                            <label class="control-label"><b>&nbsp;Penalty : </b></label>
+                            <div class="form-inline">
+                                <input id="delegatePenaltyDescription" name="penalty_description" class="form-control reg-input-inline" type="text" placeholder="Description">
+                                <input id="delegatePenaltyAmount" name="penalty_amount" class="form-control reg-input-inline" type="number" placeholder="Amount" style="text-align:right">
+                                <br>
+                                <button id="delegateGivePenalty" class="btn btn-danger pull-right"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Give Penalty</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label"><b>Discount : </b></label>
+                            <div class="form-inline">
+                                <input id="delegateRegistrationDiscountDescription" name="registration_discount_desscription" class="form-control reg-input-inline" type="text" placeholder="Description" >
+                                <input id="delegateRegistrationDiscountAmount" name="registration_discount" class="form-control reg-input-inline" type="number" placeholder="Amount" style="text-align:right">
+                                
+                                <button id="delegateGiveRegistrationDiscount" class="btn btn-success pull-right">&nbsp; Give Discount</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,8 +156,8 @@
                                     <div class="form-group">
                                         <label class="control-label">Position</label>
                                         <select name="updated_data[local_chapter_position_ID]" class="form-control localChapterPosition" id="select">
-
                                         </select>
+                                        <input name="updated_data[local_chapter_name]" class="form-control" type="text" placeholder="Local Chapter Name" style="display: none">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -245,6 +274,7 @@
             <td class="delegateListLocalChapter center-align"></td>
             <td class="delegateListLocalChapterPosition center-align"></td>
             <td class="center-align">
+                <span class="label label-primary" style="display:none">Completed</span>
                 <span class="label label-success" style="display:none">Paid</span>
                 <span class="label label-warning" style="display:none">Pending</span>
                 <span class="label label-danger" style="display:none">Unpaid</span>

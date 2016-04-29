@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                             <div class="col-md-3 col-xs-8">
-                                <input class="form-control input-sm ml-search" type="text" placeholder="Search...">
+                                <input id="systemNameSearch" class="form-control input-sm ml-search" type="text" placeholder="Search...">
                             </div>
                             <div class="col-md-7 col-xs-2">
                                 <a id="logout" href="#">

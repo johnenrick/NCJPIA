@@ -16,13 +16,14 @@ class M_account_payment extends API_Model{
         parent::__construct();
         $this->TABLE = "account_payment";
     }
-    public function createAccountPayment($assessmentItemID, $accountID, $amount, $paymentMode, $receiverAccountID){
+    public function createAccountPayment($assessmentItemID, $accountID, $amount, $paymentMode, $receiverAccountID, $description){
         $newData = array(
             "assessment_item_ID" => $assessmentItemID,
             "account_ID" => $accountID,
             "amount" => $amount,
             "payment_mode" => $paymentMode,
-            "receiver_account_ID" => $receiverAccountID
+            "receiver_account_ID" => $receiverAccountID,
+            "description" => $description
         );
         return $this->createTableEntry($newData);
     }

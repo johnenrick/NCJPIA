@@ -10,5 +10,14 @@
             $(".moduleNavigation").removeClass("active");
             $(this).addClass("active");
         });
+        $("#systemNameSearch").keyup(function(e){
+            if(e.keyCode === 13){
+                if($("#delegateListTableFilter button[type='submit']").is(":visible")){
+                    $("#delegateListTableFilter button[type='submit']").trigger("click");
+                }else if($("#userManagementTableFilter button[type='submit']").is(":visible")){
+                    $("#userManagementTableFilter button[type='submit']").trigger("click");
+                }
+            }
+        });
     });
 </script>
