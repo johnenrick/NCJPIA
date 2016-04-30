@@ -126,6 +126,45 @@ class C_account extends API_Controller {
         }
         $this->outputResponse();
     }
+    
+    public function confirmGroupRegistration(){
+        $this->accessNumber = 4;
+        if($this->checkACL() && (user_type() == 2 ||user_type() == 3 )){
+            $this->form_validation->set_rules('local_chapter_group_ID', 'Local Group', 'alpha_numeric|callback_is_unique_username');
+            
+            if($this->form_validation->run()){
+                $this->load->model("M_account");
+                $result = $this->m_account->retrieveAccount(
+                        NULL, NULL, 0, array(), NULL, array(
+                            "account_local_chapter_group__local_chapter_group_ID" => $this->input->post("local_chapter_group_ID")
+                        )
+                        );
+                if($result){
+                    $this->load->model("M_account_information");
+                    foreach($result as $groupMember){
+                        $this->M_account_information->updateAccountInformation(NULL, array(
+                            "account_ID" => $groupMember["account_ID"] 
+                        ), array(
+                            "confirmation" => 2
+                        ));
+                    }
+                    $this->actionLog(json_encode($this->input->post()));
+                    $this->responseData($result);
+                }else{
+                    $this->responseError(3, "Failed to Update");
+                }
+            }else{
+                if(count($this->form_validation->error_array())){
+                    $this->responseError(102, $this->form_validation->error_array());
+                }else{
+                    $this->responseError(100, "Required Fields are empty");
+                }
+            }
+        }else{
+            $this->responseError(1, "Not Authorized");
+        }
+        $this->outputResponse();
+    }
     public function updateAccount(){
         $this->accessNumber = 4;
         if($this->checkACL()){

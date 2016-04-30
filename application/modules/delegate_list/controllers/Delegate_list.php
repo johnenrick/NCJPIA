@@ -14,7 +14,7 @@
 class Delegate_list extends FE_Controller{
     //put your code here
     function index(){
-        $this->loadPage("delegate_list", array("delegate_list_script", "delegate_list_summary_script"), array("message" => false));
+        $this->loadPage("delegate_list", array("delegate_list_script", "delegate_list_summary_script", "serving_script"), array("message" => false));
         $this->load->view("system_application/system");
         $this->load->view("system_application/system_script");
     }

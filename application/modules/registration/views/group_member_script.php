@@ -136,6 +136,7 @@
             $("#reg-form-member-id .contact").val(tr.attr("contact_number"));
             $("#reg-form-member-id .address").val(tr.attr("complete_address"));
             $("#reg-form-member-id .emailadd").val(tr.attr("email_address"));
+            $("#reg-form-member-id #shirtSize").val(tr.attr("tshirt_size"));
             $("#memberIdentificationCardList .memberIdentificationCard").hide();
             $("#memberIdentificationCardList .memberIdentificationCard:nth-child("+(tr.index()+1)+")").show();
             $("#reg-form-member-id").validator("validate");

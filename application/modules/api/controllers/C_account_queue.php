@@ -63,7 +63,41 @@ class C_account_queue extends API_Controller {
                     $this->input->post("condition")
                     ));
             }
+            $this->responseDebug($this->input->post("condition"));
             if($result){
+                $this->actionLog(json_encode($this->input->post()));
+                $this->responseData($result);
+            }else{
+                $this->responseError(2, "No Result");
+            }
+        }else{
+            $this->responseError(1, "Not Authorized");
+        }
+        $this->outputResponse();
+    }
+    public function nextAccountQueue(){
+        $this->accessNumber = 2;
+        if($this->checkACL()){
+            $result = $this->m_account_queue->retrieveAccountQueue(
+                    NULL,
+                    1,
+                    NULL, 
+                    array(
+                        "ID" => "asc"
+                    ),
+                    NULL, 
+                    array(
+                        "status" => 1
+                    )
+                    );
+            if($result){
+                $this->m_account_queue->updateAccountQueue(
+                    $result[0]["ID"],
+                    NULL,
+                    array(
+                        "status" => 2
+                    )
+                    );
                 $this->actionLog(json_encode($this->input->post()));
                 $this->responseData($result);
             }else{

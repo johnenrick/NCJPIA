@@ -97,12 +97,26 @@ class C_local_chapter_group extends API_Controller {
     }
     public function deleteLocalChapterGroup(){
         $this->accessNumber = 8;
-        if($this->checkACL()){
+        if($this->checkACL() && user_type() == 2){
             $result = $this->m_local_chapter_group->deleteLocalChapterGroup(
-                    $this->input->post("ID"), 
-                    $this->input->post("condition")
+                    $this->input->post("ID")
                     );
             if($result){
+                $this->load->model("M_account_local_chapter_group");
+                $groupMember = $this->M_account_local_chapter_group->retrieveAccountLocalChapterGroup(NULL, NULL, 0, array(), NULL, array(
+                    "local_chapter_group_ID" => $this->input->post("ID")
+                ));
+                if($groupMember){
+                    $this->load->model("M_account");
+                    $this->load->model("M_account_information");
+                    foreach($groupMember as $groupMemberValue){
+                        $this->M_account_local_chapter_group->deleteAccountLocalChapterGroup($groupMemberValue["ID"]);
+                        $this->M_account->deleteAccount($groupMemberValue["account_ID"]);
+                        $this->M_account_information->deleteAccountInformation(NULL, array(
+                            "account_ID" => $groupMemberValue["account_ID"]
+                        ));
+                    }
+                }
                 $this->actionLog(json_encode($this->input->post()));
                 $this->responseData($result);
             }else{

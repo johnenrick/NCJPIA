@@ -26,10 +26,12 @@ class M_account_queue extends API_Model{
     }
     public function retrieveAccountQueue($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            
+            "local_chapter_group" => "local_chapter_group.ID=account_queue.registration_number",
+            "local_chapter" => "local_chapter_group.local_chapter_ID=local_chapter.ID"
         );
         $selectedColumn = array(
-            "account_queue.*"
+            "account_queue.*",
+            "local_chapter.description AS local_chapter_description"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);

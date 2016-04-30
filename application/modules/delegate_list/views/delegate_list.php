@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?=asset_url()?>/js/print.js"></script>
 <div class="col-md-12 ml-container-bottom">
     <div class="col-md-2 ml-list-controls">
         <ul class="list-group">
@@ -52,7 +53,18 @@
                 </button>
             </div>
         </form>
+        <div class="panel panel-success ml-qsno">
+            <div class="panel-heading">
+                <h3 class="panel-title">Now Serving</h3>
+            </div>
+            <div class="panel-body">
+                <h2 id="delegateListServingNumber" style="margin: 0;">0</h2>
+                <h5 id="delegateListServingLocalChapter" style="margin: 0;"></h5>
+                <br>
+                <a id="delegateListServingNext" href="#" class="btn btn-primary">Next</a></div>
+        </div>
     </div>
+    
     <div class="col-md-10 ml-list">
         <table id="delegateListTable" class="table table-hover">
             <thead>
@@ -257,12 +269,63 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button id="delegateDeleteGroup"  type="button" class="btn btn-danger pull-left" style="display:none">Delete Group</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="delegateSaveChanges" type="butotn" class="btn btn-primary">Save changes</button>
+                    <button id="delegateSaveChanges" type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div id="officialReceiptContainer">
+    <style>
+        #officialReceipt{
+            /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+            font-family: sans-serif;
+            font-size:13px;
+            color:gainsboro;
+        }
+        #officialReceiptARNumber{
+            margin-left:12.7cm;
+            margin-top : 1.1cm;
+        }
+        #officialReceiptLocalChapter{
+            margin-left : 5.5cm;
+            margin-top : 2.1cm;
+        }
+        #officialReceiptDelegateList{
+            margin-top: 0.5cm;
+            margin-left : 2cm;
+            height:3.8cm;
+        }
+        #officialReceiptTotalAmount{
+            margin-left : 11.5cm;
+        }
+    </style>
+    <div id="officialReceipt">
+        
+        <div id="officialReceiptARNumber">
+            ANC16500
+        </div>
+        <div id="officialReceiptLocalChapter">
+            Pamantasan ng Lungsod ng Maynila
+        </div>
+        <div id="officialReceiptDelegateList">
+            <table>
+                <tbody>
+                    <tr><td> Fernandez, Jhomelyn Vanessa</td><td> Fernandez, Jhomelyn Vanessa</td><td> Fernandez, Jhomelyn Vanessa</td></tr>
+                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="officialReceiptTotalAmount">
+            10, 000.00
+        </div>
+</div>
 </div>
 <div class="prototype" style="display:none">
     <table>

@@ -48,8 +48,9 @@
                     <br>
                     <br>
                     <br>
-                    <h3>Step 2</h3>
-                    <h4>Confirm your payment and get your confirmation number.</h4>
+                    <h3>Step 2 </h3>
+                    <h5>(Skip this step if you are paying on-site)</h5>
+                    <h4>Confirm your bank deposit payments.</h4>
                     <button type="button" name="op-con" class="btn btn-warning btn-lg">Confirm Payment</button>
                 </div>
                 <div id="reg-module" class="col-md-8 full-height hide-module">

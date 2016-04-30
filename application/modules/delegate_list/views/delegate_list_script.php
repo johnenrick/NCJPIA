@@ -3,7 +3,6 @@
     delegateList.viewDelegate = function(accountID){
         $.post(api_url("C_account/retrieveAccount"), {ID : accountID, with_event_participation : true}, function(data){
             var response = JSON.parse(data);
-            console.log(response);
             if(!response["error"].length){
                 $(".eventItem input").prop("checked", false);
                 $("#delegateInformation").attr("local_chapter_group_id", response["data"]["local_chapter_group_ID"]);
@@ -20,8 +19,8 @@
                 $("#delegateListAccountDetail input[name='updated_data[contact_number]']").val(response["data"]["contact_number"]);
                 $("#delegateListAccountDetail input[name='updated_data[complete_address]']").val(response["data"]["complete_address"]);
                 $("#delegateListAccountDetail input[name='updated_data[email_address]']").val(response["data"]["email_address"]);
-                $("#delegateListAccountDetail input[name='updated_data[tshirt_size]']").val(response["data"]["tshirt_size"]);
-
+                $("#delegateListAccountDetail select[name='updated_data[tshirt_size]']").val(response["data"]["tshirt_size"]);
+                $("#delegateInformation").attr("local_chapter_description", response["data"]["local_chapter_description"]);
                 $("#delegateListAccountDetail input[name='local_chapter_updated_data[description]']").val(response["data"]["local_chapter_description"]);
                 $("#delegateListAccountDetail input[name='local_chapter_updated_data[address]']").val(response["data"]["address"]);
                 $("#delegateListAccountDetail input[name='local_chapter_updated_data[region]']").val(response["data"]["region"]);
@@ -112,6 +111,10 @@
             $(".delegateConfirmPayment").hide();
             $("#delegateConfirmAttendance").parent().parent().hide();
         }
+        if(user_type()*1 === 2){
+            $("#delegateDeleteGroup").show();
+        }
+        
         /*var currentDate = new Date();
         (currentDate.getTime()/1000 < 1462064400) ? $("#delegateConfirmAttendance").parent().parent().hide() : null;
         */
@@ -187,7 +190,7 @@
                         type : "text",
                         value : 5600
                     });
-                }else if(data[3]["value"] === "0"){//completed
+                }else if(data[3]["value"] === "3"){//completed
                     data.push({
                         name : "condition[account_information__confirmation]",
                         required : false,
@@ -195,6 +198,7 @@
                         value : 2
                     });
                 }
+                
                 if($("#systemNameSearch").val() !== ""){
                     var accountName = ($("#systemNameSearch").val()).split(" ");
                     for(var y = 0; y < accountName.length; y++){
@@ -219,6 +223,7 @@
                         newRow.find(".delegateListFullName").text(response["data"][x]["last_name"]+", "+response["data"][x]["first_name"]);
                         newRow.find(".delegateListLocalChapter").text(response["data"][x]["local_chapter_description"]);
                         newRow.find(".delegateListLocalChapterPosition").text(response["data"][x]["local_chapter_position_description"]);
+                   
                         if(response["data"][x]["confirmation"]*1 === 2){
                             newRow.find(".label-primary").show();
                         }else if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
@@ -265,7 +270,6 @@
                     description : "Registration Fee"
                 };
                 $.post(api_url("C_account_payment/createGroupAccountPayment"), newData, function(data){
-                    console.log(data);
                     var response = JSON.parse(data);
                     if(!response["error"].length){
                         $(".delegateConfirmPayment").hide();
@@ -274,7 +278,6 @@
                     $(".delegateConfirmPayment").button("reset");
                 });
             }else{
-                console.log($(this).attr("payment_mode"));
                 var newData = {
                     assessment_item_ID  : 1,
                     account_ID : $("#delegateInformation").attr("account_id"),
@@ -283,7 +286,6 @@
                     description : "Registration Fee"
                 };
                 $.post(api_url("C_account_payment/createAccountPayment"), newData, function(data){
-                    console.log(data);
                     var response = JSON.parse(data);
                     if(!response["error"].length){
                         $(".delegateConfirmPayment").hide();
@@ -397,6 +399,46 @@
                 $("#delegateListAccountDetail input[name='updated_data[local_chapter_name]']").hide();
                 $("#delegateLocalChapterName").hide();
             }
+        });
+        $("#delegateDeleteGroup").dblclick(function(){
+            $.post(api_url("C_local_chapter_group/deleteLocalChapterGroup"), {ID : $("#delegateInformation").attr("local_chapter_group_id")}, function(data){
+                var response = JSON.parse(data);
+                if(!response["error"].length){
+                    $("#delegateInformation").modal("hide");
+                    $("#delegateListTableFilter").trigger("submit");
+                }
+            });
+            
+        });
+        $("#delegatePrintOficialReceipt").click(function(){
+            $.post(api_url("C_account/confirmGroupRegistration"), {local_chapter_group_ID : $("#delegateInformation").attr("local_chapter_group_id")}, function(data){
+            
+                var response = JSON.parse(data);
+                console.log(response);
+                if(!response["error"].length){
+                    $("#delegateListTableFilter").trigger("submit");
+                    //print here
+                    $("#officialReceiptARNumber").text("ANC16"+pad($("#delegateInformation").attr("local_chapter_group_id"), 3));
+                    $("#officialReceiptLocalChapter").text($("#delegateInformation").attr("local_chapter_group_id"))
+                    /*Delegates*/
+                    $("#officialReceiptDelegateList table tbody").empty();
+                    var tr;
+                    var totalAmount;
+                    for(var x = 0; x < response["data"].length; x++){
+                        if(x%3 === 0){
+                            $("#officialReceiptDelegateList table tbody").append(tr);
+                            tr = $("<tr></td>").clone();
+                        }
+                        if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
+                            totalAmount += 5700;
+                        }else{
+                            totalAmount += 5600;
+                        }
+                        tr.append("<td>"+response[x]["first_name"]+" "+response[x]["last_name"]+"</td>")
+                    }
+                    $("#delegateInformation").modal("hide");
+                }
+            });
         });
     });
 </script>
