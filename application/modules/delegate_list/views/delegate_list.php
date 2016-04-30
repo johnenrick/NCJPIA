@@ -48,6 +48,13 @@
                 </select>
             </div>
             <div class="form-group">
+                <label>Event Participated</label>
+                <select name="condition[account_event_participation__event_ID]" class="form-control">
+                    <option value="">All</option>
+                    
+                </select>
+            </div>
+            <div class="form-group">
                 <button type="submit" class='btn btn-primary'>
                     Filter Table
                 </button>
@@ -294,9 +301,10 @@
             margin-top : 2.1cm;
         }
         #officialReceiptDelegateList{
-            margin-top: 0.5cm;
+            margin-top: 0.1cm;
             margin-left : 2cm;
-            height:3.8cm;
+            height:4.4cm;
+            font-size:9px;
         }
         #officialReceiptTotalAmount{
             margin-left : 11.5cm;
@@ -313,12 +321,15 @@
         <div id="officialReceiptDelegateList">
             <table>
                 <tbody>
-                    <tr><td> Fernandez, Jhomelyn Vanessa</td><td> Fernandez, Jhomelyn Vanessa</td><td> Fernandez, Jhomelyn Vanessa</td></tr>
-                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
-                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
-                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
-                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
-                    <tr><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td><td> Chrisitine Maela Joy Taladua</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
+                    <tr><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td><td> LOUISE MELODY GLYDELLE SANCHEZ</td><td>5700</td></tr>
                 </tbody>
             </table>
         </div>

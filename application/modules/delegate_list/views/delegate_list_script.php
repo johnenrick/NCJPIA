@@ -3,6 +3,7 @@
     delegateList.viewDelegate = function(accountID){
         $.post(api_url("C_account/retrieveAccount"), {ID : accountID, with_event_participation : true}, function(data){
             var response = JSON.parse(data);
+            console.log(response);
             if(!response["error"].length){
                 $(".eventItem input").prop("checked", false);
                 $("#delegateInformation").attr("local_chapter_group_id", response["data"]["local_chapter_group_ID"]);
@@ -144,6 +145,7 @@
                     }else{
                         $(".academicEvent").append(eventItem);
                     }
+                    $("#delegateListTableFilter select[name='condition[account_event_participation__event_ID]']").append("<option value='"+response["data"][x]["ID"]+"'>"+response["data"][x]["description"]+"</option>")
                 }
             }else{
                 alert("Please contact administrator");
@@ -210,6 +212,7 @@
                         });
                     }
                 }
+                console.log(data);
                 $("#delegateListTableFilter").find("button[type=submit]").button("loading");
             },
             success : function(data){
@@ -412,30 +415,41 @@
         });
         $("#delegatePrintOficialReceipt").click(function(){
             $.post(api_url("C_account/confirmGroupRegistration"), {local_chapter_group_ID : $("#delegateInformation").attr("local_chapter_group_id")}, function(data){
-            
                 var response = JSON.parse(data);
-                console.log(response);
                 if(!response["error"].length){
                     $("#delegateListTableFilter").trigger("submit");
                     //print here
                     $("#officialReceiptARNumber").text("ANC16"+pad($("#delegateInformation").attr("local_chapter_group_id"), 3));
-                    $("#officialReceiptLocalChapter").text($("#delegateInformation").attr("local_chapter_group_id"))
+                    $("#officialReceiptLocalChapter").text($("#delegateInformation").attr("local_chapter_description"))
                     /*Delegates*/
                     $("#officialReceiptDelegateList table tbody").empty();
-                    var tr;
-                    var totalAmount;
-                    for(var x = 0; x < response["data"].length; x++){
-                        if(x%3 === 0){
-                            $("#officialReceiptDelegateList table tbody").append(tr);
-                            tr = $("<tr></td>").clone();
+                    var tr = false;
+                    var totalAmount = 0;
+                    for(var x = 0, y = 0; x < response["data"].length; x++){
+                        if(response["data"][x]["account_attendance_ID"] !== null){
+                            if(y%3 === 0){
+                                $("#officialReceiptDelegateList table tbody").append(tr);
+                                tr = $("<tr></td>").clone();
+                            }
+                            var amount = 0;
+                            if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
+                                totalAmount += 5700;
+                                amount = 5700;
+                            }else{
+                                totalAmount += 5600;
+                                amount = 5600;
+                            }
+                            totalAmount -= response["data"][x]["penalty_fee_total_amount"]*1;
+                            totalAmount -= response["data"][x]["registration_discount_total_amount"]*1;
+                            tr.append("<td>"+response["data"][x]["first_name"]+" "+response["data"][x]["last_name"]+"</td><td>-"+(amount - (response["data"][x]["penalty_fee_total_amount"]*1) - (response["data"][x]["registration_discount_total_amount"]*1))+" </td>")
+                            y++;
                         }
-                        if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
-                            totalAmount += 5700;
-                        }else{
-                            totalAmount += 5600;
-                        }
-                        tr.append("<td>"+response[x]["first_name"]+" "+response[x]["last_name"]+"</td>")
                     }
+                    if(tr){
+                        $("#officialReceiptDelegateList table tbody").append(tr);
+                    }
+                    $("#officialReceiptTotalAmount").text(totalAmount.toFixed(2));
+                    $("#officialReceiptContainer").print();
                     $("#delegateInformation").modal("hide");
                 }
             });
