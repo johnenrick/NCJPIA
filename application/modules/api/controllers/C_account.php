@@ -101,6 +101,15 @@ class C_account extends API_Controller {
                         ));
                 }
                 if($result){
+                    if($this->input->post("has_payment_accumulation")){
+                        $this->load->model("M_account_payment");
+                        foreach($result as $key => $value){
+                            $result[$key]["payment_accumulated"] = $this->M_account_payment->retrieveAccountPayment(false, NULL, 0, array(), NULL, array(
+                                "receiver_account_ID" => $value["account_ID"],
+                                "payment_mode" => 2
+                                ));
+                        }
+                    }
                     if($this->input->post("with_event_participation") || $this->input->post("all_information")){
                         $this->load->model("M_account_event_participation");
 

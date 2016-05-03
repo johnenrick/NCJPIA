@@ -35,13 +35,24 @@
             beforeSubmit : function(data, $form, options){
                 if(data[0]["value"] === ""){//User Type
                     data.splice(0,1);
+                    $("#userManagementTable thead tr th:last-child()").hide();                    
+                }else if(data[0]["value"] === "3" || data[0]["value"] === "2"){
+                    $("#userManagementTable thead tr th:last-child()").show();
                     data.push({
-                        name : "condition[not__account__account_type_ID]",
+                        name : "has_payment_accumulation",
                         required : false,
                         type : "text",
-                        value : "9"
+                        value : true
                     });
+                }else{
+                    $("#userManagementTable thead tr th:last-child()").hide();
                 }
+                data.push({
+                    name : "condition[not__account__account_type_ID]",
+                    required : false,
+                    type : "text",
+                    value : "9"
+                });
                 if($("#systemNameSearch").val() !== ""){
                     var accountName = ($("#systemNameSearch").val()).split(" ");
                     for(var y = 0; y < accountName.length; y++){
@@ -64,22 +75,28 @@
                         newRow.attr("account_id", response["data"][x]["account_ID"]);
                         newRow.find(".userManagementFullName").text(response["data"][x]["last_name"]+", "+response["data"][x]["first_name"]);
                         newRow.find(".userManagementUserType").text(response["data"][x]["account_type_description"]);
-                        if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
-                            if(response["data"][x]["registration_fee_total_amount"]*1 >= 5700){
-                                newRow.find(".label-success").show();
-                            }else if(response["data"][x]["payment_receipt_file_uploaded_name"] !== null){
-                                newRow.find(".label-warning").show();
-                            }else{
-                                newRow.find(".label-danger").show();
+                        if($("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "3" || $("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "2"){
+                            newRow.find(".userManagementAmountAccumulated").show();
+                            if(response["data"][x]["payment_accumulated"]){
+                                var paymenAccumulated = response["data"][x]["payment_accumulated"];
+                                var totalAmount = 0;
+                                for(var y = 0; y < paymenAccumulated.length; y++){
+                                    if(paymenAccumulated[y]["assessment_item_ID"]*1 === 1){//registration
+                                        if(response["data"]["local_chapter_position_ID"]*1 === 1 || response["data"]["local_chapter_position_ID"]*1 === 2 || response["data"]["local_chapter_position_ID"]*1 === 3){
+                                            totalAmount += 5700;
+                                        }else{
+                                            totalAmount += 5600;
+                                        }
+                                    }else if(paymenAccumulated[y]["assessment_item_ID"]*1 === 2){//penalty
+                                        totalAmount += paymenAccumulated[y]["amount"]*1;
+                                    }else if(paymenAccumulated[y]["assessment_item_ID"]*1 === 3){
+                                        totalAmount -= paymenAccumulated[y]["amount"]*1;
+                                    }
+                                }
+                                console.log(totalAmount)
+                                newRow.find(".userManagementAmountAccumulated").text(totalAmount.toFixed(2));
                             }
-                        }else{
-                            if(response["data"][x]["registration_fee_total_amount"]*1 >= 5600){
-                                newRow.find(".label-success").show();
-                            }else if(response["data"][x]["payment_receipt_file_uploaded_name"] !== null){
-                                newRow.find(".label-warning").show();
-                            }else{
-                                newRow.find(".label-danger").show();
-                            }
+                            
                         }
                         $("#userManagementTable tbody").append(newRow);
                     }

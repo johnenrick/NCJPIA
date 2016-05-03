@@ -50,12 +50,12 @@ class M_account extends API_Model{
             "account_identification_file_uploaded.name AS account_identification_file_uploaded_name, account_identification_file_uploaded.type AS account_identification_file_uploaded_type",
             "account_type.description AS account_type_description",
             "account_attendance.ID AS account_attendance_ID",
-            "SUM(penalty_fee.amount) AS penalty_fee_total_amount, penalty_fee.description AS penalty_fee_description",
+            "(penalty_fee.amount) AS penalty_fee_total_amount, penalty_fee.description AS penalty_fee_description",
             "local_chapter_position.description AS local_chapter_position_description",
-            "SUM(registration_discount.amount) AS registration_discount_total_amount, registration_discount.description AS registration_discount_description"
+            "registration_discount.amount AS registration_discount_amount, (registration_discount.amount) AS registration_discount_total_amount, registration_discount.description AS registration_discount_description"
    
         );
-        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, false, $having);
+        return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable, $having);
     }
     public function updateAccount($ID = NULL, $condition = array(), $newData = array()) {
         if(isset($newData["password"])){

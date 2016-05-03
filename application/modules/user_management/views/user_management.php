@@ -17,7 +17,7 @@
             </div>-->
             <div class="form-group">
                 <label>User Type</label>
-                <select name="condition[account_type_ID" class="form-control">
+                <select name="condition[account_type_ID]" class="form-control">
                     <option value="">All</option>
                     <option value="2">Vice President of Finance</option>
                     <option value="3">Registration Committee</option>
@@ -42,6 +42,7 @@
                     </th>
                     <th>Full Name</th>
                     <th class="center-align">User Type</th>
+                    <th class="center-align" style="display:none">Amount Accumulated</th>
                 </tr>
             </thead>
             <tbody>
@@ -157,6 +158,7 @@
             </td>
             <td class="userManagementFullName"></td>
             <td class="userManagementUserType center-align"></td>
+            <td class="userManagementAmountAccumulated" style="text-align: right; display:none">0.00</td>
         </tr>
     </table>
     <div class="eventItem checkbox reg-checkbox">
