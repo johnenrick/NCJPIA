@@ -73,13 +73,12 @@
     </div>
     
     <div class="col-md-10 ml-list">
+        <button id="exportToCSV" class="btn btn-success btn-sm pull-right">Export to CSV</button>
         <table id="delegateListTable" class="table table-hover">
             <thead>
                 <tr>
-                    <th width="20px">
-                        <!--<input type="checkbox">-->
-                    </th>
                     <th>Full Name</th>
+                    <th class="center-align">Amount</th>
                     <th class="center-align">Local Chapter</th>
                     <th class="center-align">Local Chapter Position</th>
                     <th class="center-align">Status</th>
@@ -341,10 +340,8 @@
 <div class="prototype" style="display:none">
     <table>
         <tr class="delegateListRow">
-            <td>
-                <!--<input type="checkbox">-->
-            </td>
             <td class="delegateListFullName"></td>
+            <td class="delegateListAmount " style="text-align: right">0.00</td>
             <td class="delegateListLocalChapter center-align"></td>
             <td class="delegateListLocalChapterPosition center-align"></td>
             <td class="center-align">

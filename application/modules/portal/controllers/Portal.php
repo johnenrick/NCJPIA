@@ -19,7 +19,7 @@ class Portal extends FE_Controller{
         $this->load->view("system_application/system_script");
     }
     public function visitPage($pageLink = "portal", $pageLink2 = false, $extraData = false){
-        if(user_id()*1 == 0){
+        if(user_id()*1 == 0){ //if not logged in
             exit();
         }
         $data = array(
@@ -41,6 +41,7 @@ class Portal extends FE_Controller{
             $condition[(filter_var($this->input->post("username"), FILTER_VALIDATE_EMAIL)) ? "email__detail" : "username"] = $this->input->post("username");
             $result = $this->M_account->retrieveAccount(NULL, NULL, NULL, NULL, NULL,$condition);
             $this->responseDebug($result);
+            $this->responseDebug("email__detail");
             if($result && ($result[0]["account_type_ID"]*1 == 2 || $result[0]["account_type_ID"]*1 == 3 || $result[0]["account_type_ID"]*1 == 4 || $result[0]["account_type_ID"]*1 == 8 )){
                 $this->responseDebug($result);
                 $this->createSession($result[0]["first_name"], $result[0]["last_name"], $result[0]["middle_name"], $result[0]["account_type_ID"], $result[0]["ID"], $result[0]["username"]);

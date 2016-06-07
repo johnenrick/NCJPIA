@@ -1,9 +1,9 @@
 <script>
     var delegateList = {};
+    delegateList.delegateCSV = "";
     delegateList.viewDelegate = function(accountID){
         $.post(api_url("C_account/retrieveAccount"), {ID : accountID, with_event_participation : true}, function(data){
             var response = JSON.parse(data);
-            console.log(response);
             if(!response["error"].length){
                 $(".eventItem input").prop("checked", false);
                 $("#delegateInformation").attr("local_chapter_group_id", response["data"]["local_chapter_group_ID"]);
@@ -212,15 +212,33 @@
                         });
                     }
                 }
-                console.log(data);
+                data.push({
+                    name : "has_payment",
+                    required : true,
+                    type : "text",
+                    value : "null"
+                });
                 $("#delegateListTableFilter").find("button[type=submit]").button("loading");
             },
             success : function(data){
                 var response = JSON.parse(data);
-                
+                console.log(response);
                 $("#delegateListTable tbody").empty();
+                delegateList.delegateCSV = "";
+                if($("select[name='condition[account_event_participation__event_ID]']").val()*1){
+                    delegateList.delegateCSV = '"'+$("select[name='condition[account_event_participation__event_ID]']").find("option:selected").text()+'"\n'
+                }
+                delegateList.delegateCSV += 'Name, University, Contact Number, Email\n';
                 if(!response["error"].length){
+                    var totalAmount = 0;
+                    var totalBankAmount = 0;
+                    var totalCashAmount = 0;
                     for(var x = 0; x < response["data"].length; x++){
+                        delegateList.delegateCSV +=response["data"][x]["first_name"] +" "+response["data"][x]["last_name"]
+                                +', '+response["data"][x]["local_chapter_description"]
+                                +', '+response["data"][x]["contact_number"]
+                                +', '+response["data"][x]["email_address"]
+                                +'\n'
                         var newRow = $(".prototype .delegateListRow").clone();
                         newRow.attr("account_id", response["data"][x]["account_ID"]);
                         newRow.find(".delegateListFullName").text(response["data"][x]["last_name"]+", "+response["data"][x]["first_name"]);
@@ -229,7 +247,7 @@
                    
                         if(response["data"][x]["confirmation"]*1 === 2){
                             newRow.find(".label-primary").show();
-                        }else if(response["data"][x]["local_chapter_position_ID"]*1 === 1 && response["data"][x]["local_chapter_position_ID"]*1 === 2 && response["data"][x]["local_chapter_position_ID"]*1 === 3){
+                        }else if(response["data"][x]["local_chapter_position_ID"]*1 === 1 || response["data"][x]["local_chapter_position_ID"]*1 === 2 || response["data"][x]["local_chapter_position_ID"]*1 === 3){
                             if(response["data"][x]["registration_fee_total_amount"]*1 >= 5700){
                                 newRow.find(".label-success").show();
                             }else if(response["data"][x]["payment_receipt_file_uploaded_name"] !== null){
@@ -246,8 +264,44 @@
                                 newRow.find(".label-danger").show();
                             }
                         }
+                        if(response["data"][x]["payment_list"]){
+                            var paymenAccumulated = response["data"][x]["payment_list"];
+                            var accountTotalAmount = 0;
+                            var hasRP = false;
+                            for(var y = 0; y < paymenAccumulated.length; y++){
+                                if(paymenAccumulated[y]["assessment_item_ID"]*1 === 1 && hasRP === false){
+                                    hasRP = true;
+                                }else if(paymenAccumulated[y]["assessment_item_ID"]*1 === 1 && hasRP === true){
+                                    console.log(response["data"][x]["account_ID"] +"hey");
+                                }
+                                
+                                if(paymenAccumulated[y]["assessment_item_ID"]*1 !== 3){
+                                    accountTotalAmount += paymenAccumulated[y]["amount"]*1;
+                                    if(paymenAccumulated[y]["payment_mode"]*1 === 1 || paymenAccumulated[y]["payment_mode"]*1 === 3){
+                                        totalBankAmount += (paymenAccumulated[y]["amount"]*1);
+                                    }else{
+                                        totalCashAmount += (paymenAccumulated[y]["amount"]*1);
+                                    }
+                                }else{
+                                    accountTotalAmount -= paymenAccumulated[y]["amount"]*1;
+                                    if(paymenAccumulated[y]["payment_mode"]*1 === 1 || paymenAccumulated[y]["payment_mode"]*1 === 3){
+                                        totalBankAmount -= (paymenAccumulated[y]["amount"]*1);
+                                    }else{
+                                        totalCashAmount -= (paymenAccumulated[y]["amount"]*1);
+                                    }
+                                }
+                            }
+                            totalAmount += accountTotalAmount;
+                            newRow.find(".delegateListAmount").text(accountTotalAmount.toFixed(2));
+                        }
                         $("#delegateListTable tbody").append(newRow);
                     }
+                    var newRow = $(".prototype .delegateListRow").clone();
+                    newRow.find(".delegateListFullName").html("<b>Total Bank : </b>"+totalBankAmount.toFixed(2));
+                    newRow.find(".delegateListAmount").html("<b>Total Cash : </b>"+totalCashAmount.toFixed(2));
+                    newRow.find(".delegateListLocalChapter").html("<b>Total : </b>"+totalAmount.toFixed(2));
+                    $("#delegateListTable tbody").prepend(newRow);
+                    
                 }
                 $("#delegateListTableFilter").find("button[type=submit]").button("reset");
             }
@@ -454,5 +508,27 @@
                 }
             });
         });
+        $("#exportToCSV").click(function(){
+            var filename = "delegate_list.csv";
+            if($("select[name='condition[account_event_participation__event_ID]']").val()*1){
+                filename = $("select[name='condition[account_event_participation__event_ID]']").find("option:selected").text()+".csv";
+            }
+            var blob = new Blob([delegateList.delegateCSV], { type: 'text/csv;charset=utf-8;' });
+                if (navigator.msSaveBlob) { // IE 10+
+                    navigator.msSaveBlob(blob, filename);
+                } else {
+                    var link = document.createElement("a");
+                    if (link.download !== undefined) { // feature detection
+                        // Browsers that support HTML5 download attribute
+                        var url = URL.createObjectURL(blob);
+                        link.setAttribute("href", url);
+                        link.setAttribute("download", filename);
+                        link.style.visibility = 'hidden';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                }
+        })
     });
 </script>

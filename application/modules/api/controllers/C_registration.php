@@ -281,7 +281,7 @@ class C_registration extends API_Controller {
                 }
                 $errorList[$i]["type"] = "Invalid image type";
             }
-            if($files ['images'] ['size'] [$i] > 2000000){//maximum 2MB
+            if($files ['images'] ['size'] [$i] > 10000000){//maximum 10MB
                 if(!isset($errorList[$i])){
                     $errorList[$i] = array();
                 }

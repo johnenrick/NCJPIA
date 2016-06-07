@@ -34,19 +34,18 @@
         $("#userManagementTableFilter").ajaxForm({
             beforeSubmit : function(data, $form, options){
                 if(data[0]["value"] === ""){//User Type
-                    data.splice(0,1);
-                    $("#userManagementTable thead tr th:last-child()").hide();                    
+                    data.splice(0,1);             
                 }else if(data[0]["value"] === "3" || data[0]["value"] === "2"){
-                    $("#userManagementTable thead tr th:last-child()").show();
-                    data.push({
-                        name : "has_payment_accumulation",
-                        required : false,
-                        type : "text",
-                        value : true
-                    });
-                }else{
-                    $("#userManagementTable thead tr th:last-child()").hide();
+                    
+                    
                 }
+                $("#userManagementTable thead tr th:last-child()").show();
+                data.push({
+                    name : "has_payment_accumulation",
+                    required : false,
+                    type : "text",
+                    value : true
+                });
                 data.push({
                     name : "condition[not__account__account_type_ID]",
                     required : false,
@@ -70,35 +69,56 @@
                 var response = JSON.parse(data);
                 $("#userManagementTable tbody").empty();
                 if(!response["error"].length){
+                    var totalUserCashAmount = 0;
+                    var totalUserBankAmount = 0;
                     for(var x = 0; x < response["data"].length; x++){
                         var newRow = $(".prototype .userManagementRow").clone();
                         newRow.attr("account_id", response["data"][x]["account_ID"]);
                         newRow.find(".userManagementFullName").text(response["data"][x]["last_name"]+", "+response["data"][x]["first_name"]);
                         newRow.find(".userManagementUserType").text(response["data"][x]["account_type_description"]);
-                        if($("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "3" || $("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "2"){
+                        //if($("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "3" || $("#userManagementTableFilter select[name='condition[account_type_ID]']").val() === "2"){
+                        if(1){
                             newRow.find(".userManagementAmountAccumulated").show();
                             if(response["data"][x]["payment_accumulated"]){
                                 var paymenAccumulated = response["data"][x]["payment_accumulated"];
                                 var totalAmount = 0;
+                                var totalCashAmount = 0;
+                                var totalBankAmount = 0;
                                 for(var y = 0; y < paymenAccumulated.length; y++){
-                                    if(paymenAccumulated[y]["assessment_item_ID"]*1 === 1){//registration
-                                        if(response["data"]["local_chapter_position_ID"]*1 === 1 || response["data"]["local_chapter_position_ID"]*1 === 2 || response["data"]["local_chapter_position_ID"]*1 === 3){
-                                            totalAmount += 5700;
+                                    if(paymenAccumulated[y]["assessment_item_ID"]*1 !== 3){//penalty
+                                        totalAmount += (paymenAccumulated[y]["amount"]*1);
+                                        if(paymenAccumulated[y]["payment_mode"]*1 === 2 || paymenAccumulated[y]["payment_mode"]*1 === 4){
+                                            totalUserCashAmount+= (paymenAccumulated[y]["amount"]*1);
+                                            totalCashAmount += (paymenAccumulated[y]["amount"]*1);
                                         }else{
-                                            totalAmount += 5600;
+                                            totalUserBankAmount+= (paymenAccumulated[y]["amount"]*1);
+                                            totalBankAmount+= (paymenAccumulated[y]["amount"]*1);
                                         }
-                                    }else if(paymenAccumulated[y]["assessment_item_ID"]*1 === 2){//penalty
-                                        totalAmount += paymenAccumulated[y]["amount"]*1;
-                                    }else if(paymenAccumulated[y]["assessment_item_ID"]*1 === 3){
-                                        totalAmount -= paymenAccumulated[y]["amount"]*1;
+                                    }else{
+                                        totalAmount -= (paymenAccumulated[y]["amount"]*1);
+                                        if(paymenAccumulated[y]["payment_mode"]*1 === 2 || paymenAccumulated[y]["payment_mode"]*1 === 4){
+                                            totalUserCashAmount-= (paymenAccumulated[y]["amount"]*1);
+                                            totalCashAmount -= (paymenAccumulated[y]["amount"]*1);
+                                        }else{
+                                            totalUserBankAmount-= (paymenAccumulated[y]["amount"]*1);
+                                            totalBankAmount-= (paymenAccumulated[y]["amount"]*1);
+                                        }
                                     }
+                                    
                                 }
-                                console.log(totalAmount)
-                                newRow.find(".userManagementAmountAccumulated").text(totalAmount.toFixed(2));
+                                newRow.find(".userManagementAmountAccumulated").text("C " +totalCashAmount+" + B "+totalBankAmount+" = "+totalAmount.toFixed(2));
                             }
                             
                         }
                         $("#userManagementTable tbody").append(newRow);
+                    }
+                    if(totalUserCashAmount){
+                        var newRow = $(".prototype .userManagementRow").clone();
+                        newRow.find(".userManagementAmountAccumulated").show();
+                        newRow.find(".userManagementFullName").html("<b>Total Cash : </b>" +totalUserCashAmount.toFixed(2));
+                        newRow.find(".userManagementUserType").html("<b>Total Bank : </b>" +totalUserBankAmount.toFixed(2));
+                        newRow.find(".userManagementAmountAccumulated").html("<b>Total : </b>" +(totalUserBankAmount+totalUserCashAmount).toFixed(2));
+                        $("#userManagementTable tbody").prepend(newRow);
                     }
                 }
                 $("#userManagementTableFilter").find("button[type=submit]").button("reset");

@@ -29,10 +29,11 @@ class M_account_payment extends API_Model{
     }
     public function retrieveAccountPayment($retrieveType = false, $limit = NULL, $offset = 0, $sort = array(), $ID = NULL, $condition = NULL) {
         $joinedTable = array(
-            
+            "account_information"=>"account_payment.account_ID = account_information.account_ID"
         );
         $selectedColumn = array(
-            "account_payment.*"
+            "account_payment.*",
+            "account_information.local_chapter_position_ID"
         );
         
         return $this->retrieveTableEntry($retrieveType, $limit, $offset, $sort, $ID, $condition, $selectedColumn, $joinedTable);

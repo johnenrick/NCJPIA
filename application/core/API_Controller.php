@@ -127,6 +127,9 @@ class API_Controller extends MX_Controller{
 
         //echo $this->email->print_debugger();
     }
+    /***
+     * Validation for an array of fields
+     */
     public function batchValidation($batchEntry, $requiredField){
         $errorList = array();
         foreach($batchEntry as $batchEntryValue){
@@ -146,13 +149,24 @@ class API_Controller extends MX_Controller{
         $t = preg_replace('/<[^<|>]+?>/', '', htmlspecialchars_decode($str));
         return htmlentities($t, ENT_QUOTES, "UTF-8");;
     }
+    
+    /*** Customer Validation Function ***/
     public $formValidationError = array();
+    /***
+     * return the error in form validation
+     */
     public function formValidationRun(){
         return (count($this->formValidationError) > 0) ? false : $this->form_validation->run();
     }
+    /***
+     * This is an alternative for getting errors from validation. This is used to get errors from custom validation error
+     */
     public function formValidationError(){
         return array_merge($this->formValidationError, $this->form_validation->error_array());
     }
+    /***
+     * A custom validation for required failed
+     */
     public function formValidationSetRule($fieldName, $fieldTitle, $rule){
         $this->form_validation->set_rules($fieldName, $fieldTitle, $rule);
         if(substr_count($rule, "required") && !$this->input->post($fieldName)){
