@@ -103,6 +103,7 @@
     function load_module(moduleLink, moduleName){
         moduleName = moduleName.toLowerCase();
         moduleLink = moduleLink.toLowerCase();
+        window.history.pushState('Object', 'Title', base_url(moduleLink));
         if($("#moduleContainer").find(".moduleHolder[module_link='"+moduleLink+"']").length === 0){
             $.post(base_url(moduleLink), {}, function(data){
                 /*CHECK IF JSON OR HTML FOR AUTHORIZATION*/
